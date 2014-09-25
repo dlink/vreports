@@ -1,0 +1,38 @@
+/* report_controls css */
+
+#report_controls {
+  margin: 10px;
+  padding: 10px;	
+  background-color: white;
+}
+
+#report_controls_title {
+  padding: 10px;
+  background-color: lightyellow;
+}
+
+#report_controls_table {
+  padding: 20px;
+}
+
+#report_controls_table td {
+  padding: 2px;
+}
+
+#report_description_container {
+  margin: 10px;
+  padding: 10px;	
+  background-color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#report_options {
+  margin: 10px;
+  padding: 2px;
+  position: relative;
+}
+
+#report_options a, #report_controls_title a {
+  cursor: pointer;
+}

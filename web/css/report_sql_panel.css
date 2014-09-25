@@ -1,0 +1,29 @@
+/* sql_panel css */
+
+#sql_panel_show {
+  font-size: 65%;
+}
+
+#sql_panel {
+  margin: 10px;
+  padding: 10px;	
+  background-color: white;
+}
+
+#sql_panel_title {
+  padding: 10px;
+  background-color: #F1D5E0;
+}
+
+#sql_panel_table {
+  padding: 4px 10px;
+}
+
+#sql_panel_table td {
+  padding: 0px 20px;
+  font-family: monospace;
+}
+
+#sql_pane_title a {
+  cursor: pointer;
+}

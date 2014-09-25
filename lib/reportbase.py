@@ -63,13 +63,13 @@ class ReportBase(HtmlPage):
         #    '.min.js',
         #    'js/report.js',
         #    ]
-        #self.style_sheets.extend([
-        #    "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
-        #    'css/main.css',
-        #    'css/report_controls.css',
-        #    'css/column_chooser.css',
-        #    'css/report_sql_panel.css'
-        #    ])
+        self.style_sheets.extend([
+            "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
+            'css/main.css',
+            'css/report_controls.css',
+            'css/column_chooser.css',
+            'css/report_sql_panel.css'
+            ])
         
     def loadParams(self):
         '''Load parameters files
