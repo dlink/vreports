@@ -1,0 +1,3 @@
+controls:
+   - name   : name
+     filter : b.name like '%{value}%s'

@@ -21,7 +21,8 @@ class Menu(object):
       else:
         return ul("".join(menu), class_="dropdown")
 
-    def getMenu(self, user, show_login_info=True):
+    #def getMenu(self, user, show_login_info=True):
+    def getMenu(self, show_login_info=True):
         reports= [
                    ['Books', 'books']
                    ]
@@ -29,12 +30,12 @@ class Menu(object):
         menu = self.htmlify(reports)
 
         if show_login_info:
-            if user:
-              menu += div('Logged in as ' + user.display_name() + \
-                          ' &middot; ' + a('Change User', class_='signout'),
-                          class_='floatr')
-            else:
-              menu += div('Not logged in', class_='floatr')
+            #if user:
+            #  menu += div('Logged in as ' + user.display_name() + \
+            #              ' &middot; ' + a('Change User', class_='signout'),
+            #              class_='floatr')
+            #else:
+            menu += div('Not logged in', class_='floatr')
 
         js = script("", type_='text/javascript', language='javascript', src='js/menufix.js')
         js += script("", type_='text/javascript', language='javascript', src='js/jquery.dropdownPlain.js')

@@ -3,9 +3,10 @@
 import os
 import yaml
 
-from vlib import conf, db
+from vlib import db
 from vlib.sqlutils import pretty_sql
 from vlib.utils import list2csv, format_date
+from vlib.odict import odict
 from vlib.entities import toEntity
 
 from vweb.htmlpage import HtmlPage
@@ -31,6 +32,7 @@ class ReportBase(HtmlPage):
     '''
 
     def __init__(self, report_name): #, report=None, form=None):
+        HtmlPage.__init__(self, report_name)
         self.report_name = report_name
 
         self.loadParams()
@@ -42,8 +44,7 @@ class ReportBase(HtmlPage):
         #  self.params.report_title = report.title
 
         self.debug_cgi = self.params.debug_cgi
-        self.db   = db.getInstance()
-        self.conf = conf.getInstance()
+        self.db   = db.Db(self.params.database)
         self.reportColumns  = ReportColumns(self.params)
         self.reportControls = ReportControls(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
@@ -52,8 +53,8 @@ class ReportBase(HtmlPage):
         #if self.report and DEBUG_SAVE_REPORT:
         #    self.debug_save_report()
 
-        #self.menu = Menu()
-        #self.header = Header(self.title)
+        self.menu = Menu()
+        self.header = Header(self.title)
 
         #self.javascript_src = [
         #    'js/jquery/jquery-1.9.0.min.js',
@@ -76,7 +77,7 @@ class ReportBase(HtmlPage):
         pdir = os.environ['PARAMETER_FILES_DIR']
 
         # load yaml parameter files:
-        self.params = {}
+        self.params = odict()
         for c in ['main', 'columns', 'controls', 'table_joins']:
             filepath = "%s/%s/%s.yaml" %(pdir, self.report_name, c)
             self.params.update(dict2odict(yaml.load(open(filepath))))
@@ -93,6 +94,14 @@ class ReportBase(HtmlPage):
                 control.display = control.name.replace('_', ' ').title()
             if 'type' not in control:
                 control.type = 'string'
+            if 'default' not in control:
+                if control.type == 'integer':
+                    control.default = 0
+                else:
+                    control.default = ''
+
+    def getDb(self):
+        return db.Db(self.params.database)
 
     # Process Inbound parameters:
 
@@ -131,9 +140,6 @@ class ReportBase(HtmlPage):
             if control.name in shared_form:
                 control.value = shared_form[control.name].strip()
             else:
-                if 'default' not in control:
-                    raise Exception('Default value not defined for control: %s'
-                                    % control.name)
                 control.value = control.default
 
             # Convert Integers
@@ -295,8 +301,8 @@ class ReportBase(HtmlPage):
            (Without HTTP Header)
         '''
         return div(
-            self.header.getHeader(self.user) + \
-            self.menu.getMenu(self.user, show_login_info=True) + \
+            self.header.getHeader() + \
+            self.menu.getMenu(show_login_info=True) + \
             div(
               self.getControlOptions() + \
               self.reportControls.getControls() + \
@@ -547,8 +553,8 @@ class ReportBase(HtmlPage):
 
     def save_panel(self):
       report_title = ""
-      if self.report:
-        report_title = self.report.param_file.split("/")[0]
+      #if self.report:
+      #  report_title = self.report.param_file.split("/")[0]
       return """
         <div id="save-panel">
           <div id="save-panel-header">
@@ -570,7 +576,6 @@ class ReportBase(HtmlPage):
 
 def dict2odict(src_dict):
     '''Return an dict converted recursively into an odict'''
-    from vlib.odict import odict
     o = odict()
     for k,v in src_dict.items():
         if isinstance(v, dict):
