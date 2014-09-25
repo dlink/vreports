@@ -10,3 +10,5 @@ columns:
    - name   : name
      default: true
 
+   - name   : published
+     default: true
