@@ -1,1 +1,4 @@
 DirectoryIndex index.py
+
+SetEnv PARAMETER_FILES_DIR /home/dlink/vreports/examples
+

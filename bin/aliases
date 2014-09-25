@@ -1,0 +1,5 @@
+vr=$HOME/vreports; alias vr='cd $vr'
+vrb=$vr/bin      ; alias vrb='cd $vrb'
+vre=$vr/examples ; alias vre='cd $vre'
+vrl=$vl/lib      ; alias vrl='cd $vrl'
+vrw=$vr/web      ; alias vrw='cd $vrw'

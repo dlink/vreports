@@ -1,0 +1,12 @@
+# Books Report Columns Data
+
+columns:
+   - name   : book_data
+     type   : separator
+
+   - name   : id
+     default: true
+
+   - name   : name
+     default: true
+

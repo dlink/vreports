@@ -1,0 +1,9 @@
+# Book Report Paramaters
+
+report_title    : Books Report
+base_table      : book
+base_table_alias: b
+debug_cgi       : false
+debug_sql       : false
+display_num_rows: 100
+sort_by         : book_id:desc
