@@ -37,10 +37,11 @@ class Menu(object):
             #else:
             menu += div('Not logged in', class_='floatr')
 
-        js = script("", type_='text/javascript', language='javascript', src='js/menufix.js')
-        js += script("", type_='text/javascript', language='javascript', src='js/jquery.dropdownPlain.js')
+        #js = script("", type_='text/javascript', language='javascript', src='js/menufix.js')
+        #js += script("", type_='text/javascript', language='javascript', src='js/jquery.dropdownPlain.js')
 
-        return div(menu + js, class_='menu')
+        #return div(menu + js, class_='menu')
+        return div(menu, class_='menu')
 
     def get_my_reports(self, user):
       l = []
