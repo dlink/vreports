@@ -56,13 +56,11 @@ class ReportBase(HtmlPage):
         self.menu = Menu()
         self.header = Header(self.title)
 
-        #self.javascript_src = [
-        #    'js/jquery/jquery-1.9.0.min.js',
-        #    'js/jquery/jquery-ui-1.10.0/ui/minified/jquery.ui.core.min.js',
-        #    'js/jquery/jquery-ui-1.10.0/ui/minified/jquery.ui.datepicker' \
-        #    '.min.js',
-        #    'js/report.js',
-        #    ]
+        self.javascript_src = [
+            "//code.jquery.com/jquery-1.10.2.js",
+            "//code.jquery.com/ui/1.11.1/jquery-ui.js",
+            'js/report.js',
+            ]
         self.style_sheets.extend([
             "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
             'css/main.css',
