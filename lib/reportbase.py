@@ -305,9 +305,9 @@ class ReportBase(HtmlPage):
             self.menu.getMenu(show_login_info=True) + \
             div(
               self.getControlOptions() + \
+              self.reportSqlPanel.getSqlPanel() + \
               self.reportControls.getControls() + \
               self.reportColumns.getColumnChooser() + \
-              self.reportSqlPanel.getSqlPanel() + \
               self.getHiddenFields() + \
               self.getReportDesc() + \
               self.getReportTable() + \
