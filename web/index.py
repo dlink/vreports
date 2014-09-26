@@ -8,5 +8,5 @@ libdir = os.path.dirname(os.path.realpath(__file__)).replace('/web', '/lib')
 sys.path.append(libdir)
 
 from reportbase import ReportBase
-ReportBase('books').go()
+ReportBase().go()
 

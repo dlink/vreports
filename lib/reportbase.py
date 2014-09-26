@@ -26,16 +26,21 @@ from datetime import datetime
 
 DEBUG_SAVE_REPORT = 0
 
+class VReportException(Exception): pass
+
 class ReportBase(HtmlPage):
     '''Base Webpage Report
        Dynamic Reporting
     '''
 
-    def __init__(self, report_name): #, report=None, form=None):
-        HtmlPage.__init__(self, report_name)
-        self.report_name = report_name
+    def __init__(self): # , report_name): #, report=None, form=None):
+        HtmlPage.__init__(self, 'Untitled')
+        if 'r' not in self.form:
+            raise VReportException('No report name passed')
 
+        self.report_name = self.form['r'].value
         self.loadParams()
+        #self.report_name = report_name
         
         #if params_file:
         # self.loadParams(params_file)

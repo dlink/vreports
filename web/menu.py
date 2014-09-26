@@ -24,7 +24,7 @@ class Menu(object):
     #def getMenu(self, user, show_login_info=True):
     def getMenu(self, show_login_info=True):
         reports= [
-                   ['Books', 'books']
+                   ['Books', '?r=books']
                    ]
         this_report = sys.argv[0]
         menu = self.htmlify(reports)
