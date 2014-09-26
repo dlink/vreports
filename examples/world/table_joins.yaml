@@ -1,8 +1,40 @@
 table_joins:
-   co:
-      clause : join Country as co on c.CountryCode = co.Code
-
+   cis:
+      clause : >
+         join (
+            select
+               ci.CountryCode,
+               group_concat(ci.name separator ', ') as cities
+            from
+               City ci
+            group by 
+               CountryCode
+            ) as cis on c.Code = cis.CountryCode
+   ci:
+      clause : join City as ci on c.Code = ci.CountryCode
+   cls:
+      clause : >
+         join (
+            select
+               cl.CountryCode,
+               group_concat(cl.Language separator ', ') as languages
+            from
+               CountryLanguage cl
+            group by
+               cl.CountryCode
+            ) cls on c.Code = cls.CountryCode
+   cls_o:
+      clause : >
+         join (
+            select
+               cl.CountryCode,
+               group_concat(cl.Language separator ', ') as languages
+            from
+               CountryLanguage cl
+            where 
+               cl.IsOfficial = 'T'
+            group by
+               cl.CountryCode
+            ) cls_o on c.Code = cls_o.CountryCode
    cl:
-      require: co
-      clause : join CountryLanguage cl on co.Code = cl.CountryCode
-
+      clause: join CountryLanguage cl on c.Code = cl.CountryCode

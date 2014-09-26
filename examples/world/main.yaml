@@ -1,7 +1,7 @@
 # Book Report Paramaters
 
 report_title    : World Report
-base_table      : City
+base_table      : Country
 base_table_alias: c
 debug_cgi       : false
 debug_sql       : false

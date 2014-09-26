@@ -103,25 +103,73 @@
 
 
 columns:
-   - name    : city_data
+   - name    : country_data
      type    : separator
 
-   - name    : ID
+   - name    : Code
+     default : true
 
    - name    : Name
      default : true
 
-   - name    : Country
-     select  : co.name
+   - name    : Continent
      group_by: true
      default : true
 
-   - name    : District
-     minor  : true
+   - name     : Region
+     group_by : true
+     default  : true
 
-   - name    : Population
-     type    : number
-     default : true
+   - name     : official_languages
+     select   : cls_o.languages
+     group_by : true
+     default  : true
+
+   - name     : spoken_languages
+     select   : cls.languages
+
+   - name     : languages
+     select   : cl.Language
+     mode     : aggregate
+     group_by : true
+
+   - name     : surface_area
+     select   : c.SurfaceArea
+     type     : number
+     default  : true
+
+   - name     : independence
+     select   : c.IndepYear
+     type     : integer
+     default  : true
+
+   - name     : Population
+     type     : integer
+     default  : true
+
+   - name     : life_expectancy
+     select   : c.LifeExpectancy
+     type     : integer
+     default  : true
+
+   - name     : GNP
+     display  : GNP
+     type     : money
+     default  : true
+
+   - name     : form_of_government
+     select   : c.GovernmentForm
+     default  : true
+
+   - name     : head_of_state
+     select   : c.HeadOfState
+     default  : true 
+
+   #- name     : Capital
+   #  default  : true
+
+   - name    : Cities
+     select  : cis.cities
 
    - name    : count
      select  : '*'
@@ -131,27 +179,3 @@ columns:
      type    : integer
      default : true
 
-
-   ### Country Data ############################
-   - name    : country_data
-     type    : separator
-
-   - name    : country_code
-     select  : co.Code
-     minor   : true
-
-   - name    : continent
-     select  : co.Continent
-     group_by: true
-
-   - name    : region
-     select  : co.Region
-     group_by: true
-
-   ### Language Data ##############################
-   - name     : language_data
-     type     : separator
-
-   - name     : Langauge
-     select   : cl.Language
-    
