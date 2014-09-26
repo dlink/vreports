@@ -1,10 +1,10 @@
 id,isbn,name,publicated,type
 1,9781557427960,The Picture of Dorian Gray,1891,Novel
-2,,On the Road,1957,Novel
-3,,"Frankenstein; or, The Modern Prometheus",1818,Novel
-4,,Childhood's End,1966,Novel
-5,,A Clockwork Orange,1962,Novel
-6,,Tai-Pan,1982,Novel
+2,9780140283297,On the Road,1957,Novel
+3,9781851243969,"Frankenstein; or, The Modern Prometheus",1818,Novel
+4,9780345347954,Childhood's End,1966,Novel
+5,9780451457998,A Clockwork Orange,1962,Novel
+6,9780440184621,Tai-Pan,1982,Novel
 7,,Another Turn of the Screw,1998,Novel
 8,,Adventures of Huckleberry Finn,1884,Novel
 9,,A Princess of Mars,1917,Novel
