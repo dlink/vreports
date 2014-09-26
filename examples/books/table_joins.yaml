@@ -1,2 +1,24 @@
 table_joins:
-   x: y
+   ba:
+      clause : left join book_authors ba on b.id = ba.book_id
+   a:
+      require: ba
+      clause : left join authors a on ba.author_id = a.id
+   bas:
+      clause : >
+         left join (
+            select 
+               ba.book_id, 
+               group_concat(
+                  concat_ws(' ', a.first_name, a.last_name )
+                  separator ', '
+               ) as authors 
+            from
+               book_authors ba
+               join authors a on ba.author_id = a.id
+            group by 
+               ba.book_id) as bas on b.id = bas.book_id
+   c:
+      require: a
+      clause : left join countries c on a.country_id = c.id
+

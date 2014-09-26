@@ -10,6 +10,10 @@ columns:
    - name    : name
      default : true
 
+   - name    : authors
+     select  : bas.authors
+     default : true
+
    - name    : published
      type    : integer
      default : true
@@ -22,4 +26,31 @@ columns:
      aggregate_func: count
      type    : integer
      default : true
+
+   ### Author Data ###################
+
+   - name    : author_data
+     type    : separator
+
+   - name    : author
+     select  : concat_ws(' ', a.first_name, a.last_name)
+     aliases : a
+
+   - name    : author_first_name
+     select  : a.first_name
+     minor   : true
+
+   - name    : author_last_name
+     select  : a.last_name
+     minor   : true
+
+   - name    : nationality
+     select  : c.nationality
+     group_by: true
+
+   - name    : born
+     select  : a.born
+
+   - name    : died
+     select  : a.died
 
