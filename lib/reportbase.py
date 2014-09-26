@@ -296,7 +296,7 @@ class ReportBase(HtmlPage):
         '''
         return div(
             self.header.getHeader() + \
-            self.menu.getMenu(show_login_info=True) + \
+            self.menu.getMenu() + \
             div(
               self.getControlOptions() + \
               self.reportSqlPanel.getSqlPanel() + \

@@ -8,40 +8,23 @@ class Menu(object):
     def is_current_page(self, target):
       return target in sys.argv[0]
 
-    def htmlify(self, nav, submenu=False):
-      menu = []
-      for (name, target) in nav:
-        if type(target) is list:
-          menu.append(li(a(name, href='#') + self.htmlify(target, submenu=True)))
-        elif type(target) is str:
-          menu.append(li(a(name, href=target)))
-
-      if submenu:
-        return ul("".join(menu), class_="sub_menu")
-      else:
-        return ul("".join(menu), class_="dropdown")
-
-    #def getMenu(self, user, show_login_info=True):
-    def getMenu(self, show_login_info=True):
-        reports= [
-                   ['Books', '?r=books']
-                   ]
+    def getMenu(self):
+        reports= [['Books', '?r=books']
+                  ]
         this_report = sys.argv[0]
-        menu = self.htmlify(reports)
+        menu_html = self.getHtml(reports)
+        return div(menu_html, class_='menu')
 
-        if show_login_info:
-            #if user:
-            #  menu += div('Logged in as ' + user.display_name() + \
-            #              ' &middot; ' + a('Change User', class_='signout'),
-            #              class_='floatr')
-            #else:
-            menu += div('Not logged in', class_='floatr')
+    def getHtml(self, reports):
+        menu = []
+        for (name, target) in reports:
+            if type(target) is list:
+                menu.append(li(a(name, href='#') + self.htmlify(target, 
+                                                          submenu=True)))
+            elif type(target) is str: 
+               menu.append(li(a(name, href=target)))
 
-        #js = script("", type_='text/javascript', language='javascript', src='js/menufix.js')
-        #js += script("", type_='text/javascript', language='javascript', src='js/jquery.dropdownPlain.js')
-
-        #return div(menu + js, class_='menu')
-        return div(menu, class_='menu')
+        return ul("".join(menu), class_="dropdown")
 
     def get_my_reports(self, user):
       l = []
