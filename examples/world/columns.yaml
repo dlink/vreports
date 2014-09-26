@@ -1,0 +1,16 @@
+# Books Report Columns Data
+
+columns:
+   - name    : city_data
+     type    : separator
+
+   - name    : ID
+     default : true
+
+   - name    : Name
+     default : true
+
+   - name    : country_code
+     select  : c.CountryCode
+     minor   : true
+

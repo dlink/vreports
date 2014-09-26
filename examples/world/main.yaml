@@ -1,0 +1,16 @@
+# Book Report Paramaters
+
+report_title    : World Report
+base_table      : City
+base_table_alias: c
+debug_cgi       : false
+debug_sql       : false
+display_num_rows: 100
+sort_by         : Name:asc
+
+database:
+   host  : localhost
+   user  : vreports
+   passwd: woodenships60
+   db    : vreports
+

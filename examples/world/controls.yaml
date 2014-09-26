@@ -1,0 +1,3 @@
+controls:
+   - name   : city
+     filter : c.Name like '%{value}%s'

@@ -1,0 +1,7 @@
+table_joins:
+   co:
+      clause : join Country as co on c.CountryCode = co.Code
+
+   cl:
+      require: co
+      clause : join CountryLanguage cl on co.Code = cl.CountryCode
