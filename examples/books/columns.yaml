@@ -1,14 +1,25 @@
 # Books Report Columns Data
 
 columns:
-   - name   : book_data
-     type   : separator
+   - name    : book_data
+     type    : separator
 
-   - name   : id
-     default: true
+   - name    : id
+     default : true
 
-   - name   : name
-     default: true
+   - name    : name
+     default : true
 
-   - name   : published
-     default: true
+   - name    : published
+     type    : integer
+     default : true
+     group_by: true
+
+   - name    : count
+     select  : '*'
+     aliases : b
+     mode    : aggregate
+     aggregate_func: count
+     type    : integer
+     default : true
+

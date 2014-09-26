@@ -6,7 +6,7 @@ base_table_alias: b
 debug_cgi       : false
 debug_sql       : false
 display_num_rows: 100
-sort_by         : book_id:desc
+sort_by         : book_id:asc
 
 database:
    host  : localhost
