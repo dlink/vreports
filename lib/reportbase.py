@@ -93,7 +93,7 @@ class ReportBase(HtmlPage):
             if 'type' not in control:
                 control.type = 'string'
             if 'default' not in control:
-                if control.type == 'integer':
+                if control.type in ('integer', 'menu'):
                     control.default = 0
                 else:
                     control.default = ''
