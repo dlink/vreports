@@ -5,3 +5,4 @@ table_joins:
    cl:
       require: co
       clause : join CountryLanguage cl on co.Code = cl.CountryCode
+

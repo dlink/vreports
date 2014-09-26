@@ -113,11 +113,8 @@ columns:
 
    - name    : Country
      select  : co.name
+     group_by: true
      default : true
-
-   - name    : country_code
-     select  : c.CountryCode
-     minor   : true
 
    - name    : District
      minor  : true
@@ -125,3 +122,36 @@ columns:
    - name    : Population
      type    : number
      default : true
+
+   - name    : count
+     select  : '*'
+     aliases : c
+     mode    : aggregate
+     aggregate_func: count
+     type    : integer
+     default : true
+
+
+   ### Country Data ############################
+   - name    : country_data
+     type    : separator
+
+   - name    : country_code
+     select  : co.Code
+     minor   : true
+
+   - name    : continent
+     select  : co.Continent
+     group_by: true
+
+   - name    : region
+     select  : co.Region
+     group_by: true
+
+   ### Language Data ##############################
+   - name     : language_data
+     type     : separator
+
+   - name     : Langauge
+     select   : cl.Language
+    
