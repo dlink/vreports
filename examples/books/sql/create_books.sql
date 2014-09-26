@@ -3,7 +3,7 @@ set foreign_key_checks = 0;
 drop table /*! if exists */ books;
 
 create table books (
-   id                int unsigned not null,
+   id                int unsigned not null primary key,
    name              varchar(255),
    published         int unsigned comment 'Publication year'
 ) 
