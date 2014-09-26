@@ -5,3 +5,5 @@ vrl=$vl/lib      ; alias vrl='cd $vrl'
 vrw=$vr/web      ; alias vrw='cd $vrw'
 vrwc=$vrw/css    ; alias vrwc='cd $vrwc'
 
+# database
+alias vrdb='mysql -uvreports -pwoodenships60 --database=vreports'
