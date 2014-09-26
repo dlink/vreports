@@ -4,3 +4,12 @@ controls:
 
    - name   : publication_year
      filter : b.published = {value}
+
+   - name   : nationality
+     type   : menu
+     menu   :
+        0: All
+        2: American
+        3: English
+        1: Irish
+     filter : a.country_id = {value}

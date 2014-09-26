@@ -10,7 +10,7 @@ table_joins:
             select 
                ba.book_id, 
                group_concat(
-                  concat_ws(' ', a.first_name, a.last_name )
+                  concat_ws(' ', a.first_name, a.middle_name, a.last_name )
                   separator ', '
                ) as authors 
             from

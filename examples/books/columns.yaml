@@ -12,6 +12,7 @@ columns:
 
    - name    : authors
      select  : bas.authors
+     group_by: true
      default : true
 
    - name    : published
@@ -27,17 +28,22 @@ columns:
      type    : integer
      default : true
 
+
    ### Author Data ###################
 
    - name    : author_data
      type    : separator
 
    - name    : author
-     select  : concat_ws(' ', a.first_name, a.last_name)
+     select  : concat_ws(' ', a.first_name, a.middle_name, a.last_name)
      aliases : a
 
    - name    : author_first_name
      select  : a.first_name
+     minor   : true
+
+   - name    : author_middle_name
+     select  : a.middle_name
      minor   : true
 
    - name    : author_last_name

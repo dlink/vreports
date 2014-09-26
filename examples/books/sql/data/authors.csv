@@ -2,5 +2,6 @@ id,first_name,middle_name,last_name,country_id,born,died
 1,Oscar,,Wilde,1,1854,1900
 2,Jacke,,Kerouac,2,1922,1969
 3,Mary,,Shelley,3,1797,1851
+4,Arthur,C.,Clarke,3,1917,2008
 100,Brian,,Herbert,3,1947,
 101,Kevin,J.,Anderson,1962,
