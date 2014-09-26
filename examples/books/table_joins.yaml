@@ -22,3 +22,20 @@ table_joins:
       require: a
       clause : left join countries c on a.country_id = c.id
 
+   bgs:
+      clause : >
+         left join (
+            select
+               bg.book_id,
+               group_concat(g.name separator ', ') as genres
+            from
+               book_genres bg
+               join genres g on bg.genre_id = g.id
+            group by
+               bg.book_id) as bgs on b.id = bgs.book_id
+   bg:
+      clause : left join book_genres bg on b.id = bg.book_id
+   g:
+      require: bg
+      clause : left join genres g on bg.genre_id = g.id
+   

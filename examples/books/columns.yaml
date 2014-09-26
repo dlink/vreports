@@ -9,7 +9,8 @@ columns:
 
    - name    : isbn
      display : ISBN
-     select  : b.isbn
+     select  : concat_ws('-', substr(b.isbn,1,3), substr(b.isbn,4))
+     aliases : b
      link    : http://www.amazon.com/gp/search/ref=sr_adv_b/?field-isbn=%s
      default : true
 
@@ -23,6 +24,10 @@ columns:
 
    - name    : classification
      select  : b.classification
+     default : true
+
+   - name    : genres
+     select  : bgs.genres
      default : true
 
    - name    : published
@@ -70,3 +75,12 @@ columns:
    - name    : died
      select  : a.died
 
+
+   ### Genre Data ############################
+
+   - name    : genre_data
+     type    : separator
+
+   - name    : genre
+     select  : g.name
+     group_by: true
