@@ -4,5 +4,8 @@ id,first_name,middle_name,last_name,country_id,born,died
 3,Mary,,Shelley,3,1797,1851
 4,Arthur,C.,Clarke,3,1917,2008
 5,James,,Clavell,3,1921,1994
+6,Henry,,James,3,1843,1916
+7,Mark,,Twain,2,1835,1910
+8,Edgar,Rice,Burroughs,2,1875,1950
 100,Brian,,Herbert,3,1947,
 101,Kevin,J.,Anderson,1962,

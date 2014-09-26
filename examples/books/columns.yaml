@@ -71,10 +71,16 @@ columns:
 
    - name    : born
      select  : a.born
+     type    : integer
 
    - name    : died
      select  : a.died
+     type    : integer
 
+   - name    : lifespan
+     select  : if(a.died, a.died - a.born, year(now() - a.born))
+     aliases : a
+     type    : integer
 
    ### Genre Data ############################
 
