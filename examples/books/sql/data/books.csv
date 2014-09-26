@@ -1,26 +1,26 @@
-id,name,publicated
-1,The Picture of Dorian Gray,1891
-2,On the Road,1957
-3,"Frankenstein; or, The Modern Prometheus",1818
-4,Childhood's End,1966
-5,A Clockwork Orange,1962
-6,Tai-Pan,1982
-7,Another Turn of the Screw,1998
-8,Adventures of Huckleberry Finn,1884
-9,A Princess of Mars,1917
-10,War of the Worlds,1897
-11,Northanger Abbey,1818
-12,Emma,1916
-13,The Profet,1923
-14,Zen and the Art of Motocycle Maintenance: An Inquiry into Value,1974
-15,Shogun,1975
-16,Hunger,1890
-17,The Growth of the Soil,1921
-18,The Sun Also Rises,1926
-19,Great Expectations,1860
-20,The Great Gadsby,1925
-21,Brothers Karamazov,1880
-22,Crime and Punishment,1866
-23,The Death of Ivan Ilyich,1886
-24,A Farewell to Arms,1929
-25,Dune: House Atreides,1999
+id,isbn,name,publicated,type
+1,9781557427960,The Picture of Dorian Gray,1891,Novel
+2,,On the Road,1957,Novel
+3,,"Frankenstein; or, The Modern Prometheus",1818,Novel
+4,,Childhood's End,1966,Novel
+5,,A Clockwork Orange,1962,Novel
+6,,Tai-Pan,1982,Novel
+7,,Another Turn of the Screw,1998,Novel
+8,,Adventures of Huckleberry Finn,1884,Novel
+9,,A Princess of Mars,1917,Novel
+10,,War of the Worlds,1897,Novel
+11,,Northanger Abbey,1818,Novel
+12,,Emma,1916,Novel
+13,,The Prophet,1923,Poetry
+14,,Zen and the Art of Motocycle Maintenance: An Inquiry into Value,1974,Novel
+15,,Shogun,1975,Novel
+16,,Hunger,1890,Novel
+17,,The Growth of the Soil,1921,Novel
+18,,The Sun Also Rises,1926,Novel
+19,,Great Expectations,1860,Novel
+20,,The Great Gadsby,1925,Novel
+21,,Brothers Karamazov,1880,Novel
+22,,Crime and Punishment,1866,Novel
+23,,The Death of Ivan Ilyich,1886,Novel
+24,,A Farewell to Arms,1929,Novel
+25,,Dune: House Atreides,1999,Novel

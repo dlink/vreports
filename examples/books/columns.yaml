@@ -7,12 +7,22 @@ columns:
    - name    : id
      default : true
 
+   - name    : isbn
+     display : ISBN
+     select  : b.isbn
+     link    : http://www.amazon.com/gp/search/ref=sr_adv_b/?field-isbn=%s
+     default : true
+
    - name    : name
      default : true
 
    - name    : authors
      select  : bas.authors
      group_by: true
+     default : true
+
+   - name    : classification
+     select  : b.classification
      default : true
 
    - name    : published
