@@ -33,30 +33,21 @@ class ReportBase(HtmlPage):
        Dynamic Reporting
     '''
 
-    def __init__(self): # , report_name): #, report=None, form=None):
+    def __init__(self):
         HtmlPage.__init__(self, 'Untitled')
         if 'r' not in self.form:
             raise VReportException('No report name passed')
 
         self.report_name = self.form['r'].value
+        self.title = self.report_name.title()
         self.loadParams()
-        #self.report_name = report_name
-        
-        #if params_file:
-        # self.loadParams(params_file)
-        #elif report:
-        #  self.loadParams(report.params_file)
-        #  self.params.report_title = report.title
 
-        self.debug_cgi = self.params.debug_cgi
-        self.db   = db.Db(self.params.database)
+        self.debug_cgi      = self.params.debug_cgi
+        self.db             = db.Db(self.params.database)
         self.reportColumns  = ReportColumns(self.params)
         self.reportControls = ReportControls(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
-
-        #if self.report and DEBUG_SAVE_REPORT:
-        #    self.debug_save_report()
 
         self.menu = Menu()
         self.header = Header(self.title)
