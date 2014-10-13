@@ -1,0 +1,15 @@
+Add date examples and controls like these:
+
+   - name: start_date_min
+     display: Starts on or After
+     type: date
+     filter: a.start_date >= '{value}'
+     default: ""
+
+   - name: start_day_max
+     display: Starts on or Before
+     type: date
+     filter: date(a.start_date) <= '{value}'
+     aliases: a
+     default: ""
+
