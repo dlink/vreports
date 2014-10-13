@@ -9,6 +9,8 @@ from vlib import db
 from vlib.datatable import DataTable
 from vlib.utils import pretty
 
+class GeneratorError(Exception): pass
+
 class Generator(object): 
 
     def __init__(self):
@@ -29,16 +31,16 @@ class Generator(object):
             # Convert DB types to vreports Types:
             #   remove numbers from db_type
             db_type = re.sub(r'[0-9]', r'', db_type)
-            if db_type in ('int()', 'tinyint()'):
+            if db_type in ('int()', 'tinyint()', 'bigint()'):
                 type = 'integer'
-            elif db_type in ('char()', 'varchar()'):
+            elif db_type in ('char()', 'varchar()') or 'enum' in db_type:
                 type = 'string'
-            elif db_type in ('datetime'):
+            elif db_type in ('datetime', 'timestamp'):
                 type = 'datetime'
             elif db_type in ('decimal(,)'):
                 type = 'money'
             else:
-                raise Exception('Unrecognized db_type: %s' % db_type)
+                raise GeneratorError('Unrecognized db_type: %s' % db_type)
             columns.append({'name': name, 'type': type})
 
         # Create Yaml by hand
