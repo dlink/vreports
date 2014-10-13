@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 import re
 import os
 import sys
@@ -9,6 +10,7 @@ from vlib.datatable import DataTable
 from vlib.utils import pretty
 
 class Generator(object): 
+
     def __init__(self):
         self.db = db.getInstance()
 
@@ -46,10 +48,7 @@ class Generator(object):
             o += '   - name   : %s\n' % c['name']
             o += '     select : %s.%s\n' % (alias, c['name'])
             o += '     type   : %s\n' % c['type']
-
-            # set the first three columns to default: true
-            if i in range(3):
-                o += '     default: true\n'
+            o += '     default: true\n'
             o += '\n'
         return o
 
