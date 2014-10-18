@@ -26,13 +26,17 @@ class NoData(HtmlPage):
                        self.body())
     def body(self):
         href='https://github.com/dlink/vreports/blob/master/README.md'
-        link = a('README', href=href)
+        readme_link = a('README', href=href)
+
+        href='https://github.com/dlink/vreports'
+        source_link = a(href, href=href)
 
 
         text = [h1('Welcome to VRreports'),
-                'No report config directory specified. You must pass a report name in as a parameter like this: ' \
-                    '"vreports?r=books".',
-                'See %s' % link,
+                'No report config directory specified. You must pass a report name ' \
+                    'in as a parameter like this: "vreports?r=books".',
+                'See %s' % readme_link,
+                'Source code available: %s' % source_link,
                 h2('Here are some Examples'),
                 self.examples()]
 
