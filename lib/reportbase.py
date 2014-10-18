@@ -36,7 +36,7 @@ class ReportBase(HtmlPage):
     def __init__(self):
         HtmlPage.__init__(self, 'Untitled')
         if 'r' not in self.form:
-            raise VReportException('No report name passed')
+            print 'Location: nodata.py' # <-- Exit
 
         self.report_name = self.form['r'].value
         self.title = self.report_name.title()
