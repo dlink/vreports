@@ -11,7 +11,7 @@ id,isbn,name,publicated,type
 10,,War of the Worlds,1897,Novel
 11,,Northanger Abbey,1818,Novel
 12,,Emma,1916,Novel
-13,,The Prophet,1923,Poetry
+13,9781614270621,The Prophet,1923,Poetry
 14,,Zen and the Art of Motocycle Maintenance: An Inquiry into Value,1974,Novel
 15,,Shogun,1975,Novel
 16,,Hunger,1890,Novel
@@ -19,7 +19,7 @@ id,isbn,name,publicated,type
 18,,The Sun Also Rises,1926,Novel
 19,,Great Expectations,1860,Novel
 20,,The Great Gadsby,1925,Novel
-21,,Brothers Karamazov,1880,Novel
+21,9780374528379,Brothers Karamazov,1880,Novel
 22,,Crime and Punishment,1866,Novel
 23,,The Death of Ivan Ilyich,1886,Novel
 24,,A Farewell to Arms,1929,Novel
