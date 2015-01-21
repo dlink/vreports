@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 
+
 import re
 import os
 import sys
@@ -21,6 +22,18 @@ class Generator(object):
            Read table schema info from the database
            Return vreports Column yaml file
         '''
+
+        # Todo add count column to output:
+        """
+        - name    : count
+          select  : '*'
+          aliases : c
+          mode    : aggregate
+          aggregate_func: count
+          type    : integer
+          default : true
+        """
+
         # Read columns info from database
         dt = DataTable(self.db, tablename)
         columns = []
