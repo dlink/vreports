@@ -42,8 +42,13 @@ class Generator(object):
             db_type = row['Type']
 
             # Convert DB types to vreports Types:
-            #   remove numbers from db_type
+
+            # remove numbers from db_type
             db_type = re.sub(r'[0-9]', r'', db_type)
+
+            # care not about unsigned:
+            db_type = db_type.replace(' unsigned', '')
+
             if db_type in ('int()', 'tinyint()', 'bigint()'):
                 type = 'integer'
             elif db_type in ('char()', 'varchar()') or 'enum' in db_type:
