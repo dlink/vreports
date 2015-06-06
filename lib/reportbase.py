@@ -34,6 +34,8 @@ class ReportBase(HtmlPage):
     '''
 
     def __init__(self):
+        '''constructor
+        '''
         HtmlPage.__init__(self, 'Untitled')
         if 'r' not in self.form:
             print 'Location: nodata.py' # <-- Exit
