@@ -29,10 +29,10 @@ class ReportSqlPanel(object):
         table.addRow([b('SQL'), b('Count SQL')])
 
         count_sql = self.sqlBuilder.getCountSQL()
-        count_sql_pretty = div(pretty_sql(count_sql, True) + ';')
+        count_sql_pretty = div(pretty_sql(count_sql, html=True) + ';')
         
         sql  = self.sqlBuilder.getSQL()
-        sql_pretty = div(pretty_sql(sql, True) + ';')
+        sql_pretty = div(pretty_sql(sql, html=True) + ';')
 
         table.addRow([sql_pretty, count_sql_pretty])
         table.setColWidth(1, '50%')
