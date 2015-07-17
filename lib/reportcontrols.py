@@ -92,7 +92,12 @@ class ReportControls(object):
 
     def _getControlMenu(self, control):
         options = ''
-        for key in control.menu.keys():
+        # sort by menu name
+        keys = sorted(control.menu.keys(), key=lambda k: control.menu[k])
+        # put 'All' (key = 0) back at the top of the list
+        p = keys.index(0)
+        keys = [0] + keys[0:p] + keys[p+1:]
+        for key in keys:
             #if int(key) == int(control.get('value')):
             if key == control.get('value'):
                 options += option(control.menu[key], value=key, selected='1')
