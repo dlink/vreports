@@ -68,8 +68,22 @@ class Generator(object):
             o += '   - name   : %s\n' % c['name']
             o += '     select : %s.%s\n' % (alias, c['name'])
             o += '     type   : %s\n' % c['type']
+            if c['type'] == 'money':
+                o += '     aggregate_func: sum\n'
             o += '     default: true\n'
             o += '\n'
+
+        o += '''
+   # count
+
+   - name    : count
+     select  : '*'
+     aliases : %s
+     mode    : aggregate
+     aggregate_func: count
+     type    : integer
+     default : true''' % alias
+
         return o
 
 def syntax():
