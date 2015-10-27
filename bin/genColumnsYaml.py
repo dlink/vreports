@@ -49,9 +49,9 @@ class Generator(object):
             # care not about unsigned:
             db_type = db_type.replace(' unsigned', '')
 
-            if db_type in ('int()', 'tinyint()', 'bigint()'):
+            if db_type in ('int()', 'tinyint()', 'smallint()', 'bigint()'):
                 type = 'integer'
-            elif db_type in ('char()', 'varchar()') or 'enum' in db_type:
+            elif db_type in ('char()', 'varchar()','text') or 'enum' in db_type:
                 type = 'string'
             elif db_type in ('datetime', 'timestamp'):
                 type = 'datetime'
