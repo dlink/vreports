@@ -1,5 +1,11 @@
 Release Notes - vreports
 ========================
+v.1.0.1
+-------
+TBC
+
+- ReportBase - you takes report_name as a parameter
+
 v.1.0.0
 -------
 10/28/2015
