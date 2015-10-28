@@ -1,5 +1,5 @@
-Release Notes - vreport
-=======================
+Release Notes - vreports
+========================
 v.1.0.0
 -------
 10/28/2015
