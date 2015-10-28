@@ -1,0 +1,9 @@
+Release Notes - vreport
+=======================
+v.1.0.0
+-------
+10/28/2015
+
+- Initial Release Notes Entry
+- Started refactoring Code into reusable libraries in Jan 2013
+- Initial code base started for single purpose report in 08/2010
