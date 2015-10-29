@@ -36,14 +36,14 @@ class ReportBase(HtmlPage):
     def __init__(self, report_name=None):
         '''constructor
         '''
+        HtmlPage.__init__(self, 'Untitled')
+
         if report_name:
             self.report_name = report_name
         elif 'r' in self.form:
             self.report_name = self.form['r'].value
         else:
             print 'Location: nodata.py' # <-- Exit
-
-        HtmlPage.__init__(self, 'Untitled')
 
         self.title = self.report_name.title()
         self.loadParams()
