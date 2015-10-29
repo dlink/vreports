@@ -12,6 +12,10 @@ body {
    background-color: #cccccc;
 }
 
+.controls {
+    text-align: right;
+}
+
 .control-section {
     background-color: white;
     margin: 10px 0px;
@@ -24,4 +28,8 @@ body {
 
 .text-element-lg {
     font-size: 20px;
+}
+
+#save-panel {
+    display: none;
 }
