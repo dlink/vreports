@@ -34,10 +34,10 @@ class ReportColumns(object):
 
         hide_button = a('[Hide]', onclick='hide_column_chooser()')
 
-        spacer = div('&nbsp;', class_='floatr')                  
+        #spacer = div('&nbsp;', class_='floatr')                  
 
         title = div(b(i('Column Chooser')) + '&nbsp;' \
-                    + hide_button + spacer,
+                    + hide_button, # + spacer,
                     id='column_chooser_title')
 
     
@@ -53,13 +53,13 @@ class ReportColumns(object):
                               self.getGuts() + \
                               other_buttons,
                               id='column_chooser',
-                             class_='control-section'
+                             #class_='control-section'
                              )
         return report_columns
 
     def getColumnsDescription(self):
-        return span(self.params.get('columns_description', ''),
-                    class_='columnDescription')
+        return span(self.params.get('columns_description', ''))
+                    #class_='columnDescription')
 
     def getGuts(self):
         # Table of column checkboxes NUM_COL's wide
@@ -89,12 +89,12 @@ class ReportColumns(object):
             elif self.disabled(column):
                 
                 # hidden fields
-                style = 'color: lightgrey'
+                #style = 'color: lightgrey'
                 h = input(type='hidden',
                           name='%s_column' % column.name,
                           value=column.get('selected', ''))
                 mark = 'x' if column.get('selected') else '&nbsp;'
-                display = span('[ %s ] %s' % (mark,column.display),style=style)
+                display = span('[ %s ] %s' % (mark,column.display)) #,style=style)
                 checkbox = display + h
                 
             else:
@@ -108,9 +108,9 @@ class ReportColumns(object):
                 if column.get('default'):
                     checkbox_params['class'] = 'default_column'
                 if column.get('minor'):
-                    display = span(column.display, class_='cc_minor')
+                    display = span(column.display)#, class_='cc_minor')
                 else:
-                    display = span(column.display, class_='cc_major')
+                    display = span(column.display)#, class_='cc_major')
                                  
                 checkbox = input(**checkbox_params) + display
             
@@ -122,7 +122,10 @@ class ReportColumns(object):
                     row_num = 0
                 skip_one = 0
 
-            rows[row_num].append(div(checkbox, class_='checkbox'))
+            rows[row_num].append(div(checkbox
+                                     #, class_='checkbox'
+                                     , class_='form-control'
+                                     ))
             row_num += 1
             if row_num >= num_rows:
                 row_num = 0
@@ -134,7 +137,11 @@ class ReportColumns(object):
         return table_of_columns
     
     def getShowButton(self):
-        show_button = a('[Column Chooser]',
-                        id='column_chooser_show',
-                        onclick='show_column_chooser()')
+        #show_button = a('[Column Chooser]',
+        #                id='column_chooser_show',
+        #                onclick='show_column_chooser()')
+        show_button = input(name='column_chooser', value='Column Chooser',
+                            id='column_chooser_show',
+                            class_='btn btn-success btn-xs',
+                            onclick='show_column_chooser()')
         return show_button

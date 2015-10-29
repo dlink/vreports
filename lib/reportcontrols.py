@@ -11,9 +11,13 @@ class ReportControls(object):
 
     def getShowButton(self):
         #class_='floatr',
-        show_button = a('[Controls]',
-                        id='report_controls_show',
-                        onclick='show_report_controls()')
+        #show_button = a('[Controls]',
+        #                id='report_controls_show',
+        #                onclick='show_report_controls()')
+        show_button = input(name='controls', value='Filters',
+                            id='report_controls_show',
+                            class_='btn btn-success btn-xs',
+                            onclick='show_report_controls()')
         return show_button
 
     def getControl(self, name):
@@ -25,6 +29,9 @@ class ReportControls(object):
 
     def getControls(self):
         hide_button = a('[Hide]', onclick='hide_report_controls()')
+        #hide_button = input(name='hide', value='Hide',
+        #                    class_='btn btn-info btn-xs',
+        #                    onclick='hide_report_controls()')
 
         spacer = div('&nbsp;', class_='floatr')
         
@@ -60,7 +67,7 @@ class ReportControls(object):
 
         clear_button = input(name='clear_button', value='Clear All',
                              type='button', onclick='clear_controls()',
-                             class_='btn btn-danger btn-xs')
+                             class_='btn btn-warning btn-xs')
             
         report_controls = div(title + \
                               table.getTable() + \

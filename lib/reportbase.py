@@ -476,9 +476,9 @@ class ReportBase(HtmlPage):
         return table.getTable()
 
     def getReportTableFooter(self):
-        return div(' &nbsp; - &nbsp; '.join([self.getRowCountDesc(),
-                                             self.getPager()]),
-                   id='report_table_footer')
+        return div(' &nbsp; '.join([strong(self.getRowCountDesc()),
+                                    self.getPager()]),
+                   id='control-section')
 
 
     def getColumnHeaders(self):
