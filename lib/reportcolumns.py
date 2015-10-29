@@ -63,7 +63,7 @@ class ReportColumns(object):
     def getGuts(self):
         # Table of column checkboxes NUM_COL's wide
         NUM_COL = 6
-        table = HtmlTable(id='column_chooser_table')
+        table = HtmlTable(class_='table table-condensed')
         num_separators = len([c for c in self.params.columns[1:]
                               if c.get('type') == 'separator'])
         num_checkboxes = len(self.params.columns) + num_separators
@@ -121,7 +121,7 @@ class ReportColumns(object):
                     row_num = 0
                 skip_one = 0
 
-            rows[row_num].append(checkbox)
+            rows[row_num].append(div(checkbox, class_='checkbox'))
             row_num += 1
             if row_num >= num_rows:
                 row_num = 0

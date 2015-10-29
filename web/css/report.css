@@ -1,0 +1,12 @@
+.header {
+    background-color: black; // navy;
+    color: AntiqueWhite;
+}
+
+.text-element {
+    padding: 3px;
+}
+
+.text-element-lg {
+    font-size: 20px;
+}

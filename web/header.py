@@ -11,6 +11,8 @@ class Header(object):
 
     def getHeader(self):
         logo = LOGO
-        return \
-            div(logo) + \
-            h4(self.title, class_='text-center')
+        return div('\n'.join([div(logo, class_='text-element'),
+                              p(strong(self.title),
+                                class_='text-center text-element text-element-lg')]),
+                   class_='header'
+                   )

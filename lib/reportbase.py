@@ -66,7 +66,7 @@ class ReportBase(HtmlPage):
         self.style_sheets.extend([
             "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
             "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
-            #'css/report.css',
+            'css/report.css',
 
             #'css/main.css',
             #'css/report_controls.css',
@@ -303,19 +303,20 @@ class ReportBase(HtmlPage):
         '''Return the entire HTML content of the page.
            (Without HTTP Header)
         '''
-        return div('\n'.join([self.header.getHeader(),
-                              self.menu.getMenu(),
-                              self.getControlOptions(),
-                              self.reportSqlPanel.getSqlPanel(),
-                              self.reportControls.getControls(),
-                              self.reportColumns.getColumnChooser(),
-                              self.getHiddenFields(),
-                              self.getReportDesc(),
-                              self.getReportTable(),
-                              self.getReportTableFooter(),
-                              self.help(),
-                              self.save_panel()]),
-                   class_='container-fluid')
+        return \
+            self.header.getHeader() + \
+            div('\n'.join([self.menu.getMenu(),
+                           self.getControlOptions(),
+                           self.reportSqlPanel.getSqlPanel(),
+                           self.reportControls.getControls(),
+                           self.reportColumns.getColumnChooser(),
+                           self.getHiddenFields(),
+                           self.getReportDesc(),
+                           self.getReportTable(),
+                           self.getReportTableFooter(),
+                           self.help(),
+                           self.save_panel()]),
+                class_='container-fluid')
 
     def getCsv(self):
         o = ''
