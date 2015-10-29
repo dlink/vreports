@@ -30,6 +30,15 @@ body {
     font-size: 20px;
 }
 
+/* Save Panel */
+
 #save-panel {
     display: none;
 }
+
+/* Report controls */
+
+#report_controls_title {
+  background-color: lightyellow;
+}
+
