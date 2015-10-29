@@ -5,6 +5,7 @@ v.1.0.1
 TBC
 
 - ReportBase - you takes report_name as a parameter
+- Style Changes: Control links changed to buttons
 
 v.1.0.0
 -------
