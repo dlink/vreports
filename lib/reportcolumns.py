@@ -39,7 +39,6 @@ class ReportColumns(object):
         title = div(b(i('Column Chooser')) + '&nbsp;' \
                     + hide_button + spacer,
                     id='column_chooser_title')
-
     
         # buttons
         reset_button = input(name='reset', value='Reset Defaults',
@@ -136,7 +135,10 @@ class ReportColumns(object):
         return table_of_columns
     
     def getShowButton(self):
-        show_button = a('[Column Chooser]',
-                        id='column_chooser_show',
-                        onclick='show_column_chooser()')
+        #show_button = a('[Column Chooser]',
+        #                id='column_chooser_show',
+        #                onclick='show_column_chooser()')
+        show_button = input(name='column_chooser', value='Choose Columns', type='button',
+                            id='column_chooser_show',
+                            onclick='show_column_chooser()')
         return show_button

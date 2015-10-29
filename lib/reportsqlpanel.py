@@ -11,10 +11,12 @@ class ReportSqlPanel(object):
         
 
     def getShowButton(self):
-        #class_='floatr',
-        show_button = a('[Show SQL]',
-                        id='sql_panel_show',
-                        onclick='show_sql_panel()')
+        #show_button = a('[Show SQL]',
+        #                id='sql_panel_show',
+        #                onclick='show_sql_panel()')
+        show_button = input(name='show_sql', value='Show SQL', type='button',
+                            id='sql_panel_show',
+                            onclick='show_sql_panel()')
         return show_button
 
     def getSqlPanel(self):
