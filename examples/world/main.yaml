@@ -9,6 +9,7 @@ display_num_rows: 100
 sort_by         : Name:asc
 
 database:
+   engine: mysql
    host  : localhost
    user  : vreports
    passwd: woodenships60
