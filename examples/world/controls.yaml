@@ -1,3 +1,18 @@
 controls:
+   - name   : continent
+     filter : c.continent like '%{value}%'
+
+   - name   : region
+     filter : c.region like '%{value}%'
+
    - name   : country
      filter : c.Name like '%{value}%'
+
+   - name   : code
+     filter : c.code like '%{value}%'
+
+   - name   : official_language
+     filter : c.official_language like '%{value}%'
+
+   - name   : form_of_government
+     filter : c.form_of_government like '%{value}%'

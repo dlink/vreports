@@ -40,6 +40,7 @@ class ReportSqlPanel(object):
         
         show_sql = div(title + \
                        table.getTable(),
-                       id='sql_panel')
+                       id='sql_panel',
+                       class_='control-section')
         
         return show_sql

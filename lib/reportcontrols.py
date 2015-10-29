@@ -31,7 +31,7 @@ class ReportControls(object):
         title = div(b(i('Report Controls')) + '&nbsp;' + hide_button + spacer,
                     id='report_controls_title')
 
-        table = HtmlTable(class_='table')
+        table = HtmlTable() #class_='table table-condensed')
         cwidgets = ''
         filters = []
         for control in self.params.controls:
@@ -59,18 +59,19 @@ class ReportControls(object):
         table.setCellColSpan(table.rownum, 2, 2)
 
         clear_button = input(name='clear_button', value='Clear All',
-                             type='button', onclick='clear_controls()')
+                             type='button', onclick='clear_controls()',
+                             class_='btn btn-danger btn-xs')
             
         report_controls = div(title + \
                               table.getTable() + \
                               clear_button,
                               id='report_controls',
-                              class_='form-group bg-info')
+                              class_='control-section')
+
         return report_controls
         
     def _getInput(self, control):
         cinput = input(name=control.name,
-                       class_='form-control',
                        type_='text',
                        value=control.get('value', ''),
                        onChange='submit()')
@@ -113,7 +114,7 @@ class ReportControls(object):
                     options += option(c.display, value=c.name, selected='1')
                 else:
                     options += option(c.display, value=c.name)
-        return select(options, name='group_by', onChange='submit()', class_='form-control')
+        return select(options, name='group_by', onChange='submit()')
 
 def listToTable(alist):
     '''Given a list of tuples

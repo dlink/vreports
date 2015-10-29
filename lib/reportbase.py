@@ -305,8 +305,8 @@ class ReportBase(HtmlPage):
         '''
         return \
             self.header.getHeader() + \
-            div('\n'.join([self.menu.getMenu(),
-                           self.getControlOptions(),
+            self.menu.getMenu() + \
+            div('\n'.join([self.getControlOptions(),
                            self.reportSqlPanel.getSqlPanel(),
                            self.reportControls.getControls(),
                            self.reportColumns.getColumnChooser(),
@@ -337,7 +337,7 @@ class ReportBase(HtmlPage):
         return div(''.join([self.reportControls.getShowButton(),
                             self.reportColumns.getShowButton(),
                             self.reportSqlPanel.getShowButton()]),
-                   class_='form-group')
+                   class_='form-group controls')
     
     def getHiddenFields(self):
         SHOW_HIDDEN=0
@@ -405,7 +405,7 @@ class ReportBase(HtmlPage):
                                     self.getPager(),
                                     self.getCsvButton(),
                                     self.getSaveButton()]),
-                   class_='form-group'
+                   class_='control-section'
                    )
 
     def getPager(self):
@@ -423,7 +423,7 @@ class ReportBase(HtmlPage):
             next = ''
         else:
             next_text = 'Next &gt;&gt;'
-            next = input(name='next', type='button', class_='btn btn-primary btn-xs',
+            next = input(name='next', type='button', class_='btn btn-info btn-xs',
                          value=next_text, onclick='go_to_next_page()')
             
         if prev and next:
@@ -434,7 +434,7 @@ class ReportBase(HtmlPage):
             return prev
 
     def getSaveButton(self):
-      return input(name='save', type='button', class_='btn btn-primary btn-xs',
+      return input(name='save', type='button', class_='btn btn-info btn-xs',
                    value='Save to My Reports', onclick='save_report()')
     
     def getRowCountDesc(self):

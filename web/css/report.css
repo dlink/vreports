@@ -1,6 +1,21 @@
+body {
+   background-color: #eeeeee;
+}
+
+
 .header {
     background-color: black; // navy;
     color: AntiqueWhite;
+}
+
+.menu {
+   background-color: #cccccc;
+}
+
+.control-section {
+    background-color: white;
+    margin: 10px 0px;
+    padding: 10px;
 }
 
 .text-element {

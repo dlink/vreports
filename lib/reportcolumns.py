@@ -43,7 +43,8 @@ class ReportColumns(object):
     
         # buttons
         reset_button = input(name='reset', value='Reset Defaults',
-                             type='button',onclick='reset_column_defaults()')
+                             type='button',onclick='reset_column_defaults()',
+                             class_='btn btn-danger btn-xs')
         
         other_buttons = p(' &nbsp; '.join([reset_button]))
         
@@ -52,7 +53,7 @@ class ReportColumns(object):
                               self.getGuts() + \
                               other_buttons,
                               id='column_chooser',
-                             class_='form-group'
+                             class_='control-section'
                              )
         return report_columns
 
@@ -63,7 +64,7 @@ class ReportColumns(object):
     def getGuts(self):
         # Table of column checkboxes NUM_COL's wide
         NUM_COL = 6
-        table = HtmlTable(class_='table table-condensed')
+        table = HtmlTable() #class_='table table-condensed')
         num_separators = len([c for c in self.params.columns[1:]
                               if c.get('type') == 'separator'])
         num_checkboxes = len(self.params.columns) + num_separators
