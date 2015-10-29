@@ -65,10 +65,13 @@ class ReportBase(HtmlPage):
             ]
         self.style_sheets.extend([
             "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
-            'css/main.css',
-            'css/report_controls.css',
-            'css/column_chooser.css',
-            'css/report_sql_panel.css'
+            "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
+            #'css/report.css',
+
+            #'css/main.css',
+            #'css/report_controls.css',
+            #'css/column_chooser.css',
+            #'css/report_sql_panel.css'
             ])
         
     def loadParams(self):
@@ -300,22 +303,19 @@ class ReportBase(HtmlPage):
         '''Return the entire HTML content of the page.
            (Without HTTP Header)
         '''
-        return div(
-            self.header.getHeader() + \
-            self.menu.getMenu() + \
-            div(
-              self.getControlOptions() + \
-              self.reportSqlPanel.getSqlPanel() + \
-              self.reportControls.getControls() + \
-              self.reportColumns.getColumnChooser() + \
-              self.getHiddenFields() + \
-              self.getReportDesc() + \
-              self.getReportTable() + \
-              self.getReportTableFooter(),
-              id='content') + \
-            self.help() + \
-            self.save_panel(),
-            id='page_container')
+        return div('\n'.join([self.header.getHeader(),
+                              self.menu.getMenu(),
+                              self.getControlOptions(),
+                              self.reportSqlPanel.getSqlPanel(),
+                              self.reportControls.getControls(),
+                              self.reportColumns.getColumnChooser(),
+                              self.getHiddenFields(),
+                              self.getReportDesc(),
+                              self.getReportTable(),
+                              self.getReportTableFooter(),
+                              self.help(),
+                              self.save_panel()]),
+                   class_='container-fluid')
 
     def getCsv(self):
         o = ''
@@ -336,7 +336,7 @@ class ReportBase(HtmlPage):
         return div(''.join([self.reportControls.getShowButton(),
                             self.reportColumns.getShowButton(),
                             self.reportSqlPanel.getShowButton()]),
-                   id='report_options')
+                   class_='form-group')
     
     def getHiddenFields(self):
         SHOW_HIDDEN=0
@@ -398,14 +398,14 @@ class ReportBase(HtmlPage):
         if not filter_desc:
             filter_desc = 'All'
                 
-        return div(' &nbsp; - &nbsp; '.join([self.params.report_title,
-                                             filter_desc,
-                                             self.getRowCountDesc(),
-                                             self.getPager(),
-                                             self.getCsvButton(),
-                                             self.getSaveButton()]),
-                   id='report_description_container',
-                   style='clear: both')
+        return div(' &nbsp; '.join([strong(self.params.report_title),
+                                    strong(filter_desc),
+                                    strong(self.getRowCountDesc()),
+                                    self.getPager(),
+                                    self.getCsvButton(),
+                                    self.getSaveButton()]),
+                   class_='form-group'
+                   )
 
     def getPager(self):
         # previous button
@@ -421,8 +421,8 @@ class ReportBase(HtmlPage):
                > self.getRowCount():
             next = ''
         else:
-            next_text = 'Next&gt;&gt;'
-            next = input(name='next', type='button',
+            next_text = 'Next &gt;&gt;'
+            next = input(name='next', type='button', class_='btn btn-primary btn-xs',
                          value=next_text, onclick='go_to_next_page()')
             
         if prev and next:
@@ -433,7 +433,7 @@ class ReportBase(HtmlPage):
             return prev
 
     def getSaveButton(self):
-      return input(name='save', type='button',
+      return input(name='save', type='button', class_='btn btn-primary btn-xs',
                    value='Save to My Reports', onclick='save_report()')
     
     def getRowCountDesc(self):
@@ -452,8 +452,11 @@ class ReportBase(HtmlPage):
         return row_count_desc
 
     def getReportTable(self):
-        table = HtmlTable(class_='report_table')        
+        table = HtmlTable(class_='table table-striped table-bordered table-hover '
+                          'table-condensed')
         table.addHeader(self.getColumnHeaders())
+        table.setRowClass(table.rownum, 'bg-info')
+        table.setRowVAlign(table.rownum, 'top')
         for row in self.getData():
             #table.addRow(row)
             # experimenting with nobr 9/3/2013 -dvl

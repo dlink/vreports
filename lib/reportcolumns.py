@@ -51,13 +51,10 @@ class ReportColumns(object):
                               self.getColumnsDescription() + \
                               self.getGuts() + \
                               other_buttons,
-                              id='column_chooser')
+                              id='column_chooser',
+                             class_='form-group'
+                             )
         return report_columns
-    
-        # container:
-        #return div(show_button + \
-        #           report_controls,
-        #           id='column_chooser_container')
 
     def getColumnsDescription(self):
         return span(self.params.get('columns_description', ''),
