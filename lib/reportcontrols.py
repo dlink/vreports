@@ -10,10 +10,12 @@ class ReportControls(object):
         
 
     def getShowButton(self):
-        #class_='floatr',
-        show_button = a('[Controls]',
-                        id='report_controls_show',
-                        onclick='show_report_controls()')
+        #show_button = a('[Controls]',
+        #                id='report_controls_show',
+        #                onclick='show_report_controls()')
+        show_button = input(name='controls', value='Filters', type='button',
+                            id='report_controls_show',
+                            onclick='show_report_controls()')
         return show_button
 
     def getControl(self, name):

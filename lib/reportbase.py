@@ -65,6 +65,7 @@ class ReportBase(HtmlPage):
             ]
         self.style_sheets.extend([
             "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
+            "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
             'css/main.css',
             'css/report_controls.css',
             'css/column_chooser.css',
@@ -312,7 +313,8 @@ class ReportBase(HtmlPage):
               self.getReportDesc() + \
               self.getReportTable() + \
               self.getReportTableFooter(),
-              id='content') + \
+              id='content', class_='container-fluid') + \
+              #id='content') + \
             self.help() + \
             self.save_panel(),
             id='page_container')
@@ -423,6 +425,7 @@ class ReportBase(HtmlPage):
         else:
             next_text = 'Next&gt;&gt;'
             next = input(name='next', type='button',
+                         #class_='btn btn-info btn-xs',
                          value=next_text, onclick='go_to_next_page()')
             
         if prev and next:
@@ -434,6 +437,7 @@ class ReportBase(HtmlPage):
 
     def getSaveButton(self):
       return input(name='save', type='button',
+                   #class_='btn btn-info btn-xs',
                    value='Save to My Reports', onclick='save_report()')
     
     def getRowCountDesc(self):
