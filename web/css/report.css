@@ -3,6 +3,12 @@ body {
 }
 
 
+h1 {
+   font-size: 20px;
+   padding: 0px 0px 5px 0px;
+   margin: 0px;
+}
+
 .header {
     background-color: black; // navy;
     color: AntiqueWhite;
@@ -22,13 +28,6 @@ body {
     padding: 10px;
 }
 
-.text-element {
-    padding: 3px;
-}
-
-.text-element-lg {
-    font-size: 20px;
-}
 
 /* Save Panel */
 

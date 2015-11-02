@@ -10,9 +10,6 @@ class Header(object):
         self.title = title
 
     def getHeader(self):
-        logo = LOGO
-        return div('\n'.join([div(logo, class_='text-element'),
-                              p(strong(self.title),
-                                class_='text-center text-element text-element-lg')]),
-                   class_='header'
-                   )
+        logo = div(LOGO, class_='text-element')
+        report_name = center(h1(self.title))
+        return div(logo + report_name, class_='header')

@@ -19,8 +19,9 @@ class Menu(object):
                 menu.append(a(name, href='#') + self.htmlify(target, 
                                                               submenu=True))
             elif type(target) is str: 
-               menu.append(input(name=name, class_='btn btn-primary btn-sm', type='button',
-                                 value=name, onclick="location.href='%s'" % target))
+               menu.append(input(name=name, class_='btn btn-primary btn-sm',
+                                 type='button', value=name,
+                                 onclick="location.href='%s'" % target))
 
         return div(' &nbsp; ' * 3 + \
                    " &nbsp; ".join(menu), class_='form-group menu')
