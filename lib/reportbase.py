@@ -398,15 +398,18 @@ class ReportBase(HtmlPage):
         filter_desc = '; &nbsp; '.join(filters)
         if not filter_desc:
             filter_desc = 'All'
-                
-        return div(' &nbsp; '.join([strong(self.params.report_title),
-                                    strong(filter_desc),
-                                    strong(self.getRowCountDesc()),
-                                    self.getPager(),
-                                    self.getCsvButton(),
-                                    self.getSaveButton()]),
-                   class_='control-section'
-                   )
+
+        table = HtmlTable(width='100%')
+        left = ' &nbsp; '.join([strong(self.params.report_title),
+                                strong(filter_desc),
+                                strong(self.getRowCountDesc()),
+                                self.getPager()])
+
+        right = ' &nbsp; '.join([self.getCsvButton(),
+                                 self.getSaveButton()])
+        table.addRow([left, right])
+        table.setCellAlign(1, 2, 'right')
+        return table.getTable()
 
     def getPager(self):
         # previous button
