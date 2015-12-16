@@ -14,7 +14,7 @@
 #                 a) the base_table_alias defined in params.yaml, or 
 #                 b) defined in table_joins.yaml
 #
-#     aliases:  Comma seperated list of table name aliases needed in 
+#     aliases:  Comma separated list of table name aliases needed in 
 #                 in table joins.   (REQUIRED IF:) 'select' is not
 #                 in the simple form of "<aliase>:<column_name>"
 #
