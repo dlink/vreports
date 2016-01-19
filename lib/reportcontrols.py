@@ -8,16 +8,6 @@ class ReportControls(object):
     def __init__(self, params):
         self.params = params
         
-
-    def getShowButton(self):
-        #show_button = a('[Controls]',
-        #                id='report_controls_show',
-        #                onclick='show_report_controls()')
-        show_button = input(name='controls', value='Filters', type='button',
-                            id='report_controls_show',
-                            onclick='show_report_controls()')
-        return show_button
-
     def getControl(self, name):
         '''Return a control object for a given name'''
         for c in self.params.controls:
@@ -26,11 +16,7 @@ class ReportControls(object):
         raise ReportControlsError('Control not found: %s' % name)
 
     def getControls(self):
-        hide_button = a('[Hide]', onclick='hide_report_controls()')
-
-        spacer = div('&nbsp;', class_='floatr')
-        
-        title = div(b(i('Report Controls')) + '&nbsp;' + hide_button + spacer,
+        title = div(b('Filters'),
                     id='report_controls_title')
 
         table = HtmlTable(id='report_controls_table')
@@ -56,16 +42,25 @@ class ReportControls(object):
             table.addRow(filter)
 
         # group_by
-        table.addRow([hr(), hr()])
+        table.addRow([hr(), hr(), hr(), hr(), hr(), hr()])
+        table.setRowClass(table.rownum, 'filter-cell-separator')
+
+        table.addRow([span(b('Summaries'), id='summaries-title')])
+        table.setCellColSpan(table.rownum, 1, 3)
+
         table.addRow(['Summarize by:', self._getGroupByMenu()])
+        table.setRowClass(table.rownum, 'filter-summarize-by')
         table.setCellColSpan(table.rownum, 2, 2)
 
-        clear_button = input(name='clear_button', value='Clear All',
-                             type='button', onclick='clear_controls()')
+        reset_button = a('Reset Filters', id='reset-filters', class_='vbutton',
+                         onclick='reset_filters()')
             
+        table.setColClass(2, 'filter-field')
+        table.setColClass(4, 'filter-field')
+
         report_controls = div(title + \
                               table.getTable() + \
-                              clear_button,
+                              reset_button,
                               id='report_controls')
         return report_controls
         # container:
@@ -77,16 +72,14 @@ class ReportControls(object):
         cinput = input(name=control.name,
                        class_=control.type,
                        type_='text',
-                       value=control.get('value', ''),
-                       onChange='submit()')
+                       value=control.get('value', ''))
         return cinput
 
     def _getCheckbox(self, control):
         params = {'name' : control.name,
                   'class': control.type,
                   'type' : 'checkbox',
-                  'value': 'True',
-                  'onChange': 'submit()'}
+                  'value': 'True'}
         if control.get('value'):
             params['checked'] = 1
         cinput = input(**params)
@@ -105,7 +98,7 @@ class ReportControls(object):
                 options += option(control.menu[key], value=key, selected='1')
             else:
                 options += option(control.menu[key], value=key)
-        return select(options, name=control.name, onChange='submit()')
+        return select(options, name=control.name)
 
     def _getGroupByMenu(self):
         options = ''
@@ -118,7 +111,7 @@ class ReportControls(object):
                     options += option(c.display, value=c.name, selected='1')
                 else:
                     options += option(c.display, value=c.name)
-        return select(options, name='group_by', onChange='submit()')
+        return select(options, name='group_by')
 
 def listToTable(alist):
     '''Given a list of tuples
@@ -131,7 +124,7 @@ def listToTable(alist):
          I,J
          K,L ]
     '''
-    NUM_COL = 5
+    NUM_COL = 2
     num_elements = len(alist)
     remander     = num_elements % NUM_COL
     num_rows     = num_elements / NUM_COL

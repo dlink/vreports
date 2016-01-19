@@ -1,15 +1,14 @@
 /* sql_panel css */
 
-#sql_panel_show {
-  font-size: 65%;
-}
-
 #sql_panel {
+  display: none;
   margin: 10px;
   padding: 10px;	
   background-color: white;
 }
-
+#sql_panel.show {
+  display: block;
+}
 #sql_panel_title {
   padding: 10px;
   background-color: #F1D5E0;

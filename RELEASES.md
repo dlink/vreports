@@ -1,5 +1,13 @@
 Release Notes - vreports
 ========================
+
+v1.1.0
+------
+01/20/2016
+
+- Improved Customization UI
+- Re-skinning Buttons
+
 v1.0.2
 ------
 01/19/2016

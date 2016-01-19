@@ -31,25 +31,16 @@ class ReportColumns(object):
             return False
         
     def getColumnChooser(self):
-
-        hide_button = a('[Hide]', onclick='hide_column_chooser()')
-
-        spacer = div('&nbsp;', class_='floatr')                  
-
-        title = div(b(i('Column Chooser')) + '&nbsp;' \
-                    + hide_button + spacer,
+        title = div(b('Columns'),
                     id='column_chooser_title')
     
         # buttons
-        reset_button = input(name='reset', value='Reset Defaults',
-                             type='button',onclick='reset_column_defaults()')
-        
-        other_buttons = p(' &nbsp; '.join([reset_button]))
-        
+        reset_button = a('Reset Columns', id='reset-columns', class_='vbutton',
+                         onclick='reset_columns()')
         report_columns = div(title + \
                               self.getColumnsDescription() + \
                               self.getGuts() + \
-                              other_buttons,
+                              reset_button,
                               id='column_chooser')
         return report_columns
     
@@ -64,7 +55,7 @@ class ReportColumns(object):
 
     def getGuts(self):
         # Table of column checkboxes NUM_COL's wide
-        NUM_COL = 6
+        NUM_COL = 4
         table = HtmlTable(id='column_chooser_table')
         num_separators = len([c for c in self.params.columns[1:]
                               if c.get('type') == 'separator'])
@@ -102,8 +93,7 @@ class ReportColumns(object):
             
                 # checkbox
                 checkbox_params = {'type': 'checkbox',
-                                   'name': '%s_column' % column.name,
-                                   'onchange': 'submit()'}
+                                   'name': '%s_column' % column.name}
                 if column.get('selected'):
                     checkbox_params['checked'] = 'checked'
                 if column.get('default'):
@@ -133,12 +123,3 @@ class ReportColumns(object):
             table.addRow(row)
         table_of_columns = table.getTable()
         return table_of_columns
-    
-    def getShowButton(self):
-        #show_button = a('[Column Chooser]',
-        #                id='column_chooser_show',
-        #                onclick='show_column_chooser()')
-        show_button = input(name='column_chooser', value='Choose Columns', type='button',
-                            id='column_chooser_show',
-                            onclick='show_column_chooser()')
-        return show_button

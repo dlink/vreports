@@ -1,59 +1,11 @@
-/* report controls */
-function hide_report_controls() {
-   $('#report_controls').hide();
-   $('#report_controls_show').show();
-   document.form1.show_controls.value = 0;
-   return true;
-}
-function show_report_controls() {
-   $('#report_controls').show();
-   $('#report_controls_show').hide();
-   document.form1.show_controls.value = 1;
-   return true;
-}
-
-/* column chooser */
-function hide_column_chooser() {
-   $('#column_chooser').hide();
-   $('#column_chooser_show').show();
-   document.form1.show_chooser.value = 0;
-   return true;
-}
-function show_column_chooser() {
-   $('#column_chooser').show();
-   $('#column_chooser_show').hide();
-   document.form1.show_chooser.value = 1;
-   return true;
-}
-function clear_controls() {
+function reset_filters() {
     document.form1.clear_cntrls.value = 1;
-    document.form1.submit();
     return true;
 }
-function reset_column_defaults() {
+function reset_columns() {
     $('#choose_columns,:checkbox').prop('checked', false);
     $('#choose_columns,.default_column').prop('checked', true);
-    document.form1.submit();
     return true;
-}
-/*function select_all_columns() {
-    $('#choose_columns,:checkbox').prop('checked', true);
-    document.form1.submit();
-    return true;
-}*/
-
-/* sql panel */
-function hide_sql_panel() {
-   $('#sql_panel').hide();
-   $('#sql_panel_show').show();
-   document.form1.show_sql_panel.value = 0;
-   return true;
-}
-function show_sql_panel() {
-   $('#sql_panel').show();
-   $('#sql_panel_show').hide();
-   document.form1.show_sql_panel.value = 1;
-   return true;
 }
 
 /* paging controls */
@@ -199,24 +151,6 @@ function save_report() {
 $(function() {
    $(".date").datepicker({dateFormat: "yy-mm-dd" });
 
-   if (document.form1.show_controls.value == 1) {
-      $("#report_controls_show").hide();
-   } else {
-     $("#report_controls").hide()
-   }
-
-   if (document.form1.show_chooser.value == 1) {
-      $("#column_chooser_show").hide();
-   } else {
-     $("#column_chooser").hide()
-   }
-
-   if (document.form1.show_sql.value == 1) {
-      $("#sql_panel_show").hide();
-   } else {
-     $("#sql_panel").hide()
-   }
-
    // Fix form action if current page contains GET parameters
    if(window.location.href.indexOf('?') != -1) {
      var cleanUrl = window.location.href.substring(0, window.location.href.indexOf('?'));
@@ -225,7 +159,79 @@ $(function() {
        .attr('method', 'POST');
    }
 
-   $("#save-panel .cancel").on('click', function() {
-     $("#save-panel").hide();
-   });
+   /* Show Customize Report Panel Window */
+   var b = document.getElementById('customize-report-button');
+   if (b) {
+      b.addEventListener('click', function() {
+          var m = document.getElementById('customize-report-panel-wrapper');
+          if (m) {
+              toggleClass(m, 'show');
+          }
+      });
+  }
+
+  /* Show SQL Panel */
+  var b = document.getElementById('show-sql-button');
+  if (b) {
+      b.addEventListener('click', function() {
+         var m = document.getElementById('sql_panel');
+         if (m) {
+	     toggleClass(m, 'show');
+         }
+      });
+  }
+
+  /* submit customizations */
+  var b = document.getElementById('customize-report-submit-button');
+  if (b) {
+      b.addEventListener('click', function() {
+          var m = document.getElementById('customize-report-panel-wrapper');
+	  if (m) {
+	      toggleClass(m, 'show');
+	  }
+	  var p = document.getElementById('loading-indicator-wrapper');
+	  if (p) {
+              toggleClass(p, 'show');
+	  }
+	  document.form1.submit();
+      });
+  }
+
+  /* cancel customizations */
+  var b = document.getElementById('customize-report-cancel-button');
+  if (b) {
+      b.addEventListener('click', function() {
+          var m = document.getElementById('customize-report-panel-wrapper');
+	  if (m) {
+	      toggleClass(m, 'show');
+	  }
+      });
+  }
 });
+
+/** toggleClass
+ ** Toggles supplied className on element.
+ */
+function toggleClass(element, elemClass){
+  "use strict";
+  if (!element || !elemClass){
+      return false;
+  }
+  if (typeof element.className !== 'undefined') {
+    var index = 0, found = false, classes = element.className.split(' ');
+    for (var i = 0, len = classes.length; !found && i < len; i++) {
+      if (classes[i] === elemClass) {
+        index = i;
+        found = true;
+      }
+    }
+    if (!found) {
+      classes.push(elemClass);
+    }
+    else {
+      classes.splice(index, 1);
+    }
+    element.className = classes.join(' ');
+  }
+  return true;
+}
