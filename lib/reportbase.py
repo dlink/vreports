@@ -579,7 +579,9 @@ class ReportBase(HtmlPage):
 # Helpers
 
 def dict2odict(src_dict):
-    '''Return an dict converted recursively into an odict'''
+    '''Return an dict converted recursively into an odict
+       Also expand environement vars
+    '''
     o = odict()
     for k,v in src_dict.items():
         if isinstance(v, dict):
@@ -591,6 +593,15 @@ def dict2odict(src_dict):
                     o[k].append(dict2odict(l))
                 else:
                     o[k].append(l)
+        elif isinstance(v, str):
+            if '\$' in v: # unescape \$
+                v = v.replace('\$', '$')
+            elif '$' in v:
+                import re
+                envvar = re.sub(r'.*\$([^/.]*).*', r'\1', v)
+                envvar_val = os.getenv(envvar, 'Uknown_env_var:%s' % envvar)
+                v = re.sub('\$[^/.]*', envvar_val, v)
+            o[k] = v
         else:
             o[k] = v
     return o

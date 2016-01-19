@@ -1,10 +1,16 @@
 Release Notes - vreports
 ========================
+v1.0.2
+------
+01/19/2016
+
+- ReportBase: configs support env. vars
+
 v1.0.1
 -------
-TBC
+12/16/2015
 
-- ReportBase - you takes report_name as a parameter
+- ReportBase: Support report_name as a parameter
 - Style Changes: Control links changed to buttons
 
 v1.0.0
