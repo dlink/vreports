@@ -22,9 +22,6 @@ from reportsqlpanel import ReportSqlPanel
 from reportsqlbuilder import ReportSqlBuilder
 
 from datetime import datetime
-#from dateutil.relativedelta import relativedelta
-
-DEBUG_SAVE_REPORT = 0
 
 class VReportException(Exception): pass
 
@@ -34,8 +31,6 @@ class ReportBase(HtmlPage):
     '''
 
     def __init__(self, report_name=None):
-        '''constructor
-        '''
         HtmlPage.__init__(self, 'Untitled')
 
         if report_name:
@@ -73,8 +68,8 @@ class ReportBase(HtmlPage):
             ])
         
     def loadParams(self):
-        '''Load parameters files
-        '''
+        '''Load parameters files'''
+
         pdir = os.environ['PARAMETER_FILES_DIR']
 
         # load yaml parameter files:
@@ -107,29 +102,9 @@ class ReportBase(HtmlPage):
     # Process Inbound parameters:
 
     def process(self):
-        HtmlPage.process(self)
+        '''Pre-render CGI parameter processing'''
 
-        # Standardize input format (whether loaded from DB or GET)
-        #shared_form = {}
-        #if self.report and len(self.form.keys()) <= 2 and 'r' in self.form:
-        #  shared_form = self.report.params
-        #  for key in shared_form:
-        #    # Convert relative dates into absolute dates
-        #    now = datetime.now()
-        #    if str(shared_form[key]).find("#DAYSAGO:") == 0:
-        #      days_ago = int(shared_form[key].split(':')[1])
-        #      shared_form[key] = (now - relativedelta(days=days_ago)).strftime("%Y-%m-%d")
-        #    elif str(shared_form[key]).find("#MONTHSAGO:") == 0:
-        #      months_ago = int(shared_form[key].split(':')[1])
-        #      shared_form[key] = (now - relativedelta(months=months_ago)).strftime("%Y-%m-%d")
-        #    elif str(shared_form[key]).find("#YEARSAGO:") == 0:
-        #      years_ago = int(shared_form[key].split(':')[1])
-        #      shared_form[key] = (now - relativedelta(years=years_ago)).strftime("%Y-%m-%d")
-        #    elif str(shared_form[key]).find("#CURRENT:MONTH") == 0:
-        #      shared_form[key] = datetime(now.year, now.month, 1).strftime("%Y-%m-%d")
-        #    elif str(shared_form[key]).find("#CURRENT:YEAR") == 0:
-        #      shared_form[key] = datetime(now.year, 1, 1).strftime("%Y-%m-%d")
-        #else:
+        HtmlPage.process(self)
 
         shared_form = {}
         for field in self.form:
@@ -261,39 +236,6 @@ class ReportBase(HtmlPage):
             s_sort_column = s_sort_direction = ''
         self.params.s_sort_column    = s_sort_column
         self.params.s_sort_direction = s_sort_direction
-
-    def debug_save_report(self):
-      from report_columns import ReportColumnsError
-      from report_controls import ReportControlsError
-
-      report = self.report
-      self.debug_msg += '<b>report values:</b> <br/>'
-      self.debug_msg += 'title: %s<br/>' % report.title
-      self.debug_msg += 'param_file: %s<br/>' % report.param_file
-      self.debug_msg += 'created_at: %s<br/>' % report.created_at
-
-      self.debug_msg += 'params:<br/>'
-      for k, v in report.params.items():
-          # check
-          info = ''
-          # check columns
-          if '_column' in k:
-              column = k.replace('_column', '')
-              try:
-                  x = self.reportColumns.getColumn(column)
-              except ReportColumnsError, e:
-                  info = ' <font color="red">[%s]</font>' % e
-          # skip csv and_sort by columns:
-          elif k == 'csv' or 'sort_by' in k:
-              pass
-          # check controls:
-          else:
-              try:
-                  x = self.reportControls.getControl(k)
-              except ReportControlsError, e:
-                  info = ' <font color="red">[%s]</font>' % e
-          self.debug_msg += '&nbsp; &nbsp; %s: %s%s<br/>' % (k,v, info)
-
             
     # Level I
 
@@ -305,18 +247,18 @@ class ReportBase(HtmlPage):
             self.header.getHeader() + \
             self.menu.getMenu() + \
             div(
-              self.getControlOptions() + \
+              self.getReportControls() + \
               self.reportSqlPanel.getSqlPanel() + \
-              self.reportControls.getControls() + \
-              self.reportColumns.getColumnChooser() + \
+              self.getCustomizeReportPanel() + \
               self.getHiddenFields() + \
+              self.getLoadingIndicator() + \
               self.getReportDesc() + \
               self.getReportTable() + \
               self.getReportTableFooter(),
-              id='content', class_='container-fluid') + \
+              id='content', class_='container-fluid'),
               #id='content') + \
-            self.help() + \
-            self.save_panel(),
+            #self.help(),
+            #self.save_panel(),
             id='page_container')
 
     def getCsv(self):
@@ -334,12 +276,31 @@ class ReportBase(HtmlPage):
 
     # Level II
     
-    def getControlOptions(self):
-        return div(''.join([self.reportControls.getShowButton(),
-                            self.reportColumns.getShowButton(),
-                            self.reportSqlPanel.getShowButton()]),
-                   id='report_options')
-    
+    def getReportControls(self):
+        button1 = a('Customize Report', id='customize-report-button',
+                    class_='vbutton')
+        button2 = a('Show SQL', id='show-sql-button',
+                    class_='vbutton')
+        return div(button1 + button2, id='report-controls')
+
+    def getCustomizeReportPanel(self):
+        submit_button = a('Submit', id='customize-report-submit-button',
+                          class_='vbutton')
+        cancel_button = a('Cancel', id='customize-report-cancel-button',
+                          class_='vbutton')
+
+        button_area = div(submit_button + cancel_button,
+                          id='customize-report-buttons')
+
+        panel = div(
+            a('X', href="#close", class_="close") + \
+            self.reportControls.getControls() + \
+            self.reportColumns.getColumnChooser() + \
+            button_area,
+            id='customize-report-panel')
+
+        return div(panel, id='customize-report-panel-wrapper')
+
     def getHiddenFields(self):
         SHOW_HIDDEN=0
         if SHOW_HIDDEN:
@@ -384,6 +345,10 @@ class ReportBase(HtmlPage):
                clear_cntrls + input(name='clear_cntrls', type=itype) +\
                show_report_params
             
+    def getLoadingIndicator(self):
+        return div(img(src="images/loading.gif", id="loading-indicator"),
+                   id="loading-indicator-wrapper")
+
     def getReportDesc(self):
         filters = []
         for control in self.params.controls:
@@ -405,7 +370,8 @@ class ReportBase(HtmlPage):
                                              self.getRowCountDesc(),
                                              self.getPager(),
                                              self.getCsvButton(),
-                                             self.getSaveButton()]),
+                                             #self.getSaveButton()
+                                             ]),
                    id='report_description_container',
                    style='clear: both')
 
@@ -415,8 +381,8 @@ class ReportBase(HtmlPage):
             prev = ''
         else:
             prev_text = '&lt;&lt;Prev'
-            prev = input(name='prev', type='button',
-                         value=prev_text, onclick='go_to_prev_page()')
+            prev = a(prev_text, id='prev-button', class_='vbutton green',
+                     onclick='go_to_prev_page()')
 
         # next button
         if self.params.page_num * self.params.display_num_rows \
@@ -424,9 +390,8 @@ class ReportBase(HtmlPage):
             next = ''
         else:
             next_text = 'Next&gt;&gt;'
-            next = input(name='next', type='button',
-                         #class_='btn btn-info btn-xs',
-                         value=next_text, onclick='go_to_next_page()')
+            next = a(next_text, id='next-button', class_='vbutton green',
+                     onclick = 'go_to_next_page()')
             
         if prev and next:
             return "%s%s" % (prev, next)
@@ -435,10 +400,23 @@ class ReportBase(HtmlPage):
         else:
             return prev
 
-    def getSaveButton(self):
-      return input(name='save', type='button',
-                   #class_='btn btn-info btn-xs',
-                   value='Save to My Reports', onclick='save_report()')
+    def getCsvButton(self):
+        '''This code copied from vweb/htmlpage.py and tweaked
+
+           Return a 'Download CSV' button that can be used on the page
+           Uses a hidden field called 'csv'
+           Uses javascript to reset the value of that field.
+        '''
+        reset_js = 'function(){document.form1.csv.value=0}'
+        return script('setInterval(%s,''500)') % reset_js + \
+               input(name='csv', type='hidden', value='0') + \
+               a('Download CSV', id='download-csv', class_='vbutton orange',
+                 onclick='document.form1.csv.value=1; document.form1.submit()')
+
+    #def getSaveButton(self):
+    #  return input(name='save', type='button',
+    #               #class_='btn btn-info btn-xs',
+    #               value='Save to My Reports', onclick='save_report()')
     
     def getRowCountDesc(self):
         row_count = self.getRowCount()
@@ -554,27 +532,6 @@ class ReportBase(HtmlPage):
                 self.debug_msg += p("Count SQL: %s" % pretty_sql(sql, True))
             self._row_count = self.db.query(sql)[0]['count']
         return self._row_count
-
-    def save_panel(self):
-      report_title = ""
-      #if self.report:
-      #  report_title = self.report.param_file.split("/")[0]
-      return """
-        <div id="save-panel">
-          <div id="save-panel-header">
-            <div class="cancel">x</div>
-            Save Report
-          </div>
-          <div id="save-panel-body">
-            <p>By saving this report, you can have quick access to it from now on through the "My Reports" menu. Just give it a name so you can identify it.</p>
-            <div id="questions"></div>
-            <input type="hidden" name="report_title" value="%s">
-            <label for="custom_report_name">Name your report:</label>
-            <input type="text" name="custom_report_name" id="custom_report_name">
-            <input type="button" value="Save Report">
-          </div>
-        </div>
-      """ % report_title
 
 # Helpers
 

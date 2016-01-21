@@ -34,19 +34,6 @@ body {
   position: relative;
 }
 
-#help {
-  width: 400px;
-  background-color: #C2DAEB;
-  border: solid 1px #666;
-  padding: 10px;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  box-shadow: 3px 3px 3px #333;
-  display: none;
-  z-index: 99;
-}
-
 #showhelp {
   position: absolute;
   top: 0px;
@@ -115,54 +102,6 @@ a:hover {
 
 .userMsg {
   padding: 1px 40px;
-}
-
-table.summary-table {
-  margin: 0 auto;
-  margin-bottom: 10px;
-  border-collapse: collapse;
-  border: solid 2px #004C99;
-  width: 100%;
-  z-index: 10;
-  position: relative;
-}
-
-table.summary-table th {
-  background-color: #004C99;
-  padding: 3px;
-  color: white;
-}
-
-table.summary-table td {
-  background-color: white;
-  border: solid 1px black;
-  padding: 3px;
-}
-
-table.summary-table tr.total td {
-  background-color: #8B9DC3;
-}
-
-table.summary-table tr.total td:first-child {
-  font-style: italic;
-}
-
-table.summary-table .loading {
-  float: right;
-  height: 16px;
-  width: 16px;
-  background-image: url('/images/ajax-loader-bluebg.gif');
-  visibility: hidden;
-}
-
-.value-change {
-  z-index: 9;
-  position: absolute;
-  text-align: center;
-  background-color: white;
-  display: table-cell;
-  vertical-align: middle;
-  padding: 4px;
 }
 
 table td img {
@@ -319,7 +258,6 @@ table.report_list_table th {
   margin: 0;
   padding: 0;
   list-style: none;
-  z-index: 10;
 }
 
 .menu ul.dropdown {
@@ -554,4 +492,85 @@ span.keyboard {
   font-size: 80%;
   box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.75);
   margin-right: 3px;
+}
+
+/* Customize Report Modal */
+
+#customize-report-panel-wrapper {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, .5);
+  overflow: scroll;
+}
+#customize-report-panel-wrapper.show {
+  display: block;
+}
+#customize-report-panel {
+  background-color: white;
+  position: relative;
+  margin: 100px 2%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: small;
+}
+#customize-report-buttons {
+  margin-top: 2px;
+  padding: 20px;
+  border-top: thin solid grey;
+  text-align: center;
+}
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    text-align: center;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+}
+.close:hover {
+   background: black;
+   color: white;
+}
+
+#report-controls {
+  margin: 10px;
+  padding: 2px;
+}
+a.vbutton {
+  background-color: #4E8EAD; /* light blue */
+  padding: 2px 20px;
+  margin: 2px 20px 2px 0px;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
+}
+a.vbutton.green {
+  background-color: green;
+}
+a.vbutton.orange {
+  background-color: #C26308;
+}
+
+#loading-indicator-wrapper {
+    display: none;
+    background-color: white;
+    padding: 50px;
+    position: absolute;
+    top: 160px;
+    left: 35%;
+    /* margin: 0 auto;*/
+}
+#loading-indicator-wrapper.show {
+    display: block;
 }

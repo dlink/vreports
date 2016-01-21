@@ -1,22 +1,35 @@
 /* report_controls css */
 
 #report_controls {
-  margin: 10px;
-  padding: 10px;	
+  padding: 0.5%;
   background-color: white;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
 }
 
 #report_controls_title {
-  padding: 10px;
+  padding: 5px;
   background-color: lightyellow;
+}
+#summaries-title {
+  padding: 5px;
+  background-color: #EBD5D9 /* pink; */
 }
 
 #report_controls_table {
-  padding: 20px;
+    margin: 5px;
+    padding: 10px;
 }
-
 #report_controls_table td {
+  vertical-align: top;
   padding: 2px;
+}
+#report_controls_table td.filter-field {
+  padding-right: 10px;
+}
+#report_controls_table tr.filter-summarize-by td {
+    padding-bottom: 30px;
 }
 
 #report_description_container {
@@ -27,12 +40,6 @@
   font-size: 14px;
 }
 
-#report_options {
-  margin: 10px;
-  padding: 2px;
-  position: relative;
-}
-
-#report_options a, #report_controls_title a {
-  cursor: pointer;
+#report_controls input {
+    height: 20px;
 }
