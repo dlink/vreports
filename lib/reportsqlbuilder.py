@@ -170,6 +170,9 @@ class ReportSqlBuilder(object):
                 value = control.value
                 if isinstance(value, (str, unicode)):
                     value = value.replace("'", "''")
+                if control.type == 'multiple':
+                    value = ','.join(['"%s"' % v
+                                      for v in control.value.split(' ')])
                 filters.append(control.filter.format(value=value))
         if not filters:
             return ''

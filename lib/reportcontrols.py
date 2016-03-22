@@ -24,8 +24,10 @@ class ReportControls(object):
         filters = []
         for control in self.params.controls:
             ctitle = control.display
-            if control.type in ('string', 'date'):
+            if control.type in ('string', 'date', 'multiple'):
                 cinput = self._getInput(control)
+                if control.type == 'multiple':
+                    ctitle += ' (multiple - space separated)'
             elif control.type == 'checkbox':
                 cinput = self._getCheckbox(control)
             elif control.type == 'menu':

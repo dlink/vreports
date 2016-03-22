@@ -121,7 +121,7 @@ class ReportBase(HtmlPage):
             # Convert Integers
             if control.type in ('integer', 'menu'):
                 control.value = int(control.value)
-                
+
         # Pager Control: Init
         if 'page_num' in shared_form:
             self.params.page_num = int(shared_form['page_num'])

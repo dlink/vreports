@@ -3,7 +3,9 @@ controls:
      filter : c.Name like '%{value}%'
 
    - name   : Official Languages
-     filter : cls_o.languages like '%{value}%'
+     filter : cls_o.language in '%{value}%'
+     type   : multiple
 
    - name   : Spoken Languages
-     filter : cls.languages like '%{value}%'
+     filter : cl.language in ({value})
+     type   : multiple
