@@ -1,3 +1,9 @@
 controls:
    - name   : country
      filter : c.Name like '%{value}%'
+
+   - name   : Official Languages
+     filter : cls_o.languages like '%{value}%'
+
+   - name   : Spoken Languages
+     filter : cls.languages like '%{value}%'
