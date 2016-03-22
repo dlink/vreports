@@ -130,18 +130,6 @@ class ReportBase(HtmlPage):
         else:
             self.params.page_num = 1
 
-        # Controls Show/Hide: Init
-        if 'show_controls' in shared_form:
-            self.params.show_controls = shared_form['show_controls']
-        else:
-            self.params.show_controls =  0
-            
-        # Columns Chooser: Show/Hide Init
-        if 'show_chooser' in shared_form:
-            self.params.show_chooser = shared_form['show_chooser']
-        else:
-            self.params.show_chooser = 0
-
         # Show SQL: Show/Hide Init
         if 'show_sql_panel' in shared_form:
             self.params.show_sql_panel = shared_form['show_sql_panel']
@@ -306,16 +294,13 @@ class ReportBase(HtmlPage):
         if SHOW_HIDDEN:
             itype      = 'text'
             page_num = 'page_num'
-            show_controls = 'show_controls'
-            show_chooser  = 'show_chooser'
             show_sql_panel = 'show_sql_panel'
             sort_by = 'sort_by'
             s_sort_by = 's_sort_by'
             clear_cntrls = 'clear_cntrls'
         else:
             itype = 'hidden'
-            page_num = show_controls = show_chooser = show_sql_panel = \
-                       sort_by = s_sort_by = clear_cntrls = '' 
+            page_num = show_sql_panel = sort_by = s_sort_by = clear_cntrls = ''
 
         show_report_params = ''
         if 'r' in self.form:
@@ -327,11 +312,6 @@ class ReportBase(HtmlPage):
 
         return page_num + input(name='page_num', type=itype,
                                 value=self.params.page_num) + \
-               show_controls + input(name='show_controls', type=itype,
-                                     value=self.params.show_controls) + \
-               show_chooser + input(name='show_chooser',
-                                    type=itype,
-                                    value=self.params.show_chooser) + \
                show_sql_panel + input(name='show_sql',
                                       type=itype,
                                       value=self.params.show_sql_panel) + \
