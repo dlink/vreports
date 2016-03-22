@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.2.0
+------
+03/22/2016
+
+- Control Filters: support multiple - space separated values
+
 v1.1.0
 ------
 01/20/2016
