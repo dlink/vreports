@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.2.1
+------
+03/23/2016
+
+- Add Column format documenation
+
 v1.2.0
 ------
 03/22/2016

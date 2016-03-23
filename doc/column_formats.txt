@@ -1,0 +1,125 @@
+COLUMN Formats
+
+The columns.yaml file defines a list of column attributes that can be
+displayed on the report.
+
+Simple Example:
+
+  - name   : first_name
+    select : c.first_name
+
+Advanced Examples:
+
+  - name    : has_giftwrapping
+    select  : if(o.gw_price > 0, 'Yes', 'No')
+    aliases : o
+   group_by: true
+    
+  - name    : order_date
+    select  : date(convert_tz(o.created, 'UTC', 'US/Eastern'))
+    aliases : o
+    type    : date
+    group_by: true
+    default : true
+
+  - name    : bill_address
+    select  : >
+       replace(concat_ws(', ', ba.address1, ba.city, br.code, ba.postcode,
+               bc.name), '  ', ' ')
+    aliases : ba,br,bc
+
+
+ATTRIBUTES DEFINED:
+
+   name   :  Identifier for the code (REQUIRED)
+
+   display:  Identifier for Humans
+               Defaults to 'name' with '_' removed and first leter caps.
+
+   select :  SQL claused used to select a value. (REQUIRED) 
+               It must use SQL table name aliases which are either
+               a) the base_table_alias defined in params.yaml, or 
+               b) defined in table_joins.yaml
+
+   aliases:  Comma separated list of table name aliases needed in 
+               in table joins.   (REQUIRED IF:) 'select' is not
+               in the simple form of "<aliase>:<column_name>"
+
+               Eq. - name  : product
+                     select: pr.name
+                     # <-- No aliases required
+
+               Eq. - name   : order_date
+                     select : date(o.order_date)
+                     aliases: o      # <-- Aliases required
+                     group_by: true
+                     type   : date
+                     default: true
+
+               Eq. - name   : name
+                     select : concat_ws(' ', p5.value, p6.value)
+                     aliases: p5,p6    # <-- Aliases required
+
+   group_by:  true|false.  Determine if can summerized by this value
+
+
+   mode    : aggregate  - Used to disable column from non-aggregate mode
+
+   aggregate_func: count|sum. SQL aggregate function
+                Used to define aggregatable fact columns in 'group_by' mode
+                The aggregate_func is applied to the 'select'
+                Default: Blank -- Which is disabled in 'group_by' mode.
+
+   link    :  An href to create a hyper link to
+
+              Eq. - name   : b_book_name
+                    display: Bookserver Book Name
+                    select : e.book_key
+                    group_by: true
+                    link   : http://bookreports.flatworldknowledge.com\
+                             /bookdetails.py?book=%s
+
+   report_link, and
+   report_key       : Allows linking into other reports:
+
+              Eq. - name   : has_adopted
+                    select : >
+                       case when pa.professor_id is null then 'No'
+                            else 'Yes' end
+                    aliases: pa
+                    report_link: adoptions.py
+                    report_key : professor_id
+                    group_by: true
+
+              Will produce the following link:
+                  <a href='adoptions.py?professor_id?40013'>Yes</a>
+
+              It also automatically selecting the report_key column
+              into the report.
+
+   type    :  date|time|datetime|integer|number|money|percent|string.
+                Used for display formating.  Defaults to 'string'
+ 
+   minor   :  true|false.  Indicate a minor data point, possibly for
+              developer use only.
+
+   default :  true|false.  Wheither column is dispayed initially
+                Defaults to false
+
+ Special Cases:  
+
+   You should have a 'count' column with default='true' to be used
+   in 'group_by' mode.  With 'mode: aggregate', 
+   It will be disabled when not in 'group_by' mode
+
+      - name   : count
+        select : '*'
+        aliases: o
+        mode   : aggregate
+        aggregate_func: count
+        type   : integer
+        default: true
+
+   It is best to list columns that have 'aggregate_func' at the end
+     so the columns with 'group_by' will appear on the left of
+
