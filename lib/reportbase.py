@@ -30,7 +30,7 @@ class ReportBase(HtmlPage):
        Dynamic Reporting
     '''
 
-    def __init__(self, report_name=None):
+    def __init__(self, report_name=None, allow_download=True):
         HtmlPage.__init__(self, 'Untitled')
 
         if report_name:
@@ -41,6 +41,7 @@ class ReportBase(HtmlPage):
             print 'Location: nodata.py' # <-- Exit
 
         self.title = self.report_name.title()
+        self.allow_download = allow_download
         self.loadParams()
 
         self.debug_cgi      = self.params.debug_cgi
@@ -387,6 +388,9 @@ class ReportBase(HtmlPage):
            Uses a hidden field called 'csv'
            Uses javascript to reset the value of that field.
         '''
+        if not self.allow_download:
+            return ''
+
         reset_js = 'function(){document.form1.csv.value=0}'
         return script('setInterval(%s,''500)') % reset_js + \
                input(name='csv', type='hidden', value='0') + \

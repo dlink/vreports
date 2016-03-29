@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.3.0
+------
+03/29/2016
+
+- Add allow/disallow csv download support
+
 v1.2.1
 ------
 03/23/2016
