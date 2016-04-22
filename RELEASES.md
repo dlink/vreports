@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.3.1
+------
+04/22/2016
+
+- Allow trackeback to disk, and to not display in browswer for production systems
+
 v1.3.0
 ------
 03/29/2016
