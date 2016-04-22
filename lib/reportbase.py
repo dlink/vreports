@@ -30,8 +30,18 @@ class ReportBase(HtmlPage):
        Dynamic Reporting
     '''
 
-    def __init__(self, report_name=None, allow_download=True):
+    def __init__(self, report_name=None, allow_download=True, traceback_dir=''):
+        '''Constructor:
+              report_name    - Name of page
+              allow_download - Add [csv download] button or not
+              traceback_dir  - Where to write traceback
+                               if left blank display to screen
+        '''
         HtmlPage.__init__(self, 'Untitled')
+
+        if traceback_dir:
+            import cgitb
+            cgitb.enable(display=0, logdir=traceback_dir)
 
         if report_name:
             self.report_name = report_name
