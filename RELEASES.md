@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.3.2
+------
+05/10/2016
+
+- Close Customize Report bug fix
+
 v1.3.1
 ------
 04/22/2016

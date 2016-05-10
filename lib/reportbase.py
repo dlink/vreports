@@ -292,7 +292,7 @@ class ReportBase(HtmlPage):
                           id='customize-report-buttons')
 
         panel = div(
-            a('X', href="#close", class_="close") + \
+            a('X', href="#", class_="close", id='close') + \
             self.reportControls.getControls() + \
             self.reportColumns.getColumnChooser() + \
             button_area,

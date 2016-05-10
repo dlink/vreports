@@ -197,6 +197,17 @@ $(function() {
       });
   }
 
+  /* close customizations */
+  var b = document.getElementById('close');
+  if (b) {
+      b.addEventListener('click', function() {
+          var m = document.getElementById('customize-report-panel-wrapper');
+	  if (m) {
+	      toggleClass(m, 'show');
+	  }
+	  });
+  }
+
   /* cancel customizations */
   var b = document.getElementById('customize-report-cancel-button');
   if (b) {
