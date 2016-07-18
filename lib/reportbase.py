@@ -160,16 +160,13 @@ class ReportBase(HtmlPage):
                 if column.get('default'):
                     column.selected = True
 
-        # Column report_links init:
-        # report_key column must be selected
-        for column in self.reportColumns.getSelectedColumns():
-            if column.get('report_link'):
-                self.reportColumns.getColumn(column.report_key).selected = True
-
         # Set Group_by
+        group_by_name = None
         if 'group_by' in shared_form:
             group_by_name = shared_form['group_by']
-            #self.debug_msg = p(group_by_name)
+        elif 'group_by' in self.params:
+            group_by_name = self.params.group_by
+        if group_by_name:
             for column in self.params.columns:
                 if group_by_name == column.name:
                     self.params.group_by = column
@@ -178,6 +175,12 @@ class ReportBase(HtmlPage):
             if not self.params.group_by:
                 raise Exception('Unrecognized group_by value: %s' % group_by)
             
+        # Column report_links init:
+        # report_key column must be selected
+        for column in self.reportColumns.getSelectedColumns():
+            if column.get('report_link'):
+                self.reportColumns.getColumn(column.report_key).selected = True
+
         # clear controls if nec.
         if 'clear_cntrls' in shared_form:
             for control in self.params.controls:
