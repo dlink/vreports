@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.4.0
+------
+07/18/2016
+
+- Main Yaml config: Support group_by parameter
+
 v1.3.2
 ------
 05/10/2016
