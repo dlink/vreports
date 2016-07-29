@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.4.1
+------
+07/27/2016
+
+- ReportBase: Remove CGI traceback errors created on redirecto to nodata.py
+
 v1.4.0
 ------
 07/18/2016
