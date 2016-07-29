@@ -38,6 +38,7 @@ class ReportBase(HtmlPage):
                                if left blank display to screen
         '''
         HtmlPage.__init__(self, 'Untitled')
+        self.nodata = False
 
         if traceback_dir:
             import cgitb
@@ -48,7 +49,9 @@ class ReportBase(HtmlPage):
         elif 'r' in self.form:
             self.report_name = self.form['r'].value
         else:
+            self.nodata = True
             print 'Location: nodata.py' # <-- Exit
+            return
 
         self.title = self.report_name.title()
         self.allow_download = allow_download
@@ -80,7 +83,6 @@ class ReportBase(HtmlPage):
         
     def loadParams(self):
         '''Load parameters files'''
-
         pdir = os.environ['PARAMETER_FILES_DIR']
 
         # load yaml parameter files:
@@ -114,6 +116,7 @@ class ReportBase(HtmlPage):
 
     def process(self):
         '''Pre-render CGI parameter processing'''
+        if self.nodata: return
 
         HtmlPage.process(self)
 
@@ -245,6 +248,8 @@ class ReportBase(HtmlPage):
         '''Return the entire HTML content of the page.
            (Without HTTP Header)
         '''
+        if self.nodata: return ''
+
         return div(
             self.header.getHeader() + \
             self.menu.getMenu() + \
