@@ -505,7 +505,7 @@ class ReportBase(HtmlPage):
                     value = ''
                 if column.get('type') == 'money' and (value or value==0):
                     value = "{:,.2f}".format(value)
-                elif column.get('type') == 'percent':
+                elif column.get('type') == 'percent' and value != '':
                     value = "{:,.2f}%".format(value*100)
                 elif column.get('type') == 'date' and value:
                     value = format_date(value)
