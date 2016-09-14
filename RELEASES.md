@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.4.2
+------
+09/14/2016
+
+- ReportSQLbuilder: Allow table_join requirs to go 4 levels deep
+
 v1.4.1
 ------
 07/27/2016
