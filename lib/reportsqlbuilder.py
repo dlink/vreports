@@ -109,10 +109,14 @@ class ReportSqlBuilder(object):
                     # works for two levels
                     require2 = self.params.table_joins[require].get('require')
                     if require2 and require2 not in alias_list:
-                        # works for three levels deep only.
-                        # TODO: make recurisve
+                        # works for three levels
                         require3 = self.params.table_joins[require2].get('require')
                         if require3 and require3 not in alias_list:
+                            # works for four levels deep only.
+                            # TODO: make recurisve
+                            require4 = self.params.table_joins[require3].get('require')
+                            if require4 and require4 not in alias_list:
+                                alias_list.append(require4)
                             alias_list.append(require3)
                         alias_list.append(require2)
                     alias_list.append(require)
