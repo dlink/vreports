@@ -7,6 +7,10 @@ function reset_columns() {
     $('#choose_columns,.default_column').prop('checked', true);
     return true;
 }
+function clear_columns() {
+    $('#choose_columns,:checkbox').prop('checked', false);
+    return true;
+}
 
 /* paging controls */
 function go_to_prev_page() {

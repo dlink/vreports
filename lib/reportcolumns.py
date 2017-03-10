@@ -16,9 +16,14 @@ class ReportColumns(object):
         raise ReportColumnsError('Column not found: %s' % name)
 
     def getSelectedColumns(self):
-        return [c for c in self.params.columns
-                if c.get('selected') and not self.disabled(c)]
-    
+        columns = [c for c in self.params.columns
+                   if c.get('selected') and not self.disabled(c)]
+        # if nothing selected use first column
+        # (the 0th column could be a separator)
+        if not columns:
+            columns = [self.params.columns[1]]
+        return columns
+
     def disabled(self, column):
         group_by = self.params.get('group_by')
         if group_by \
@@ -37,10 +42,13 @@ class ReportColumns(object):
         # buttons
         reset_button = a('Reset Columns', id='reset-columns', class_='vbutton',
                          onclick='reset_columns()')
+        clear_button = a('Clear Columns', id='clear-columns', class_='vbutton',
+                         onclick='clear_columns()')
         report_columns = div(title + \
                               self.getColumnsDescription() + \
                               self.getGuts() + \
-                              reset_button,
+                              reset_button + \
+                              clear_button,
                               id='column_chooser')
         return report_columns
     
