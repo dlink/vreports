@@ -1,6 +1,12 @@
 Release Notes - vreports
 ========================
 
+v1.4.3
+------
+03/10/2017
+
+- ReportColumns: Added [Clear Columns] Button
+
 v1.4.2
 ------
 09/14/2016
