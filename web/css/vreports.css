@@ -1,0 +1,144 @@
+/* veports styling */
+
+body {
+}
+
+/* div { border: 1px solid black } */
+#page-container {
+  background-color: #fff;
+  color: #555;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  width: 100%;
+  margin: 0px 20px;
+}
+
+/* header */
+
+#header {
+  padding: 7px 0px;
+  font-size: 14px;
+}
+#header #vreports-logo {
+  font-family: Palatino, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  padding-right: 50px;
+}
+#header #setup-button {
+  padding: 0px 30px;
+}
+#header #account-menu {
+  border-left: solid 2px rgba(0,0,0,0.12);
+  padding: 0px 50px;
+}
+
+/* nav */
+
+#nav {
+  background-color: rgb(240, 240, 240);
+  padding: 5px 0px;
+}
+
+ul.menu {
+  margin: 0px;
+  margin-left: 20px;
+  padding: 0px;
+}
+
+ul.menu li {
+  display: inline;
+  position: relative;
+}
+
+ul.menu li a.menu-link {
+  border: solid lightgrey 1px;
+  color: #555;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 0px 10px;
+  padding: 4px 15px;
+}
+
+ul.menu li a.menu-link:hover {
+  background-color: #d4bbbb;
+}
+
+/* report */
+
+#report {
+  margin: auto;
+  width: 97%;
+}
+
+/* report-header */
+
+#report-header {
+  margin: 20px 0px 15px;
+}
+
+#report-header #report-name {
+  font-size: 18px;
+  padding-right: 20px;
+}
+
+#report-header #report-description {
+  font-size: 14px;
+  padding-right: 20px;
+}
+
+#report-header #report-paging-info {
+  font-size: 14px;
+  padding-right: 20px;
+}
+
+#report-header #report-paging-controls {
+  padding-right: 20px;
+}
+
+/* vtable */
+
+table.vtable { 
+  background-color: white;
+  border-collapse: collapse;
+}
+
+table.vtable tr th {
+  /* background-color: rgb(160, 126, 70); */
+  background-color: #badae4;
+  color: #000;
+  padding: 6px; 
+  border: 1px solid rgba(0,0,0,0.1);
+}
+table.vtable tr td {
+  padding: 6px; 
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+table.vtable tr th a.row-header-title {
+  vertical-align: middle;
+}
+table.vtable tr th img.row-header-arrow-icon {
+  vertical-align: middle;
+}
+table.vtable tr:nth-child(odd) td {
+  background-color: #f3f3f6;
+}
+
+/* vbutton */
+
+a.vbutton {
+  border: solid lightgrey 1px;
+  font-size: 14px;
+  padding: 4px 15px;
+  margin: 2px;
+}
+a.vbutton:hover {
+  background-color: #d4bbbb;
+}
+
+/* utils */
+
+.floatr {
+   float: right;
+}

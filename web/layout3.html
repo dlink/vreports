@@ -1,0 +1,3887 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- layout 3 - I've removed the report controls sections -->
+<html lang="en">
+   <head>
+      <title>World</title>
+      <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" / -->
+      <!-- link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" / -->
+      <link href="css/vreports.css?reload=63"
+            rel="stylesheet" type="text/css" />
+      <!-- link href="css/report_controls.css" rel="stylesheet" type="text/css" / -->
+      <!-- link href="css/column_chooser.css" rel="stylesheet" type="text/css" / -->
+      <!-- link href="css/report_sql_panel.css" rel="stylesheet" type="text/css" / -->
+   </head>
+   <body >
+      <form action="" name="form1" method="POST">
+         <div id="page-container">
+            <div id="header">        
+               <span id="vreports-logo">VReports</span>
+               <span id="company-name">dvlink</span>
+               <span class="floatr">
+                  <span id="setup-button">Setup</span>
+                  <span id="account-menu">Account</span>
+               </span>
+            </div>
+
+          <div id="content-container">
+            <div id="nav">
+               <ul class="menu">
+                  <li><a class="menu-link" href="/?r=books">Books</a></li>
+                  <li><a class="menu-link" href="/?r=world">World</a></li>
+               </ul>
+            </div>
+
+	    <div id="report">
+               <div id="report-header">
+                  <span id="report-name">World</span>
+                  <span id="report-description">Spoken Languages: Spanish</span>
+                  <span id="report-paging-info">28 Rows</span>
+                  <span id="report-paging-controls">
+                     <a class="vbutton" id="paging-next">Next</a>
+                     <a class="vbutton" id="paging-previous">Previous</a>
+                  </span>
+                  <span> <!-- class="floatr" -->
+                    <span id="report-customize-button">
+                       <a class="vbutton" id="customize-button">Customize Report</a>
+                    </span>
+                    <span id="report-show-sql-button">
+                       <a class="vbutton" id="show-sql-button">Show SQL</a>
+                    </span>
+                    <span id="report-download-button">
+                       <a class="vbutton" id="download-button">Download CSV</a>
+                    </span>
+                   </div>
+               <table class="vtable">
+                  <thead>
+                     <tr valign="top">
+                        <th><a class="row-header-title" onclick="set_sort('Code', 'asc')">Code</a></th>
+                        <th><a class="row-header-title" onclick="set_sort('Name', 'desc')">Name<img class="row-header-arrow-icon" src="images/sort_asc.png" />
+                           </a>
+                        </th>
+                        <th><a class="row-header-title" onclick="set_sort('Continent', 'asc')">Continent</a></th>
+                        <th><a class="row-header-title" onclick="set_sort('Region', 'asc')">Region</a></th>
+                        <th><a class="row-header-title" onclick="set_sort('official_languages', 'asc')">Official Languages</a></th>
+                        <th align="right"><a class="row-header-title" onclick="set_sort('surface_area', 'asc')">Surface Area</a></th>
+                        <th align="right"><a class="row-header-title" onclick="set_sort('independence', 'asc')">Independence</a></th>
+                        <th align="right"><a class="row-header-title" onclick="set_sort('Population', 'asc')">Population</a></th>
+                        <th align="right"><a class="row-header-title" onclick="set_sort('life_expectancy', 'asc')">Life Expectancy</a></th>
+                        <th align="right"><a class="row-header-title" onclick="set_sort('GNP', 'asc')">GNP</a></th>
+                        <th><a class="row-header-title" onclick="set_sort('form_of_government', 'asc')">Form Of Government</a></th>
+                        <th><a class="row-header-title" onclick="set_sort('head_of_state', 'asc')">Head Of State</a></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>
+                           <nobr>AFG</nobr>
+                        </td>
+                        <td>
+                           <nobr>Afghanistan</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern and Central Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dari, Pashto</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>652090.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1919</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>22720000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>45.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5,976.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Islamic Emirate</nobr>
+                        </td>
+                        <td>
+                           <nobr>Mohammad Omar</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ALB</nobr>
+                        </td>
+                        <td>
+                           <nobr>Albania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Albaniana</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>28748.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1912</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3401200</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>71.6</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3,205.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Rexhep Mejdani</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>DZA</nobr>
+                        </td>
+                        <td>
+                           <nobr>Algeria</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Northern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2381741.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1962</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>31471000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>49,982.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Abdelaziz Bouteflika</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ASM</nobr>
+                        </td>
+                        <td>
+                           <nobr>American Samoa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Polynesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>English, Samoan</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>199.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>75.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>334.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>US Territory</nobr>
+                        </td>
+                        <td>
+                           <nobr>George W. Bush</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>AND</nobr>
+                        </td>
+                        <td>
+                           <nobr>Andorra</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Catalan</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>468.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1278</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>83.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,630.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Parliamentary Coprincipality</nobr>
+                        </td>
+                        <td>
+                           <nobr></nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>AIA</nobr>
+                        </td>
+                        <td>
+                           <nobr>Anguilla</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>96.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>76.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>63.20</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dependent Territory of the UK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ATG</nobr>
+                        </td>
+                        <td>
+                           <nobr>Antigua and Barbuda</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>442.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1981</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>70.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>612.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ARG</nobr>
+                        </td>
+                        <td>
+                           <nobr>Argentina</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2780400.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1816</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>37032000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>75.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>340,238.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Fernando de la R&#250;a</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ARM</nobr>
+                        </td>
+                        <td>
+                           <nobr>Armenia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Armenian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>29800.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3520000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>66.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,813.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Robert Kot&#353;arjan</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ABW</nobr>
+                        </td>
+                        <td>
+                           <nobr>Aruba</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dutch</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>193.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>103000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>828.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nonmetropolitan Territory of The Netherlands</nobr>
+                        </td>
+                        <td>
+                           <nobr>Beatrix</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>AUS</nobr>
+                        </td>
+                        <td>
+                           <nobr>Australia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Australia and New Zealand</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>7741220.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1901</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>18886000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>79.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>351,182.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy, Federation</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>AUT</nobr>
+                        </td>
+                        <td>
+                           <nobr>Austria</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>German</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>83859.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1918</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8091800</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>211,860.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Thomas Klestil</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>AZE</nobr>
+                        </td>
+                        <td>
+                           <nobr>Azerbaijan</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Azerbaijani</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>86600.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>7734000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>62.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4,127.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Heyd&#228;r &#196;liyev</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BHR</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bahrain</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>694.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1971</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>617000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>73.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6,366.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Monarchy (Emirate)</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hamad ibn Isa al-Khalifa</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BGD</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bangladesh</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern and Central Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bengali</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>143998.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1971</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>129155000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>60.2</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>32,852.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Shahabuddin Ahmad</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BRB</nobr>
+                        </td>
+                        <td>
+                           <nobr>Barbados</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>430.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1966</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>270000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>73.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2,223.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BLR</nobr>
+                        </td>
+                        <td>
+                           <nobr>Belarus</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Belorussian, Russian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>207600.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10236000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>13,714.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Aljaksandr Luka&#353;enka</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BEL</nobr>
+                        </td>
+                        <td>
+                           <nobr>Belgium</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dutch, French, German</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>30518.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1830</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10239000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>249,704.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy, Federation</nobr>
+                        </td>
+                        <td>
+                           <nobr>Albert II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BLZ</nobr>
+                        </td>
+                        <td>
+                           <nobr>Belize</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Central America</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>22696.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1981</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>241000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>70.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>630.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BMU</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bermuda</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>53.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>65000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>76.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2,328.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dependent Territory of the UK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BTN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bhutan</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern and Central Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dzongkha</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>47000.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1910</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2124000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>52.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>372.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jigme Singye Wangchuk</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BOL</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bolivia</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Aimar&#225;, Ket&#353;ua, Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1098581.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1825</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8329000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>63.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8,571.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hugo B&#225;nzer Su&#225;rez</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BIH</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bosnia and Herzegovina</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Serbo-Croatian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>51197.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1992</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3972000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>71.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2,841.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ante Jelavic</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BRA</nobr>
+                        </td>
+                        <td>
+                           <nobr>Brazil</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Portuguese</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8547403.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1822</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>170115000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>62.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>776,739.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Fernando Henrique Cardoso</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BRN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Brunei</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southeast Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Malay</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5765.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1984</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>328000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>73.6</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>11,705.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Monarchy (Sultanate)</nobr>
+                        </td>
+                        <td>
+                           <nobr>Haji Hassan al-Bolkiah</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BGR</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bulgaria</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bulgariana</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>110994.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1908</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8190900</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>70.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>12,178.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Petar Stojanov</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>BDI</nobr>
+                        </td>
+                        <td>
+                           <nobr>Burundi</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>French, Kirundi</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>27834.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1962</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6695000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>46.2</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>903.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Pierre Buyoya</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>KHM</nobr>
+                        </td>
+                        <td>
+                           <nobr>Cambodia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southeast Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Khmer</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>181035.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1953</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>11168000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>56.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5,121.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Norodom Sihanouk</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CAN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Canada</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>French, English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>9970610.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1867</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>31147000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>79.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>598,862.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy, Federation</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CPV</nobr>
+                        </td>
+                        <td>
+                           <nobr>Cape Verde</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Portuguese</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4033.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1975</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>428000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>435.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ant&#243;nio Mascarenhas Monteiro</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CYM</nobr>
+                        </td>
+                        <td>
+                           <nobr>Cayman Islands</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>264.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>38000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,263.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dependent Territory of the UK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>TCD</nobr>
+                        </td>
+                        <td>
+                           <nobr>Chad</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Central Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1284000.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1960</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>7651000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>50.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,208.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Idriss D&#233;by</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CHL</nobr>
+                        </td>
+                        <td>
+                           <nobr>Chile</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>756626.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1810</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>15211000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>75.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>72,949.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ricardo Lagos Escobar</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CHN</nobr>
+                        </td>
+                        <td>
+                           <nobr>China</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Chinese</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>9572900.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>-1523</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1277558000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>71.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>982,268.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>People'sRepublic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jiang Zemin</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CXR</nobr>
+                        </td>
+                        <td>
+                           <nobr>Christmas Island</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Australia and New Zealand</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>135.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2500</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>0.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Territory of Australia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CCK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Cocos (Keeling) Islands</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Australia and New Zealand</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>14.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>600</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>0.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Territory of Australia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>COL</nobr>
+                        </td>
+                        <td>
+                           <nobr>Colombia</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1138914.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1810</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>42321000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>70.3</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>102,896.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Andr&#233;s Pastrana Arango</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>COM</nobr>
+                        </td>
+                        <td>
+                           <nobr>Comoros</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Comorian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1862.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1975</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>578000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>60.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4,401.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Azali Assoumani</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>COK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Cook Islands</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Polynesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Maori</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>236.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>20000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>71.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>100.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nonmetropolitan Territory of New Zealand</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CRI</nobr>
+                        </td>
+                        <td>
+                           <nobr>Costa Rica</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Central America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>51100.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1821</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4023000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>75.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10,226.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Miguel &#193;ngel Rodr&#237;guez Echeverr&#237;a</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>HRV</nobr>
+                        </td>
+                        <td>
+                           <nobr>Croatia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Serbo-Croatian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>56538.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4473000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>73.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>20,208.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>&#352;tipe Mesic</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CUB</nobr>
+                        </td>
+                        <td>
+                           <nobr>Cuba</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>110861.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1902</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>11201000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>76.2</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>17,843.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Socialistic Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Fidel Castro Ruz</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CYP</nobr>
+                        </td>
+                        <td>
+                           <nobr>Cyprus</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Greek, Turkish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>9251.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1960</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>754700</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>76.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>9,333.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Glafkos Klerides</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>CZE</nobr>
+                        </td>
+                        <td>
+                           <nobr>Czech Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Czech</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78866.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1993</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10278100</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>74.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>55,017.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>V&#225;clav Havel</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>DNK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Denmark</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nordic Countries</nobr>
+                        </td>
+                        <td>
+                           <nobr>Danish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>43094.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>800</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5330000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>76.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>174,099.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Margrethe II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>DJI</nobr>
+                        </td>
+                        <td>
+                           <nobr>Djibouti</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>23200.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1977</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>638000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>50.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>382.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ismail Omar Guelleh</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>DOM</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dominican Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>48511.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1844</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8495000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>73.2</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>15,846.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hip&#243;lito Mej&#237;a Dom&#237;nguez</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>TMP</nobr>
+                        </td>
+                        <td>
+                           <nobr>East Timor</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southeast Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Portuguese</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>14874.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>885000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>46.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>0.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Administrated by the UN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jos&#233; Alexandre Gusm&#227;o</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ECU</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ecuador</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>283561.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1822</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>12646000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>71.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>19,770.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Gustavo Noboa Bejarano</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>EGY</nobr>
+                        </td>
+                        <td>
+                           <nobr>Egypt</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Northern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1001449.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1922</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68470000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>63.3</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>82,710.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hosni Mubarak</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>SLV</nobr>
+                        </td>
+                        <td>
+                           <nobr>El Salvador</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Central America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>21041.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1841</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6276000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>11,863.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Francisco Guillermo Flores P&#233;rez</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ERI</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eritrea</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Tigrinja</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>117600.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1993</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3850000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>55.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>650.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Isayas Afewerki [Isaias Afwerki]</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>EST</nobr>
+                        </td>
+                        <td>
+                           <nobr>Estonia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Baltic Countries</nobr>
+                        </td>
+                        <td>
+                           <nobr>Estonian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>45227.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1439200</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5,328.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Lennart Meri</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>FLK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Falkland Islands</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>South America</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>12173.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>0.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dependent Territory of the UK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>FRO</nobr>
+                        </td>
+                        <td>
+                           <nobr>Faroe Islands</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nordic Countries</nobr>
+                        </td>
+                        <td>
+                           <nobr>Faroese, Danish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1399.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>43000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>0.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Part of Denmark</nobr>
+                        </td>
+                        <td>
+                           <nobr>Margrethe II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>FJI</nobr>
+                        </td>
+                        <td>
+                           <nobr>Fiji Islands</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Melanesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Fijian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>18274.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1970</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>817000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>67.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,536.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Josefa Iloilo</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>FIN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Finland</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nordic Countries</nobr>
+                        </td>
+                        <td>
+                           <nobr>Finnish, Swedish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>338145.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1917</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5171300</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>121,914.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Tarja Halonen</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>FRA</nobr>
+                        </td>
+                        <td>
+                           <nobr>France</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>French</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>551500.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>843</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>59225700</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,424,285.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jacques Chirac</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>PYF</nobr>
+                        </td>
+                        <td>
+                           <nobr>French Polynesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Polynesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>French</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4000.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>235000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>74.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>818.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nonmetropolitan Territory of France</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jacques Chirac</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GEO</nobr>
+                        </td>
+                        <td>
+                           <nobr>Georgia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Georgiana</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69700.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4968000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>64.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6,064.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eduard &#352;evardnadze</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>DEU</nobr>
+                        </td>
+                        <td>
+                           <nobr>Germany</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>German</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>357022.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1955</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>82164700</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2,133,367.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Johannes Rau</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GIB</nobr>
+                        </td>
+                        <td>
+                           <nobr>Gibraltar</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>25000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>79.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>258.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Dependent Territory of the UK</nobr>
+                        </td>
+                        <td>
+                           <nobr>Elisabeth II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GRC</nobr>
+                        </td>
+                        <td>
+                           <nobr>Greece</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Greek</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>131626.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1830</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10545700</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>120,724.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kostis Stefanopoulos</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GRL</nobr>
+                        </td>
+                        <td>
+                           <nobr>Greenland</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Greenlandic, Danish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2166090.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>56000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>0.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Part of Denmark</nobr>
+                        </td>
+                        <td>
+                           <nobr>Margrethe II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GLP</nobr>
+                        </td>
+                        <td>
+                           <nobr>Guadeloupe</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>French</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1705.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>456000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3,501.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Overseas Department of France</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jacques Chirac</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GUM</nobr>
+                        </td>
+                        <td>
+                           <nobr>Guam</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Micronesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Chamorro, English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>549.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>168000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,197.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>US Territory</nobr>
+                        </td>
+                        <td>
+                           <nobr>George W. Bush</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GTM</nobr>
+                        </td>
+                        <td>
+                           <nobr>Guatemala</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Central America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>108889.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1821</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>11385000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>66.2</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>19,008.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Alfonso Portillo Cabrera</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>GNB</nobr>
+                        </td>
+                        <td>
+                           <nobr>Guinea-Bissau</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Portuguese</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>36125.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1974</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1213000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>49.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>293.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kumba Ial&#225;</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>HTI</nobr>
+                        </td>
+                        <td>
+                           <nobr>Haiti</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Caribbean</nobr>
+                        </td>
+                        <td>
+                           <nobr>French</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>27750.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1804</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8222000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>49.2</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3,459.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jean-Bertrand Aristide</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>VAT</nobr>
+                        </td>
+                        <td>
+                           <nobr>Holy See (Vatican City State)</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Italian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>0.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1929</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>9.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Independent Church State</nobr>
+                        </td>
+                        <td>
+                           <nobr>Johannes Paavali II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>HND</nobr>
+                        </td>
+                        <td>
+                           <nobr>Honduras</nobr>
+                        </td>
+                        <td>
+                           <nobr>North America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Central America</nobr>
+                        </td>
+                        <td>
+                           <nobr>Spanish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>112088.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1838</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6485000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69.9</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5,333.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Carlos Roberto Flores Facuss&#233;</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>HKG</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hong Kong</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1075.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6782000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>79.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>166,448.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Special Administrative Region of China</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jiang Zemin</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>HUN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hungary</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hungarian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>93030.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1918</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10043200</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>71.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>48,267.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ferenc M&#225;dl</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ISL</nobr>
+                        </td>
+                        <td>
+                           <nobr>Iceland</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nordic Countries</nobr>
+                        </td>
+                        <td>
+                           <nobr>Icelandic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>103000.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1944</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>279000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>79.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>8,255.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>&#211;lafur Ragnar Gr&#237;msson</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>IND</nobr>
+                        </td>
+                        <td>
+                           <nobr>India</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern and Central Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hindi</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3287263.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1947</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1013662000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>62.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>447,114.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kocheril Raman Narayanan</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>IDN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Indonesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southeast Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Malay</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1904569.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1945</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>212107000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>84,982.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Abdurrahman Wahid</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>IRN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Iran</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern and Central Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Persian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1648195.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1906</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>67702000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>195,746.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Islamic Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ali Mohammad Khatami-Ardakani</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>IRQ</nobr>
+                        </td>
+                        <td>
+                           <nobr>Iraq</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>438317.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1932</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>23115000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>66.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>11,500.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Saddam Hussein al-Takriti</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>IRL</nobr>
+                        </td>
+                        <td>
+                           <nobr>Ireland</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>British Islands</nobr>
+                        </td>
+                        <td>
+                           <nobr>English, Irish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>70273.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1921</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3775100</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>76.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>75,921.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Mary McAleese</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ISR</nobr>
+                        </td>
+                        <td>
+                           <nobr>Israel</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic, Hebrew</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>21056.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1948</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6217000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78.6</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>97,477.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Moshe Katzav</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>ITA</nobr>
+                        </td>
+                        <td>
+                           <nobr>Italy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Italian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>301316.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1861</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>57680000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>79.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,161,755.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Carlo Azeglio Ciampi</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>JPN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Japan</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Japanese</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>377829.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>-660</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>126714000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>80.7</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3,787,042.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Akihito</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>JOR</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jordan</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>88946.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1946</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5083000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>7,526.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Abdullah II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>KAZ</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kazakstan</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern and Central Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kazakh</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2724900.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>16223000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>63.2</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>24,375.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Nursultan Nazarbajev</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>KIR</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kiribati</nobr>
+                        </td>
+                        <td>
+                           <nobr>Oceania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Micronesia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kiribati</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>726.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1979</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>83000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>59.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>40.70</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Teburoro Tito</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>KWT</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kuwait</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>17818.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1961</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1972000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>76.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>27,037.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy (Emirate)</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jabir al-Ahmad al-Jabir al-Sabah</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>KGZ</nobr>
+                        </td>
+                        <td>
+                           <nobr>Kyrgyzstan</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern and Central Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Russian, Kirgiz</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>199900.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>4699000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>63.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,626.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Askar Akajev</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LAO</nobr>
+                        </td>
+                        <td>
+                           <nobr>Laos</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southeast Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Lao</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>236800.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1953</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5433000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>53.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,292.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Khamtay Siphandone</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LVA</nobr>
+                        </td>
+                        <td>
+                           <nobr>Latvia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Baltic Countries</nobr>
+                        </td>
+                        <td>
+                           <nobr>Latvian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>64589.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2424200</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>68.4</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>6,398.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Vaira Vike-Freiberga</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LBN</nobr>
+                        </td>
+                        <td>
+                           <nobr>Lebanon</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Middle East</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10400.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1941</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3282000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>71.3</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>17,121.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>&#201;mile Lahoud</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LSO</nobr>
+                        </td>
+                        <td>
+                           <nobr>Lesotho</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Sotho, English</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>30355.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1966</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2153000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>50.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,061.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Letsie III</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LBY</nobr>
+                        </td>
+                        <td>
+                           <nobr>Libyan Arab Jamahiriya</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Northern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Arabic</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1759540.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1951</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5605000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>75.5</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>44,806.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Socialistic State</nobr>
+                        </td>
+                        <td>
+                           <nobr>Muammar al-Qadhafi</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LIE</nobr>
+                        </td>
+                        <td>
+                           <nobr>Liechtenstein</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>German</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>160.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1806</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>32300</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>78.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,119.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Hans-Adam II</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LTU</nobr>
+                        </td>
+                        <td>
+                           <nobr>Lithuania</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Baltic Countries</nobr>
+                        </td>
+                        <td>
+                           <nobr>Lithuanian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>65301.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3698500</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10,692.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Valdas Adamkus</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>LUX</nobr>
+                        </td>
+                        <td>
+                           <nobr>Luxembourg</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Western Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>French, German, Luxembourgish</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2586.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1867</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>435700</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>77.1</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>16,321.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy</nobr>
+                        </td>
+                        <td>
+                           <nobr>Henri</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>MAC</nobr>
+                        </td>
+                        <td>
+                           <nobr>Macao</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Portuguese</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>18.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr></nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>473000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>81.6</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>5,749.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Special Administrative Region of China</nobr>
+                        </td>
+                        <td>
+                           <nobr>Jiang Zemin</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>MKD</nobr>
+                        </td>
+                        <td>
+                           <nobr>Macedonia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southern Europe</nobr>
+                        </td>
+                        <td>
+                           <nobr>Macedonian</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>25713.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1991</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>2024000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>73.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,694.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Boris Trajkovski</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>MDG</nobr>
+                        </td>
+                        <td>
+                           <nobr>Madagascar</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>French, Malagasy</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>587041.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1960</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>15942000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>55.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>3,750.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Federal Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Didier Ratsiraka</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>MWI</nobr>
+                        </td>
+                        <td>
+                           <nobr>Malawi</nobr>
+                        </td>
+                        <td>
+                           <nobr>Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Eastern Africa</nobr>
+                        </td>
+                        <td>
+                           <nobr>Chichewa</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>118484.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1964</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>10925000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>37.6</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1,687.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Republic</nobr>
+                        </td>
+                        <td>
+                           <nobr>Bakili Muluzi</nobr>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <nobr>MYS</nobr>
+                        </td>
+                        <td>
+                           <nobr>Malaysia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Southeast Asia</nobr>
+                        </td>
+                        <td>
+                           <nobr>Malay</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>329758.0</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>1957</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>22244000</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>70.8</nobr>
+                        </td>
+                        <td align="right">
+                           <nobr>69,213.00</nobr>
+                        </td>
+                        <td>
+                           <nobr>Constitutional Monarchy, Federation</nobr>
+                        </td>
+                        <td>
+                           <nobr>Salahuddin Abdul Aziz Shah Alhaj</nobr>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+</div>
+</div>
+</div>
+         <!-- /div container-fluid -->
+      </form>
+      <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script type="text/javascript" language="javascript" src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+      <script type="text/javascript" language="javascript" src="js/report.js"></script>
+   </body>
+</html>
