@@ -17,6 +17,7 @@ body {
 
 #header {
   padding: 7px 0px;
+  margin-bottom: 10px;
   font-size: 14px;
 }
 #header #vreports-logo {
@@ -52,7 +53,7 @@ ul.menu li {
 }
 
 ul.menu li a.menu-link {
-  border: solid lightgrey 1px;
+  /* border: solid lightgrey 1px; */
   color: #555;
   font-size: 14px;
   text-decoration: none;
@@ -64,11 +65,15 @@ ul.menu li a.menu-link:hover {
   background-color: #d4bbbb;
 }
 
+/* content-container */
+#content-container {
+  margin: auto;
+  width: 97%;
+}
+
 /* report */
 
 #report {
-  margin: auto;
-  width: 97%;
 }
 
 /* report-header */
@@ -80,16 +85,18 @@ ul.menu li a.menu-link:hover {
 #report-header #report-name {
   font-size: 18px;
   padding-right: 20px;
+  font-weight: bold
 }
 
 #report-header #report-description {
   font-size: 14px;
-  padding-right: 20px;
+  padding-right: 30px;
+  font-weight: bold
 }
 
 #report-header #report-paging-info {
   font-size: 14px;
-  padding-right: 20px;
+  padding-right: 15px;
 }
 
 #report-header #report-paging-controls {
@@ -132,6 +139,7 @@ a.vbutton {
   font-size: 14px;
   padding: 4px 15px;
   margin: 2px;
+  border-radius: 5px;
 }
 a.vbutton:hover {
   background-color: #d4bbbb;
