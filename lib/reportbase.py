@@ -73,12 +73,13 @@ class ReportBase(HtmlPage):
             'js/report.js',
             ]
         self.style_sheets.extend([
-            "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
-            "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
-            'css/main.css',
-            'css/report_controls.css',
-            'css/column_chooser.css',
-            'css/report_sql_panel.css'
+            'css/vreports.css?r=2'
+            #"http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
+            #"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
+            #'css/main.css',
+            #'css/report_controls.css',
+            #'css/column_chooser.css',
+            #'css/report_sql_panel.css'
             ])
         
     def loadParams(self):
@@ -252,21 +253,24 @@ class ReportBase(HtmlPage):
 
         return div(
             self.header.getHeader() + \
-            self.menu.getMenu() + \
             div(
               self.getReportControls() + \
               self.reportSqlPanel.getSqlPanel() + \
-              self.getCustomizeReportPanel() + \
-              self.getHiddenFields() + \
-              self.getLoadingIndicator() + \
-              self.getReportDesc() + \
-              self.getReportTable() + \
-              self.getReportTableFooter(),
-              id='content', class_='container-fluid'),
+              self.menu.getMenu() + \
+              div(
+                self.getCustomizeReportPanel() + \
+                self.getHiddenFields() + \
+                self.getLoadingIndicator() + \
+                self.getReportDesc() + \
+                self.getReportTable() + \
+                self.getReportTableFooter(),
+                id='report'
+              ),
+              id='content-container'),
               #id='content') + \
             #self.help(),
             #self.save_panel(),
-            id='page_container')
+            id='page-container')
 
     def getCsv(self):
         o = ''
@@ -349,6 +353,23 @@ class ReportBase(HtmlPage):
                    id="loading-indicator-wrapper")
 
     def getReportDesc(self):
+        report_name = span('Report Name', id='report-name')
+
+        report_description = span('Report Description',
+                                  id='report-description')
+        report_paging_info = span('Paging Info', id='paging-info')
+        report_paging_controls = span('Paging Controls', id='paging_controls')
+        report_addl_buttons = span('Addl Buttons')
+        return div(report_name + \
+                       report_description + \
+                       report_paging_info + \
+                       report_paging_controls + \
+                       report_addl_buttons,
+                   id='report-header')
+
+        # older code. 
+        # TO DO fill in the blanks above with goods from this older code ...
+
         filters = []
         for control in self.params.controls:
             if control.get('value'):
@@ -436,7 +457,7 @@ class ReportBase(HtmlPage):
         return row_count_desc
 
     def getReportTable(self):
-        table = HtmlTable(class_='report_table')        
+        table = HtmlTable(class_='vtable')
         table.addHeader(self.getColumnHeaders())
         for row in self.getData():
             #table.addRow(row)
