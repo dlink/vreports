@@ -11,4 +11,4 @@ class Header(object):
 
     def getHeader(self):
         logo = LOGO
-        return div(div(logo, class_='logo'), id='header')
+        return div(div(logo, id='vreports-logo'), id='header')

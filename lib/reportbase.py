@@ -353,23 +353,7 @@ class ReportBase(HtmlPage):
                    id="loading-indicator-wrapper")
 
     def getReportDesc(self):
-        report_name = span('Report Name', id='report-name')
-
-        report_description = span('Report Description',
-                                  id='report-description')
-        report_paging_info = span('Paging Info', id='paging-info')
-        report_paging_controls = span('Paging Controls', id='paging_controls')
-        report_addl_buttons = span('Addl Buttons')
-        return div(report_name + \
-                       report_description + \
-                       report_paging_info + \
-                       report_paging_controls + \
-                       report_addl_buttons,
-                   id='report-header')
-
-        # older code. 
-        # TO DO fill in the blanks above with goods from this older code ...
-
+        # get filter description
         filters = []
         for control in self.params.controls:
             if control.get('value'):
@@ -384,23 +368,33 @@ class ReportBase(HtmlPage):
         filter_desc = '; &nbsp; '.join(filters)
         if not filter_desc:
             filter_desc = 'All'
-                
-        return div(' &nbsp; - &nbsp; '.join([self.params.report_title,
-                                             filter_desc,
-                                             self.getRowCountDesc(),
-                                             self.getPager(),
-                                             self.getCsvButton(),
-                                             #self.getSaveButton()
-                                             ]),
-                   id='report_description_container',
-                   style='clear: both')
+
+        # get addl buttons
+        addl_buttons = self.getCsvButton()
+
+        # assign ind. spans
+        report_name = span(self.params.report_title, id='report-name')
+        report_description = span(filter_desc, id='report-description')
+        report_paging_info = span(self.getRowCountDesc(),
+                                  id='report-paging-info')
+        report_paging_controls = span(self.getPager(),
+                                      id='report-paging-controls')
+        report_addl_buttons = span(addl_buttons)
+        
+        # put it together
+        return div(report_name + \
+                   report_description + \
+                   report_paging_info + \
+                   report_paging_controls + \
+                   report_addl_buttons,
+                   id='report-header')
 
     def getPager(self):
         # previous button
         if self.params.page_num == 1:
             prev = ''
         else:
-            prev_text = '&lt;&lt;Prev'
+            prev_text = 'Previous'
             prev = a(prev_text, id='prev-button', class_='vbutton green',
                      onclick='go_to_prev_page()')
 
@@ -409,7 +403,7 @@ class ReportBase(HtmlPage):
                > self.getRowCount():
             next = ''
         else:
-            next_text = 'Next&gt;&gt;'
+            next_text = 'Next'
             next = a(next_text, id='next-button', class_='vbutton green',
                      onclick = 'go_to_next_page()')
             
