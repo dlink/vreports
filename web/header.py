@@ -2,7 +2,8 @@
 
 from vweb.html import *
 
-LOGO = 'VReports Database Report'
+LOGO = 'VReports'
+COMPANY = 'Crowfly.net'
 
 class Header(object): 
 
@@ -10,5 +11,8 @@ class Header(object):
         self.title = title
 
     def getHeader(self):
-        logo = LOGO
-        return div(div(logo, id='vreports-logo'), id='header')
+        return div(
+            span(LOGO, id='vreports-logo') + \
+            span(COMPANY, id='company-name'),
+            id='header')
+    
