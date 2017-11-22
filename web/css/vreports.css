@@ -150,3 +150,19 @@ a.vbutton:hover {
 .floatr {
    float: right;
 }
+
+/* Customize Report Modal */
+
+#customize-report-panel-wrapper {
+  display: none;
+}
+
+/* sql_panel css */
+
+#sql_panel {
+  display: none;
+}
+
+#loading-indicator-wrapper {
+    display: none;
+}

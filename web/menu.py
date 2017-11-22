@@ -14,7 +14,7 @@ class Menu(object):
                   ]
         this_report = sys.argv[0]
         menu_html = self.getHtml(reports)
-        return div(menu_html, class_='menu')
+        return div(menu_html, id='nav')
 
     def getHtml(self, reports):
         menu = []
@@ -23,9 +23,9 @@ class Menu(object):
                 menu.append(li(a(name, href='#') + self.htmlify(target, 
                                                           submenu=True)))
             elif type(target) is str: 
-               menu.append(li(a(name, href=target)))
+               menu.append(li(a(name, href=target, class_='menu-link')))
 
-        return ul("".join(menu), class_="dropdown")
+        return ul("".join(menu), class_="menu")
 
     def get_my_reports(self, user):
       l = []
