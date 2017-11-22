@@ -254,7 +254,6 @@ class ReportBase(HtmlPage):
         return div(
             self.header.getHeader() + \
             div(
-              self.getReportControls() + \
               self.reportSqlPanel.getSqlPanel() + \
               self.menu.getMenu() + \
               div(
@@ -370,7 +369,12 @@ class ReportBase(HtmlPage):
             filter_desc = 'All'
 
         # get addl buttons
-        addl_buttons = self.getCsvButton()
+        addl_buttons = [
+            a('Customize Report', id='customize-report-button',
+              class_='vbutton'),
+            a('Show SQL', id='show-sql-button', class_='vbutton'),
+            self.getCsvButton()]
+
 
         # assign ind. spans
         report_name = span(self.params.report_title, id='report-name')
@@ -379,7 +383,7 @@ class ReportBase(HtmlPage):
                                   id='report-paging-info')
         report_paging_controls = span(self.getPager(),
                                       id='report-paging-controls')
-        report_addl_buttons = span(addl_buttons)
+        report_addl_buttons = span(' '.join(addl_buttons))
         
         # put it together
         return div(report_name + \
