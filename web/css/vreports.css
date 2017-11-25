@@ -130,6 +130,10 @@ table.vtable tr:nth-child(odd) td {
   background-color: #f3f3f6;
 }
 
+/* footer */
+#report_table_footer {
+   margin: 30px 0 20px;
+}
 /* vbutton */
 
 a.vbutton {

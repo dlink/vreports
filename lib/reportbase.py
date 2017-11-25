@@ -73,13 +73,7 @@ class ReportBase(HtmlPage):
             'js/report.js',
             ]
         self.style_sheets.extend([
-            'css/vreports.css?r=2'
-            #"http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
-            #"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
-            #'css/main.css',
-            #'css/report_controls.css',
-            #'css/column_chooser.css',
-            #'css/report_sql_panel.css'
+            'css/vreports.css?r=48'
             ])
         
     def loadParams(self):
@@ -475,6 +469,7 @@ class ReportBase(HtmlPage):
         return table.getTable()
 
     def getReportTableFooter(self):
+        
         return div(' &nbsp; - &nbsp; '.join([self.getRowCountDesc(),
                                              self.getPager()]),
                    id='report_table_footer')
