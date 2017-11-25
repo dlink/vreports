@@ -73,7 +73,7 @@ class ReportBase(HtmlPage):
             'js/report.js',
             ]
         self.style_sheets.extend([
-            'css/vreports.css?r=48'
+            'css/vreports.css?r=53'
             ])
         
     def loadParams(self):
@@ -248,13 +248,13 @@ class ReportBase(HtmlPage):
         return div(
             self.header.getHeader() + \
             div(
-              self.reportSqlPanel.getSqlPanel() + \
               self.menu.getMenu() + \
               div(
                 self.getCustomizeReportPanel() + \
                 self.getHiddenFields() + \
                 self.getLoadingIndicator() + \
                 self.getReportDesc() + \
+                self.reportSqlPanel.getSqlPanel() + \
                 self.getReportTable() + \
                 self.getReportTableFooter(),
                 id='report'
@@ -368,7 +368,6 @@ class ReportBase(HtmlPage):
               class_='vbutton'),
             a('Show SQL', id='show-sql-button', class_='vbutton'),
             self.getCsvButton()]
-
 
         # assign ind. spans
         report_name = span(self.params.report_title, id='report-name')

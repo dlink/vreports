@@ -297,7 +297,25 @@ span.cc_minor {
 
 #sql_panel {
   display: none;
+  background-color: white;
 }
+#sql_panel.show {
+  display: block;
+}
+#sql_panel_title {
+  padding: 10px;
+  background-color: #F1D5E0;
+}
+
+#sql_panel_table {
+  padding: 15px 10px;
+}
+
+#sql_panel_table td {
+  font-family: monospace;
+}
+
+/* load indicator */
 
 #loading-indicator-wrapper {
     display: none;
