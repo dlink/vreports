@@ -3,7 +3,6 @@
 body {
 }
 
-/* div { border: 1px solid black } */
 #page-container {
   background-color: #fff;
   color: #555;
@@ -53,7 +52,6 @@ ul.menu li {
 }
 
 ul.menu li a.menu-link {
-  /* border: solid lightgrey 1px; */
   color: #555;
   font-size: 14px;
   text-decoration: none;
@@ -66,6 +64,7 @@ ul.menu li a.menu-link:hover {
 }
 
 /* content-container */
+
 #content-container {
   margin: auto;
   width: 97%;
@@ -111,7 +110,6 @@ table.vtable {
 }
 
 table.vtable tr th {
-  /* background-color: rgb(160, 126, 70); */
   background-color: #badae4;
   color: #000;
   padding: 6px; 
@@ -174,7 +172,6 @@ a.vbutton:hover {
   position: relative;
   margin: 85px 2%;
   padding: 35px 10px 10px;
-  /* border-radius: 5px; */
   font-size: small;
 }
 .close {
@@ -191,21 +188,9 @@ a.vbutton:hover {
    color: #d4bbbb;
 }
 
-/*
-#report-controls {
-  margin: 10px;
-  padding: 2px;
-}*/
-
-/* eee */
-
-
-/* sss 2 */
 /* report_controls css */
 
 #report_controls {
-  /* padding: 0.5%; */
-  /* background-color: white; */
   padding-bottom: 20px;
   display: inline-block;
   width: 49%;
@@ -255,15 +240,9 @@ a.vbutton:hover {
   margin-left: 20px;
 }
 
-/* eee 2 */
-
-/* sss 3 */
-
 /* column_chooser.css */
 
 #column_chooser { 
-  /* padding: 0.5%; */
-  /* background-color: white; */
   margin-left: 8px;
   padding-bottom: 20px;
   display: inline-block;
@@ -302,14 +281,11 @@ span.cc_minor {
 #column_chooser #reset-columns {
   margin-left: 20px;
 }
-/* eee 3 */
 
 /* customize-report-buttons */
+
 #customize-report-buttons {
-  /* margin-top: 2px;
-  padding: 20px; */
   margin: 25px 0 10px;
-  /* border-top: thin solid grey; */
   text-align: center;
 }
 
