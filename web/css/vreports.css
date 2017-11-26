@@ -67,7 +67,7 @@ ul.menu li a.menu-link:hover {
 
 #content-container {
   margin: auto;
-  width: 97%;
+  width: 100;
 }
 
 /* report */
@@ -128,6 +128,13 @@ table.vtable tr th img.row-header-arrow-icon {
 }
 table.vtable tr:nth-child(odd) td {
   background-color: #f3f3f6;
+}
+table.vtable a {
+  color: #004C99;
+  text-decoration: None
+}
+table.vtable a:hover {
+  color: orange;
 }
 
 /* footer */
