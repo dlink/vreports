@@ -1,6 +1,7 @@
 /* veports styling */
 
 body {
+  margin-top: 0px;
 }
 
 #page-container {
@@ -15,15 +16,14 @@ body {
 /* header */
 
 #header {
-  padding: 7px 0px;
-  margin-bottom: 10px;
+  padding: 7px 13px;
   font-size: 14px;
 }
 #header #vreports-logo {
   font-family: Palatino, Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: bold;
-  padding-right: 50px;
+  padding-right: 5px;
 }
 #header #setup-button {
   padding: 0px 30px;
@@ -33,34 +33,28 @@ body {
   padding: 0px 50px;
 }
 
-/* nav */
+/* menu */
 
-#nav {
-  background-color: rgb(240, 240, 240);
-  padding: 5px 0px;
+#menu {
+  /* background-color: rgb(240, 240, 240); */
+  border-bottom: solid 1px #d1d5da;
+  text-align: center;
+  margin-top: -23px;
 }
-
-ul.menu {
-  margin: 0px;
-  margin-left: 20px;
-  padding: 0px;
-}
-
-ul.menu li {
-  display: inline;
-  position: relative;
-}
-
-ul.menu li a.menu-link {
+#menu a {
   color: #555;
   font-size: 14px;
   text-decoration: none;
-  margin: 0px 10px;
   padding: 4px 15px;
+  display: inline-block;
+  border-bottom: solid 2px #fff;
 }
-
-ul.menu li a.menu-link:hover {
-  background-color: #d4bbbb;
+#menu a:hover {
+  border-bottom: solid 2px #d1d5da;
+}
+#menu a.active-menu-item {
+  font-weight: 600;
+  border-bottom: solid 2px orange;
 }
 
 /* content-container */
@@ -78,7 +72,7 @@ ul.menu li a.menu-link:hover {
 /* report-header */
 
 #report-header {
-  margin: 20px 0px 15px;
+  margin: 25px 0px 15px; */
 }
 
 #report-header #report-name {
@@ -111,9 +105,16 @@ table.vtable {
 
 table.vtable tr th {
   background-color: #badae4;
-  color: #000;
   padding: 6px; 
   border: 1px solid rgba(0,0,0,0.1);
+}
+table.vtable tr th a {
+  color: #000;
+  text-decoration: None
+  cursor: pointer;
+}
+table.vtable tr th a:hover {
+  color: #004C99;
 }
 table.vtable tr td {
   padding: 6px; 
@@ -131,7 +132,7 @@ table.vtable tr:nth-child(odd) td {
 }
 table.vtable a {
   color: #004C99;
-  text-decoration: None
+  text-decoration: None;
 }
 table.vtable a:hover {
   color: orange;

@@ -73,7 +73,7 @@ class ReportBase(HtmlPage):
             'js/report.js',
             ]
         self.style_sheets.extend([
-            'css/vreports.css?r=53'
+            'css/vreports.css?r=83'
             ])
         
     def loadParams(self):
@@ -248,7 +248,7 @@ class ReportBase(HtmlPage):
         return div(
             self.header.getHeader() + \
             div(
-              self.menu.getMenu() + \
+              self.menu.getMenu(self.report_name) + \
               div(
                 self.getCustomizeReportPanel() + \
                 self.getHiddenFields() + \
