@@ -30,7 +30,7 @@ class ReportBase(HtmlPage):
        Dynamic Reporting
     '''
 
-    def __init__(self, report_name=None, allow_download=True, traceback_dir=''):
+    def __init__(self, report_name=None, allow_download=True,traceback_dir=''):
         '''Constructor:
               report_name    - Name of page
               allow_download - Add [csv download] button or not
@@ -73,7 +73,7 @@ class ReportBase(HtmlPage):
             'js/report.js',
             ]
         self.style_sheets.extend([
-            'css/vreports.css?r=83'
+            'css/vreports.css?r=96'
             ])
         
     def loadParams(self):
@@ -280,12 +280,12 @@ class ReportBase(HtmlPage):
 
     # Level II
     
-    def getReportControls(self):
-        button1 = a('Customize Report', id='customize-report-button',
-                    class_='vbutton')
-        button2 = a('Show SQL', id='show-sql-button',
-                    class_='vbutton')
-        return div(button1 + button2, id='report-controls')
+    #def getReportControls(self):
+    #    button1 = a('Customize Report', id='customize-report-button',
+    #                class_='vbutton')
+    #    button2 = a('Show SQL', id='show-sql-button',
+    #                class_='vbutton')
+    #    return div(button1 + button2, id='report-controls')
 
     def getCustomizeReportPanel(self):
         submit_button = a('Submit', id='customize-report-submit-button',

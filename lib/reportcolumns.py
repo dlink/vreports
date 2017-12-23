@@ -36,8 +36,7 @@ class ReportColumns(object):
             return False
         
     def getColumnChooser(self):
-        title = div(b('Columns'),
-                    id='column_chooser_title')
+        title = div(b('Columns'), class_='report-controls-title')
     
         # buttons
         reset_button = a('Reset Columns', id='reset-columns', class_='vbutton',
@@ -49,7 +48,8 @@ class ReportColumns(object):
                               self.getGuts() + \
                               reset_button + \
                               clear_button,
-                              id='column_chooser')
+                              id='column-chooser',
+                              class_='report-controls')
         return report_columns
     
         # container:
@@ -64,7 +64,8 @@ class ReportColumns(object):
     def getGuts(self):
         # Table of column checkboxes NUM_COL's wide
         NUM_COL = 4
-        table = HtmlTable(id='column_chooser_table')
+        table = HtmlTable(id='column-chooser-table',
+                          class_='report-columns-table')
         num_separators = len([c for c in self.params.columns[1:]
                               if c.get('type') == 'separator'])
         num_checkboxes = len(self.params.columns) + num_separators

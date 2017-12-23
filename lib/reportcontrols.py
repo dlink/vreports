@@ -16,10 +16,9 @@ class ReportControls(object):
         raise ReportControlsError('Control not found: %s' % name)
 
     def getControls(self):
-        title = div(b('Filters'),
-                    id='report_controls_title')
+        title = div(b('Filters'), class_='report-controls-title')
 
-        table = HtmlTable(id='report_controls_table')
+        table = HtmlTable(class_='report-controls-table')
         cwidgets = ''
         filters = []
         for control in self.params.controls:
@@ -63,7 +62,8 @@ class ReportControls(object):
         report_controls = div(title + \
                               table.getTable() + \
                               reset_button,
-                              id='report_controls')
+                              id = 'filter-chooser',
+                              class_ ='report-controls')
         return report_controls
         # container:
         #return div(#show_button + \

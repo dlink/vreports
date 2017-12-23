@@ -154,6 +154,7 @@ a.vbutton {
 }
 a.vbutton:hover {
   background-color: #d4bbbb;
+  cursor: pointer;
 }
 
 /* utils */
@@ -200,87 +201,64 @@ a.vbutton:hover {
    color: #d4bbbb;
 }
 
-/* report_controls css */
+/* customize-report-buttons */
 
-#report_controls {
+#customize-report-buttons {
+  margin: 25px 0 10px;
+  text-align: center;
+}
+
+/* report-controls css */
+
+.report-controls {
   padding-bottom: 20px;
   display: inline-block;
   width: 49%;
   vertical-align: top;
   border: 1px solid #c0d3eb;
 }
-
-#report_controls_title {
+.report-controls-title {
   padding: 10px;
   background-color: #f1f8ff;
   border-bottom: 1px solid #c0d3eb;
 }
+.report-controls-table {
+    margin: 5px;
+    padding: 10px;
+}
+.report-controls-table td {
+  vertical-align: top;
+  padding: 2px;
+}
+.report-controls-table td.filter-field {
+  padding-right: 10px;
+}
+.report-controls-table tr.filter-summarize-by td {
+    padding-bottom: 30px;
+}
+.report-controls #reset-filters {
+  margin-left: 20px;
+}
+.report-controls #reset-columns {
+  margin-left: 20px;
+}
+
+/* summaries */
+
 #summaries-title {
   padding: 5px;
   background-color: #f1f8ff;
   border-bottom: 1px solid #c0d3eb;
 }
 
-#report_controls_table {
-    margin: 5px;
-    padding: 10px;
-}
-#report_controls_table td {
-  vertical-align: top;
-  padding: 2px;
-}
-#report_controls_table td.filter-field {
-  padding-right: 10px;
-}
-#report_controls_table tr.filter-summarize-by td {
-    padding-bottom: 30px;
-}
+/* #column_chooser.css */
 
-#report_description_container {
-  margin: 10px;
-  padding: 10px;	
-  background-color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-#report_controls input {
-    height: 20px;
-}
-
-#report_controls #reset-filters {
-  margin-left: 20px;
-}
-
-/* column_chooser.css */
-
-#column_chooser { 
+#column-chooser { 
   margin-left: 8px;
-  padding-bottom: 20px;
-  display: inline-block;
-  width: 48%;
-  vertical-align: top;
-  border: 1px solid #c0d3eb;
 }
-#column_chooser_title {
-  padding: 10px;
-  background-color: #f1f8ff;
-  border-bottom: 1px solid #c0d3eb;
-}
-
-#column_chooser_table{
-  margin: 5px;
-  padding: 10px;
-}
-
-#column_chooser_table td{
+#column-chooser-table td{
   padding: 5px;
 }
-
-#column_chooser_title a {
-  cursor: pointer;
-}
-
 span.cc_major {
   font-size: 100%;
 }
@@ -289,16 +267,6 @@ span.cc_minor {
   font-size: 90%;
   font-style: italic;
   color: #666;
-}
-#column_chooser #reset-columns {
-  margin-left: 20px;
-}
-
-/* customize-report-buttons */
-
-#customize-report-buttons {
-  margin: 25px 0 10px;
-  text-align: center;
 }
 
 /* sql_panel css */

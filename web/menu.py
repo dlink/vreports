@@ -7,8 +7,16 @@ class Menu(object):
 
     def getMenu(self, current_page):
         reports= [['Books', '/vreports/?r=books'],
-                  ['World', '/vreports?r=world']
+                  ['World', '/vreports?r=world'],
+                  ['Home', 'Home'],
+                  ['Categories', 'Categories'],
+                  ['Products', 'Products'],
+                  ['Product', 'Product'],
+                  ['Customers', 'Customers'],
+                  ['Orders', 'Orders'],
+                  ['Giftcards', 'Giftcards'],
                   ]
+
         menu_html = ''
         for name, target in reports:
 
