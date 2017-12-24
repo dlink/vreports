@@ -1,14 +1,19 @@
 function reset_filters() {
-    document.form1.clear_cntrls.value = 1;
+    $('#filter-chooser input[type=text]').val('');
+    $('#filter-chooser input[type=checkbox]').attr('checked', false);
+    $('#filter-chooser select').val(0);
     return true;
 }
+function reset_summaries() {
+    $('#summary-chooser select').val('');
+}
 function reset_columns() {
-    $('#choose_columns,:checkbox').prop('checked', false);
-    $('#choose_columns,.default_column').prop('checked', true);
+    $('#column-chooser :checkbox').prop('checked', false);
+    $('#column-chooser .default_column').prop('checked', true);
     return true;
 }
 function clear_columns() {
-    $('#choose_columns,:checkbox').prop('checked', false);
+    $('#column-chooser :checkbox').prop('checked', false);
     return true;
 }
 

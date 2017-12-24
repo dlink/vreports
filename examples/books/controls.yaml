@@ -16,3 +16,14 @@ controls:
         3: English
         1: Irish
      filter : a.country_id = {value}
+
+   - name   : 20th_century
+     display: 20th Century
+     type   : checkbox
+     filter : b.published >= 1900
+
+   - name   : pre_20th_century
+     display: Pre 20th Century
+     type   : checkbox
+     filter : b.published < 1900
+

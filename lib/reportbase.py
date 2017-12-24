@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-import os
+import os, sys
 import yaml
 
 from vlib import db
@@ -16,8 +16,9 @@ from vweb.html import *
 from header import Header
 from menu import Menu
 
+from reportfilters import ReportFilters
+from reportsummaries import ReportSummaries
 from reportcolumns import ReportColumns
-from reportcontrols import ReportControls
 from reportsqlpanel import ReportSqlPanel
 from reportsqlbuilder import ReportSqlBuilder
 
@@ -30,7 +31,7 @@ class ReportBase(HtmlPage):
        Dynamic Reporting
     '''
 
-    def __init__(self, report_name=None, allow_download=True, traceback_dir=''):
+    def __init__(self, report_name=None, allow_download=True,traceback_dir=''):
         '''Constructor:
               report_name    - Name of page
               allow_download - Add [csv download] button or not
@@ -59,27 +60,26 @@ class ReportBase(HtmlPage):
 
         self.debug_cgi      = self.params.debug_cgi
         self.db             = db.Db(self.params.database)
+        self.reportFilters  = ReportFilters(self.params)
+        self.reportSummaries= ReportSummaries(self.params)
         self.reportColumns  = ReportColumns(self.params)
-        self.reportControls = ReportControls(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
 
         self.menu = Menu()
         self.header = Header(self.title)
 
+        progpath = os.path.dirname(sys.argv[0])
+        def versionize(file):
+            timestamp = os.path.getmtime('%s/../web/%s' % (progpath, file))
+            return '%s?v=%s' % (file, timestamp)
+
         self.javascript_src = [
             "//code.jquery.com/jquery-1.10.2.js",
             "//code.jquery.com/ui/1.11.1/jquery-ui.js",
-            'js/report.js',
+            versionize('js/report.js'),
             ]
-        self.style_sheets.extend([
-            "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
-            "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
-            'css/main.css',
-            'css/report_controls.css',
-            'css/column_chooser.css',
-            'css/report_sql_panel.css'
-            ])
+        self.style_sheets.extend([versionize('css/vreports.css')])
         
     def loadParams(self):
         '''Load parameters files'''
@@ -184,7 +184,7 @@ class ReportBase(HtmlPage):
             if column.get('report_link'):
                 self.reportColumns.getColumn(column.report_key).selected = True
 
-        # clear controls if nec.
+        # clear controls if nec. (deprecated - now done in JS)
         if 'clear_cntrls' in shared_form:
             for control in self.params.controls:
                 control.value = control.default
@@ -252,21 +252,23 @@ class ReportBase(HtmlPage):
 
         return div(
             self.header.getHeader() + \
-            self.menu.getMenu() + \
             div(
-              self.getReportControls() + \
-              self.reportSqlPanel.getSqlPanel() + \
-              self.getCustomizeReportPanel() + \
-              self.getHiddenFields() + \
-              self.getLoadingIndicator() + \
-              self.getReportDesc() + \
-              self.getReportTable() + \
-              self.getReportTableFooter(),
-              id='content', class_='container-fluid'),
+              self.menu.getMenu(self.report_name) + \
+              div(
+                self.getCustomizeReportPanel() + \
+                self.getHiddenFields() + \
+                self.getLoadingIndicator() + \
+                self.getReportDesc() + \
+                self.reportSqlPanel.getSqlPanel() + \
+                self.getReportTable() + \
+                self.getReportTableFooter(),
+                id='report'
+              ),
+              id='content-container'),
               #id='content') + \
             #self.help(),
             #self.save_panel(),
-            id='page_container')
+            id='page-container')
 
     def getCsv(self):
         o = ''
@@ -283,13 +285,6 @@ class ReportBase(HtmlPage):
 
     # Level II
     
-    def getReportControls(self):
-        button1 = a('Customize Report', id='customize-report-button',
-                    class_='vbutton')
-        button2 = a('Show SQL', id='show-sql-button',
-                    class_='vbutton')
-        return div(button1 + button2, id='report-controls')
-
     def getCustomizeReportPanel(self):
         submit_button = a('Submit', id='customize-report-submit-button',
                           class_='vbutton')
@@ -301,7 +296,10 @@ class ReportBase(HtmlPage):
 
         panel = div(
             a('X', href="#", class_="close", id='close') + \
-            self.reportControls.getControls() + \
+            div(self.reportFilters.getControls() + \
+                self.reportSummaries.getControls(),
+                id='filters-and-summaries-container'
+            ) + \
             self.reportColumns.getColumnChooser() + \
             button_area,
             id='customize-report-panel')
@@ -349,6 +347,7 @@ class ReportBase(HtmlPage):
                    id="loading-indicator-wrapper")
 
     def getReportDesc(self):
+        # get filter description
         filters = []
         for control in self.params.controls:
             if control.get('value'):
@@ -363,23 +362,37 @@ class ReportBase(HtmlPage):
         filter_desc = '; &nbsp; '.join(filters)
         if not filter_desc:
             filter_desc = 'All'
-                
-        return div(' &nbsp; - &nbsp; '.join([self.params.report_title,
-                                             filter_desc,
-                                             self.getRowCountDesc(),
-                                             self.getPager(),
-                                             self.getCsvButton(),
-                                             #self.getSaveButton()
-                                             ]),
-                   id='report_description_container',
-                   style='clear: both')
+
+        # get addl buttons
+        addl_buttons = [
+            a('Customize Report', id='customize-report-button',
+              class_='vbutton'),
+            a('Show SQL', id='show-sql-button', class_='vbutton'),
+            self.getCsvButton()]
+
+        # assign ind. spans
+        report_name = span(self.params.report_title, id='report-name')
+        report_description = span(filter_desc, id='report-description')
+        report_paging_info = span(self.getRowCountDesc(),
+                                  id='report-paging-info')
+        report_paging_controls = span(self.getPager(),
+                                      id='report-paging-controls')
+        report_addl_buttons = span(' '.join(addl_buttons))
+        
+        # put it together
+        return div(report_name + \
+                   report_description + \
+                   report_paging_info + \
+                   report_paging_controls + \
+                   report_addl_buttons,
+                   id='report-header')
 
     def getPager(self):
         # previous button
         if self.params.page_num == 1:
             prev = ''
         else:
-            prev_text = '&lt;&lt;Prev'
+            prev_text = 'Previous'
             prev = a(prev_text, id='prev-button', class_='vbutton green',
                      onclick='go_to_prev_page()')
 
@@ -388,7 +401,7 @@ class ReportBase(HtmlPage):
                > self.getRowCount():
             next = ''
         else:
-            next_text = 'Next&gt;&gt;'
+            next_text = 'Next'
             next = a(next_text, id='next-button', class_='vbutton green',
                      onclick = 'go_to_next_page()')
             
@@ -436,7 +449,7 @@ class ReportBase(HtmlPage):
         return row_count_desc
 
     def getReportTable(self):
-        table = HtmlTable(class_='report_table')        
+        table = HtmlTable(class_='vtable')
         table.addHeader(self.getColumnHeaders())
         for row in self.getData():
             #table.addRow(row)
@@ -456,6 +469,7 @@ class ReportBase(HtmlPage):
         return table.getTable()
 
     def getReportTableFooter(self):
+        
         return div(' &nbsp; - &nbsp; '.join([self.getRowCountDesc(),
                                              self.getPager()]),
                    id='report_table_footer')

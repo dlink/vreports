@@ -10,11 +10,7 @@ class ReportSqlPanel(object):
         self.sqlBuilder = sqlBuilder
         
     def getSqlPanel(self):
-        hide_button = a('[Hide]', onclick='hide_sql_panel()')
-
-        spacer = div('&nbsp;', class_='floatr')
-        
-        title = div(b(i('Show SQL')) + '&nbsp;' + hide_button + spacer,
+        title = div(b(i('Show SQL for %s' % self.params.report_title)),
                     id='sql_panel_title')
 
         table = HtmlTable(id='sql_panel_table')
