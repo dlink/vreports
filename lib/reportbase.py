@@ -74,9 +74,7 @@ class ReportBase(HtmlPage):
             "//code.jquery.com/ui/1.11.1/jquery-ui.js",
             'js/report.js',
             ]
-        self.style_sheets.extend([
-            'css/vreports.css?r=105'
-            ])
+        self.style_sheets.extend(['css/vreports.css'])
         
     def loadParams(self):
         '''Load parameters files'''
@@ -181,7 +179,7 @@ class ReportBase(HtmlPage):
             if column.get('report_link'):
                 self.reportColumns.getColumn(column.report_key).selected = True
 
-        # clear controls if nec.
+        # clear controls if nec. (deprecated - now done in JS)
         if 'clear_cntrls' in shared_form:
             for control in self.params.controls:
                 control.value = control.default

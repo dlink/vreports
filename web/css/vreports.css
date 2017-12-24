@@ -1,7 +1,7 @@
 /* veports styling */
 
 body {
-  background-color: #f3f0f0;
+  background-color: #fff; /* #f3f0f0; */
   margin-top: 0px;
 }
 
@@ -144,8 +144,8 @@ table.vtable a:hover {
 /* vbutton */
 
 a.vbutton {
-  border: solid lightgrey 1px;
-  /* background-color: #f4f5ea; */
+  /* border: solid lightgrey 1px; */
+  border: solid #aaa 1px;
   background-color: white;
   font-size: 14px;
   padding: 4px 15px;
@@ -185,8 +185,8 @@ a.vbutton:hover {
   display: block;
 }
 #customize-report-panel {
-  background-color: #f3f0f0;
-  /* background-color: white;*/
+  /* background-color: #f3f0f0; */
+  background-color: white;
   position: relative;
   margin: 85px 2%;
   padding: 35px 10px 10px;
