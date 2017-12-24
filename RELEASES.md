@@ -1,5 +1,9 @@
 Release Notes - vreports
 ========================
+v2.00.00
+--------
+- New Skin - cleaner more professional look
+- Refactored ReportControls: ReportSummaries has been separated out
 
 v1.4.3
 ------
