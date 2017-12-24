@@ -1,9 +1,9 @@
 from vweb.htmltable import HtmlTable
 from vweb.html import *
 
-class ReportControlsError(Exception): pass
+class ReportFiltersError(Exception): pass
 
-class ReportControls(object):
+class ReportFilters(object):
     
     def __init__(self, params):
         self.params = params
@@ -13,7 +13,7 @@ class ReportControls(object):
         for c in self.params.controls:
             if c.name == name:
                 return c
-        raise ReportControlsError('Control not found: %s' % name)
+        raise ReportFiltersError('Control not found: %s' % name)
 
     def getControls(self):
         title = div(b('Filters'), class_='report-controls-title')
@@ -35,7 +35,7 @@ class ReportControls(object):
                 ctitle = ''
                 cinput = ''
             else:
-                raise Exception("ReportControls: Unrecognized control.type: "
+                raise Exception("ReportFilters: Unrecognized control.type: "
                                 "%s" % (control.type))
             filters.append([ctitle, cinput])
 

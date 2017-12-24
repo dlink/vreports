@@ -16,8 +16,8 @@ from vweb.html import *
 from header import Header
 from menu import Menu
 
+from reportfilters import ReportFilters
 from reportcolumns import ReportColumns
-from reportcontrols import ReportControls
 from reportsqlpanel import ReportSqlPanel
 from reportsqlbuilder import ReportSqlBuilder
 
@@ -59,8 +59,8 @@ class ReportBase(HtmlPage):
 
         self.debug_cgi      = self.params.debug_cgi
         self.db             = db.Db(self.params.database)
+        self.reportFilters  = ReportFilters(self.params)
         self.reportColumns  = ReportColumns(self.params)
-        self.reportControls = ReportControls(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
 
@@ -280,13 +280,6 @@ class ReportBase(HtmlPage):
 
     # Level II
     
-    #def getReportControls(self):
-    #    button1 = a('Customize Report', id='customize-report-button',
-    #                class_='vbutton')
-    #    button2 = a('Show SQL', id='show-sql-button',
-    #                class_='vbutton')
-    #    return div(button1 + button2, id='report-controls')
-
     def getCustomizeReportPanel(self):
         submit_button = a('Submit', id='customize-report-submit-button',
                           class_='vbutton')
@@ -298,7 +291,7 @@ class ReportBase(HtmlPage):
 
         panel = div(
             a('X', href="#", class_="close", id='close') + \
-            self.reportControls.getControls() + \
+            self.reportFilters.getControls() + \
             self.reportColumns.getColumnChooser() + \
             button_area,
             id='customize-report-panel')
