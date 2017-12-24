@@ -4,7 +4,6 @@ body {
   background-color: #fff; /* #f3f0f0; */
   margin-top: 0px;
 }
-
 #page-container {
   color: #555;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -16,7 +15,7 @@ body {
 /* header */
 
 #header {
-  padding: 7px 13px;
+  padding: 7px 0;
   font-size: 14px;
 }
 #header #vreports-logo {
@@ -46,7 +45,7 @@ body {
   text-decoration: none;
   padding: 4px 15px;
   display: inline-block;
-  border-bottom: solid 2px #f3f0f0;
+  border-bottom: solid 2px #fff; /* f3f0f0; */
 }
 #menu a:hover {
   border-bottom: solid 2px #d1d5da;
@@ -147,7 +146,7 @@ a.vbutton {
   /* border: solid lightgrey 1px; */
   border: solid #aaa 1px;
   background-color: white;
-  font-size: 14px;
+  font-size: 12px;
   padding: 4px 15px;
   margin: 2px;
   border-radius: 5px;

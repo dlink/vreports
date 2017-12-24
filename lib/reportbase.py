@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-import os
+import os, sys
 import yaml
 
 from vlib import db
@@ -69,12 +69,17 @@ class ReportBase(HtmlPage):
         self.menu = Menu()
         self.header = Header(self.title)
 
+        progpath = os.path.dirname(sys.argv[0])
+        def versionize(file):
+            timestamp = os.path.getmtime('%s/../web/%s' % (progpath, file))
+            return '%s?v=%s' % (file, timestamp)
+
         self.javascript_src = [
             "//code.jquery.com/jquery-1.10.2.js",
             "//code.jquery.com/ui/1.11.1/jquery-ui.js",
-            'js/report.js',
+            versionize('js/report.js'),
             ]
-        self.style_sheets.extend(['css/vreports.css'])
+        self.style_sheets.extend([versionize('css/vreports.css')])
         
     def loadParams(self):
         '''Load parameters files'''
