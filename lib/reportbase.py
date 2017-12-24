@@ -17,6 +17,7 @@ from header import Header
 from menu import Menu
 
 from reportfilters import ReportFilters
+from reportsummaries import ReportSummaries
 from reportcolumns import ReportColumns
 from reportsqlpanel import ReportSqlPanel
 from reportsqlbuilder import ReportSqlBuilder
@@ -60,6 +61,7 @@ class ReportBase(HtmlPage):
         self.debug_cgi      = self.params.debug_cgi
         self.db             = db.Db(self.params.database)
         self.reportFilters  = ReportFilters(self.params)
+        self.reportSummaries= ReportSummaries(self.params)
         self.reportColumns  = ReportColumns(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
@@ -73,7 +75,7 @@ class ReportBase(HtmlPage):
             'js/report.js',
             ]
         self.style_sheets.extend([
-            'css/vreports.css?r=96'
+            'css/vreports.css?r=105'
             ])
         
     def loadParams(self):
@@ -291,7 +293,10 @@ class ReportBase(HtmlPage):
 
         panel = div(
             a('X', href="#", class_="close", id='close') + \
-            self.reportFilters.getControls() + \
+            div(self.reportFilters.getControls() + \
+                self.reportSummaries.getControls(),
+                id='filters-and-summaries-container'
+            ) + \
             self.reportColumns.getColumnChooser() + \
             button_area,
             id='customize-report-panel')

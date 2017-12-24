@@ -1,11 +1,11 @@
 /* veports styling */
 
 body {
+  background-color: #f3f0f0;
   margin-top: 0px;
 }
 
 #page-container {
-  background-color: #fff;
   color: #555;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -36,7 +36,6 @@ body {
 /* menu */
 
 #menu {
-  /* background-color: rgb(240, 240, 240); */
   border-bottom: solid 1px #d1d5da;
   text-align: center;
   margin-top: -23px;
@@ -47,7 +46,7 @@ body {
   text-decoration: none;
   padding: 4px 15px;
   display: inline-block;
-  border-bottom: solid 2px #fff;
+  border-bottom: solid 2px #f3f0f0;
 }
 #menu a:hover {
   border-bottom: solid 2px #d1d5da;
@@ -146,6 +145,8 @@ table.vtable a:hover {
 
 a.vbutton {
   border: solid lightgrey 1px;
+  /* background-color: #f4f5ea; */
+  background-color: white;
   font-size: 14px;
   padding: 4px 15px;
   margin: 2px;
@@ -177,11 +178,15 @@ a.vbutton:hover {
   background: rgba(0, 0, 0, .5);
   overflow: scroll;
 }
+#customize-report-panel-wrapper a.vbutton {
+  font-size: 12px;
+}
 #customize-report-panel-wrapper.show {
   display: block;
 }
 #customize-report-panel {
-  background-color: white;
+  background-color: #f3f0f0;
+  /* background-color: white;*/
   position: relative;
   margin: 85px 2%;
   padding: 35px 10px 10px;
@@ -196,7 +201,6 @@ a.vbutton:hover {
     font-size: medium;
     color: #555;
 }
-
 .close:hover {
    color: #d4bbbb;
 }
@@ -208,13 +212,18 @@ a.vbutton:hover {
   text-align: center;
 }
 
-/* report-controls css */
+/* filters-and-summaries-container */
+
+#filters-and-summaries-container {
+  display: inline-block;
+  width: 49%;
+}
+/* report-controls */
 
 .report-controls {
   padding-bottom: 20px;
-  display: inline-block;
-  width: 49%;
   vertical-align: top;
+  background-color: #fff;
   border: 1px solid #c0d3eb;
 }
 .report-controls-title {
@@ -223,7 +232,7 @@ a.vbutton:hover {
   border-bottom: 1px solid #c0d3eb;
 }
 .report-controls-table {
-    margin: 5px;
+    margin: 5px 5px 25px;
     padding: 10px;
 }
 .report-controls-table td {
@@ -243,17 +252,23 @@ a.vbutton:hover {
   margin-left: 20px;
 }
 
-/* summaries */
+/* filter-chooser */
+#filter-chooser {
+  margin-bottom: 15px;
+}
+/* summary-chooser */
 
-#summaries-title {
+/*#summaries-title {
   padding: 5px;
   background-color: #f1f8ff;
   border-bottom: 1px solid #c0d3eb;
-}
+}*/
 
-/* #column_chooser.css */
+/* #column-chooser */
 
 #column-chooser { 
+  display: inline-block;
+  width: 49%;
   margin-left: 8px;
 }
 #column-chooser-table td{

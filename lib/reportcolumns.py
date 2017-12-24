@@ -65,7 +65,7 @@ class ReportColumns(object):
         # Table of column checkboxes NUM_COL's wide
         NUM_COL = 4
         table = HtmlTable(id='column-chooser-table',
-                          class_='report-columns-table')
+                          class_='report-controls-table')
         num_separators = len([c for c in self.params.columns[1:]
                               if c.get('type') == 'separator'])
         num_checkboxes = len(self.params.columns) + num_separators

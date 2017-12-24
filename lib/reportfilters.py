@@ -19,7 +19,6 @@ class ReportFilters(object):
         title = div(b('Filters'), class_='report-controls-title')
 
         table = HtmlTable(class_='report-controls-table')
-        cwidgets = ''
         filters = []
         for control in self.params.controls:
             ctitle = control.display
@@ -42,17 +41,6 @@ class ReportFilters(object):
         for filter in listToTable(filters):
             table.addRow(filter)
 
-        # group_by
-        table.addRow([hr(), hr(), hr(), hr(), hr(), hr()])
-        table.setRowClass(table.rownum, 'filter-cell-separator')
-
-        table.addRow([span(b('Summaries'), id='summaries-title')])
-        table.setCellColSpan(table.rownum, 1, 3)
-
-        table.addRow(['Summarize by:', self._getGroupByMenu()])
-        table.setRowClass(table.rownum, 'filter-summarize-by')
-        table.setCellColSpan(table.rownum, 2, 2)
-
         reset_button = a('Reset Filters', id='reset-filters', class_='vbutton',
                          onclick='reset_filters()')
             
@@ -65,10 +53,6 @@ class ReportFilters(object):
                               id = 'filter-chooser',
                               class_ ='report-controls')
         return report_controls
-        # container:
-        #return div(#show_button + \
-        #           report_controls,
-        #           id='report_controls_container')
         
     def _getInput(self, control):
         cinput = input(name=control.name,
@@ -101,19 +85,6 @@ class ReportFilters(object):
             else:
                 options += option(control.menu[key], value=key)
         return select(options, name=control.name)
-
-    def _getGroupByMenu(self):
-        options = ''
-        options += option('No Summary', value='')
-        group_by = self.params.get('group_by')
-        group_by_name = group_by.name if group_by else None
-        for c in self.params.columns:
-            if c.get('group_by'):
-                if  c.name == group_by_name:
-                    options += option(c.display, value=c.name, selected='1')
-                else:
-                    options += option(c.display, value=c.name)
-        return select(options, name='group_by')
 
 def listToTable(alist):
     '''Given a list of tuples
