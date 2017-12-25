@@ -309,4 +309,14 @@ span.cc_minor {
 
 #loading-indicator-wrapper {
     display: none;
+    background-color: white;
+    padding: 20px 50px;
+    position: fixed;
+    top: 160px;
+    width: 128px;
+    margin-left: -64px;
+    left: 50%;
+}
+#loading-indicator-wrapper.show {
+    display: block;
 }
