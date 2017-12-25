@@ -77,7 +77,7 @@ class ReportBase(HtmlPage):
         self.javascript_src = [
             "//code.jquery.com/jquery-1.10.2.js",
             "//code.jquery.com/ui/1.11.1/jquery-ui.js",
-            versionize('js/report.js'),
+            versionize('js/vreports.js'),
             ]
         self.style_sheets.extend([versionize('css/vreports.css')])
         
