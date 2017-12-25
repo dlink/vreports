@@ -15,7 +15,7 @@ class NoData(HtmlPage):
         self.header = Header(self.title)
 
         self.style_sheets.extend([
-            'css/main.css',
+            'css/vreports.css',
             ])
 
     def getHtmlContent(self):
@@ -33,7 +33,7 @@ class NoData(HtmlPage):
 
 
         text = [h1('Welcome to VRreports'),
-                'No report config directory specified. You must pass a report name ' \
+                'No report config directory specified. You pass report name ' \
                     'in as a parameter like this: "vreports?r=books".',
                 'See %s' % readme_link,
                 'Source code available: %s' % source_link,
