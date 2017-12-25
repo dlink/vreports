@@ -428,11 +428,6 @@ class ReportBase(HtmlPage):
                a('Download CSV', id='download-csv', class_='vbutton orange',
                  onclick='document.form1.csv.value=1; document.form1.submit()')
 
-    #def getSaveButton(self):
-    #  return input(name='save', type='button',
-    #               #class_='btn btn-info btn-xs',
-    #               value='Save to My Reports', onclick='save_report()')
-    
     def getRowCountDesc(self):
         row_count = self.getRowCount()
         if row_count <= self.params.display_num_rows:
