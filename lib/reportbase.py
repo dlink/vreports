@@ -291,13 +291,18 @@ class ReportBase(HtmlPage):
     # Level II
     
     def leftNav(self):
+        # close icon
+        close_icon = span('<', id='left-nav-close', class_='on-left')
+
+        # open icon
+        open_icon = span('>', id='left-nav-open', class_='on-left')
+
         # menu
         items = ['Dashboard', 'Other']
         menu = ul(''.join([li(i) for i in items]))
+        left_nav = span(menu + close_icon, id='left-nav', class_='on-left');
         
-        # expand icon
-        #expand_icon = span('>', id='left-nav-open')
-        return span(menu, id='left-nav');
+        return left_nav + open_icon
 
     def getCustomizeReportPanel(self):
         submit_button = a('Submit', id='customize-report-submit-button',

@@ -65,15 +65,19 @@ body {
 
 /* left-nav */
 
-#left-nav {
+.on-left {
   display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  font-size: 15px;
+}
+#left-nav {
+  display: none;
+  /* display: inline-block; */
   width: 150px;
   height: 1200px;
   background-color: #efefef;
-  white-space: normal;
-  vertical-align: top;
   padding-top: 45px;
-  font-size: 15px;
 }
 #left-nav ul {
   padding-left: 20px;
@@ -82,7 +86,21 @@ body {
 #left-nav ul li {
   padding-bottom: 10px;
 }
-
+#left-nav-close {
+  position: absolute;
+  left: 160px;
+  top: 200px;
+  padding: 155px 3px;
+  background-color:#e6e4e4;
+}
+#left-nav-open {
+  position: absolute;
+  left: 28px;
+  top: 200px;
+  /* margin-top: 200px; */
+  padding: 155px 3px;
+  background-color: #e6e4e4;
+}
 
 /* report */
 
