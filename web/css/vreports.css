@@ -59,12 +59,37 @@ body {
 
 #content-container {
   margin: auto;
-  width: 100;
+  white-space: nowrap;
+
 }
+
+/* left-nav */
+
+#left-nav {
+  display: inline-block;
+  width: 150px;
+  height: 1200px;
+  background-color: #efefef;
+  white-space: normal;
+  vertical-align: top;
+  padding-top: 45px;
+  font-size: 15px;
+}
+#left-nav ul {
+  padding-left: 20px;
+  list-style-type: none;
+}
+#left-nav ul li {
+  padding-bottom: 10px;
+}
+
 
 /* report */
 
 #report {
+   display: inline-block;
+   white-space: normal;
+   margin-left: 20px;
 }
 
 /* report-header */

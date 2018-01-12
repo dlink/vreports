@@ -258,7 +258,8 @@ class ReportBase(HtmlPage):
             self.header.getHeader() + \
             div(
               self.menu.getMenu(self.report_name) + \
-              div(
+              self.leftNav() + \
+              span(
                 self.getCustomizeReportPanel() + \
                 self.getHiddenFields() + \
                 self.getLoadingIndicator() + \
@@ -289,6 +290,15 @@ class ReportBase(HtmlPage):
 
     # Level II
     
+    def leftNav(self):
+        # menu
+        items = ['Dashboard', 'Other']
+        menu = ul(''.join([li(i) for i in items]))
+        
+        # expand icon
+        #expand_icon = span('>', id='left-nav-open')
+        return span(menu, id='left-nav');
+
     def getCustomizeReportPanel(self):
         submit_button = a('Submit', id='customize-report-submit-button',
                           class_='vbutton')
