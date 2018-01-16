@@ -72,7 +72,6 @@ body {
   font-size: 15px;
 }
 #left-nav {
-  display: none;
   /* display: inline-block; */
   width: 150px;
   height: 1200px;
@@ -92,14 +91,17 @@ body {
   top: 200px;
   padding: 155px 3px;
   background-color:#e6e4e4;
+  cursor: pointer;
 }
 #left-nav-open {
+  display: none;
   position: absolute;
   left: 28px;
   top: 200px;
   /* margin-top: 200px; */
   padding: 155px 3px;
   background-color: #e6e4e4;
+  cursor: pointer;
 }
 
 /* report */

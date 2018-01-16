@@ -292,15 +292,17 @@ class ReportBase(HtmlPage):
     
     def leftNav(self):
         # close icon
-        close_icon = span('<', id='left-nav-close', class_='on-left')
+        close_icon = span('<', id='left-nav-close', class_='on-left',
+                          onclick='close_left_nav()')
 
         # open icon
-        open_icon = span('>', id='left-nav-open', class_='on-left')
+        open_icon = span('>', id='left-nav-open', class_='on-left',
+                         onclick='open_left_nav()')
 
         # menu
         items = ['Dashboard', 'Other']
         menu = ul(''.join([li(i) for i in items]))
-        left_nav = span(menu + close_icon, id='left-nav', class_='on-left');
+        left_nav = span(menu + close_icon, id='left-nav', class_='on-left')
         
         return left_nav + open_icon
 
