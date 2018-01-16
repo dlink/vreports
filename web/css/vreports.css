@@ -85,23 +85,19 @@ body {
 #left-nav ul li {
   padding-bottom: 10px;
 }
-#left-nav-close {
+.left-nav-control {
   position: absolute;
-  left: 160px;
-  top: 200px;
-  padding: 155px 3px;
+  padding: 20px 3px;
   background-color:#e6e4e4;
+  top: 200px;
   cursor: pointer;
+}
+#left-nav-close {
+  left: 160px;
 }
 #left-nav-open {
   display: none;
-  position: absolute;
   left: 28px;
-  top: 200px;
-  /* margin-top: 200px; */
-  padding: 155px 3px;
-  background-color: #e6e4e4;
-  cursor: pointer;
 }
 
 /* report */
