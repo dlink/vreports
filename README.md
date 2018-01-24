@@ -10,3 +10,5 @@ Live Examples:
 
 * http://crowfly.net/vreports/?r=world
 * http://crowfly.net/vreports/?r=books 
+
+[Documentation](https://github.com/dlink/vreports/wiki)
