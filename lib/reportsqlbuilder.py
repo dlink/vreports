@@ -147,18 +147,23 @@ class ReportSqlBuilder(object):
         else:
             return 'count(*) as count'
         
-    def _getSelectClause0(self):
-        return ', '.join(["%s as %s" % (c.select, c.name) \
-                          for c in self.reportColumns.getSelectedColumns()])
-    
     def _getJoinClause(self, target=''):
         '''Return SQL Join Statement
            based on (self.aliases or self.where_aliases) and
                     self.params.table_joins
            target param in (''|'Count')
         '''
-        aliases = self.group_by_aliases or self.where_aliases \
-                  if target == 'Count' else self.aliases
+        if target == 'Count':
+            aliases = self.group_by_aliases or self.where_aliases
+
+            # Add aliases for 'to_many' tables - to keep count right
+            for a in self.aliases:
+                if a not in aliases and \
+                        self.params.table_joins[a].get('to_many'):
+                    aliases.append(a)
+        else:
+            aliases = self.aliases
+
         joins = []
         for alias in aliases:
             join = self.params.table_joins[alias].clause
