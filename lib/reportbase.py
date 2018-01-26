@@ -89,8 +89,14 @@ class ReportBase(HtmlPage):
         '''Load parameters files'''
         pdir = os.environ['PARAMETER_FILES_DIR']
 
-        # load yaml parameter files:
+        # load yaml parameters:
         self.params = odict()
+
+        # bring in VCONF if exists (for default db values)
+        if 'VCONF' in os.environ:
+            self.params = dict2odict(yaml.load(open(os.environ['VCONF'])))
+
+        # load yaml parameter files:
         for c in ['main', 'columns', 'controls', 'table_joins']:
             filepath = "%s/%s/%s.yaml" %(pdir, self.report_name, c)
             self.params.update(dict2odict(yaml.load(open(filepath))))
