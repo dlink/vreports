@@ -28,7 +28,7 @@ class Menu(object):
 
         # customize this list
         reports = [['Dashboard', '/vreports/dashboard.py'],
-                   ['Other', '/vreports/other.py']
+                   #['Other Report', '/vreports/other.py']
                    ]
 
         # close icon
