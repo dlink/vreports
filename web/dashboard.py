@@ -11,10 +11,9 @@ class Dashboard(BasePage):
 
     def getReport(self):
         return p(
-            'This is an example site set up to demo '
+            'Dashboard is empty. See '
             '<a href="http://github.com/dlink/vreports" target="_blank">'
-            'VReports</a>') + \
-            p('See Sample reports Books, and World above.')
+            'VReports</a> for information about configuring Dashboard')
     
 if __name__ == '__main__':
     Dashboard().go()
