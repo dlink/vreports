@@ -83,7 +83,7 @@ body {
   list-style-type: none;
 }
 #left-nav ul li {
-  padding-bottom: 10px;
+  /* padding-bottom: 10px;*/
 }
 .left-nav-control {
   position: absolute;
@@ -98,6 +98,20 @@ body {
 #left-nav-open {
   display: none;
   left: 28px;
+}
+
+#left-nav a {
+  color: #555;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 5px 10px;
+  display: inline-block;
+}
+#left-nav a:hover {
+  color: #000; */
+}
+#left-nav a.active-menu-item {
+  font-weight: 600;
 }
 
 /* report */
