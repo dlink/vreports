@@ -9,13 +9,13 @@ from vlib.utils import list2csv, format_date
 from vlib.odict import odict
 from vlib.entities import toEntity
 
-from vweb.htmlpage import HtmlPage
 from vweb.htmltable import HtmlTable
 from vweb.html import *
 
 from header import Header
 from menu import Menu
 
+from basepage import BasePage
 from reportfilters import ReportFilters
 from reportsummaries import ReportSummaries
 from reportcolumns import ReportColumns
@@ -26,7 +26,7 @@ from datetime import datetime
 
 class VReportException(Exception): pass
 
-class ReportBase(HtmlPage):
+class ReportBase(BasePage):
     '''Base Webpage Report
        Dynamic Reporting
     '''
@@ -38,7 +38,7 @@ class ReportBase(HtmlPage):
               traceback_dir  - Where to write traceback
                                if left blank display to screen
         '''
-        HtmlPage.__init__(self, 'Untitled')
+        BasePage.__init__(self, 'Untitled')
         self.nodata = False
 
         if traceback_dir:
@@ -66,25 +66,6 @@ class ReportBase(HtmlPage):
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
 
-        self.menu = Menu()
-        self.header = Header(self.title)
-
-        progpath = os.path.dirname(sys.argv[0])
-        def versionize(file):
-            timestamp = os.path.getmtime('%s/../web/%s' % (progpath, file))
-            return '%s?v=%s' % (file, timestamp)
-
-        self.javascript_src = [
-            "//code.jquery.com/jquery-1.10.2.js",
-            "//code.jquery.com/ui/1.11.1/jquery-ui.js",
-            versionize('js/vreports.js'),
-            ]
-        self.style_sheets.extend(
-            ['http://code.jquery.com/ui/1.10.2/themes/smoothness/' \
-                 'jquery-ui.css',
-             versionize('css/vreports.css'),
-             ])
-        
     def loadParams(self):
         '''Load parameters files'''
         pdir = os.environ['PARAMETER_FILES_DIR']
@@ -128,7 +109,7 @@ class ReportBase(HtmlPage):
         '''Pre-render CGI parameter processing'''
         if self.nodata: return
 
-        HtmlPage.process(self)
+        BasePage.process(self)
 
         shared_form = {}
         for field in self.form:
@@ -264,7 +245,8 @@ class ReportBase(HtmlPage):
             self.header.getHeader() + \
             div(
               self.menu.getMenu(self.report_name) + \
-              div(
+              self.menu.getLeftNav() + \
+              span(
                 self.getCustomizeReportPanel() + \
                 self.getHiddenFields() + \
                 self.getLoadingIndicator() + \
@@ -275,9 +257,6 @@ class ReportBase(HtmlPage):
                 id='report'
               ),
               id='content-container'),
-              #id='content') + \
-            #self.help(),
-            #self.save_panel(),
             id='page-container')
 
     def getCsv(self):

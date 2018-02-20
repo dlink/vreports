@@ -1,3 +1,11 @@
+function open_left_nav() {
+    $('#left-nav').show('slow');
+    $('#left-nav-open').hide('slow');
+}
+function close_left_nav() {
+    $('#left-nav').hide('slow');
+    $('#left-nav-open').show('slow');
+}
 function reset_filters() {
     $('#filter-chooser input[type=text]').val('');
     $('#filter-chooser input[type=checkbox]').attr('checked', false);
