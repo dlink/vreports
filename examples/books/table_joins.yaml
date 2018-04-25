@@ -1,3 +1,6 @@
+# table_joins.yaml
+# See Documenation: https://github.com/dlink/vreports/wiki
+
 table_joins:
    ba:
       clause : left join book_authors ba on b.id = ba.book_id
