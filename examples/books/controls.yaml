@@ -1,3 +1,7 @@
+
+# controls.yaml
+# See Documenation: https://github.com/dlink/vreports/wiki
+
 controls:
    - name   : name
      filter : b.name like '%{value}%s'
