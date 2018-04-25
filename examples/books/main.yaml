@@ -1,4 +1,5 @@
-# Book Report Paramaters
+# Book Report Paramaters main.yaml
+# See Documenation: https://github.com/dlink/vreports/wiki
 
 report_title    : Books Report
 base_table      : books
@@ -7,6 +8,9 @@ debug_cgi       : false
 debug_sql       : false
 display_num_rows: 100
 sort_by         : book_id:asc
+
+# The following is option.  
+#   if used it overrides database values in environment variable VCONF
 
 database:
    engine: mysql
