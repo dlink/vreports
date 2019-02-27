@@ -55,6 +55,8 @@ class Generator(object):
                 type = 'string'
             elif db_type in ('datetime', 'timestamp'):
                 type = 'datetime'
+            elif db_type in ('date',):
+                type = 'date'
             elif db_type in ('decimal(,)'):
                 type = 'money'
             else:
