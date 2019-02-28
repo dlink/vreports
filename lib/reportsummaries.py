@@ -12,7 +12,19 @@ class ReportSummaries(object):
         title = div(b('Summaries'), class_='report-controls-title')
 
         table = HtmlTable(class_='report-controls-table')
-        table.addRow(['Summarize by:', self._getGroupByMenu()])
+        #sss
+        for n in range(1, self.params.num_group_bys+1):
+            if n == 1:
+                row = ['Summarize by:', self._getGroupByMenu(n)]
+            else:
+                row = ['', self._getGroupByMenu(n)]
+            table.addRow(row)
+            #table.setRowClass(table.rownum, 'filter-summarize-by')
+            #table.setCellColSpan(table.rownum, 2, 2)
+        
+        #eee
+        
+        #table.addRow(['Summarize by:', self._getGroupByMenu()])
 
         reset_button = a('Reset Summary', id='reset-filters', class_='vbutton',
                          onclick='reset_summaries()')
@@ -27,15 +39,18 @@ class ReportSummaries(object):
                               class_ ='report-controls')
         return report_controls
         
-    def _getGroupByMenu(self):
+
+    def _getGroupByMenu(self, n):
         options = ''
         options += option('No Summary', value='')
-        group_by = self.params.get('group_by')
-        group_by_name = group_by.name if group_by else None
+        if len(self.params.group_bys) >= n:
+            group_by_name = self.params.group_bys[n-1].name
+        else:
+            group_by_name = None
         for c in self.params.columns:
             if c.get('group_by'):
                 if  c.name == group_by_name:
                     options += option(c.display, value=c.name, selected='1')
                 else:
                     options += option(c.display, value=c.name)
-        return select(options, name='group_by')
+        return select(options, name='group_by_%s' % n)
