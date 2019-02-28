@@ -1,4 +1,7 @@
 controls:
+   - name    : continent
+     filter  : c.Continent like '%{value}%'
+
    - name   : country
      filter : c.Name like %s
 
