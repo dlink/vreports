@@ -23,6 +23,8 @@ from reportsqlbuilder import ReportSqlBuilder
 
 from datetime import datetime
 
+NUM_GROUP_BYS = 4
+
 class VReportException(Exception): pass
 
 class ReportBase(HtmlPage):
@@ -85,8 +87,11 @@ class ReportBase(HtmlPage):
         '''Load parameters files'''
         pdir = os.environ['PARAMETER_FILES_DIR']
 
-        # load yaml parameter files:
+        # init params
         self.params = odict()
+        self.params['num_group_bys'] = NUM_GROUP_BYS
+
+        # load yaml parameter files:
         for c in ['main', 'columns', 'controls', 'table_joins']:
             filepath = "%s/%s/%s.yaml" %(pdir, self.report_name, c)
             self.params.update(dict2odict(yaml.load(open(filepath))))
@@ -164,20 +169,26 @@ class ReportBase(HtmlPage):
                     column.selected = True
 
         # Set Group_by
-        group_by_name = None
-        if 'group_by' in shared_form:
-            group_by_name = shared_form['group_by']
-        elif 'group_by' in self.params:
-            group_by_name = self.params.group_by
-        if group_by_name:
-            for column in self.params.columns:
-                if group_by_name == column.name:
-                    self.params.group_by = column
-                    column.selected = True
-                    break
-            if not self.params.group_by:
-                raise Exception('Unrecognized group_by value: %s' % group_by)
-            
+        self.params.group_bys = []
+        for n in range(1, self.params.num_group_bys+1):
+            gbn = 'group_by_%s' % n
+            group_by_name = None
+            if gbn in shared_form:
+                group_by_name = shared_form[gbn]
+            elif gbn in self.params:
+                group_by_name = self.params[gbn]
+            if group_by_name:
+                found = 0
+                for column in self.params.columns:
+                    if group_by_name == column.name:
+                        self.params.group_bys.append(column)
+                        column.selected = True
+                        found = 1
+                        break
+                if not found:
+                    raise Exception('Unrecognized group_by value: %s'
+                                    % group_by_name)
+
         # Column report_links init:
         # report_key column must be selected
         for column in self.reportColumns.getSelectedColumns():
@@ -188,8 +199,10 @@ class ReportBase(HtmlPage):
         if 'clear_cntrls' in shared_form:
             for control in self.params.controls:
                 control.value = control.default
-            if 'group_by' in self.params:
-                del self.params.group_by
+            for n in range(1, self.params.num_group_bys+1):
+                gbn = 'group_by_%s' % n
+                if gbn in self.params:
+                    del self.params[gbn]
 
 
         # sort_by
@@ -205,7 +218,7 @@ class ReportBase(HtmlPage):
                 if col not in [c.name for c in
                                self.reportColumns.getSelectedColumns()]:
                     sort_by = None
-        if not sort_by and 'group_by' not in self.params:
+        if not sort_by and not self.params.group_bys:
             # default:
             sort_by = self.params.get('sort_by', '1:desc')
         if sort_by:
@@ -231,7 +244,7 @@ class ReportBase(HtmlPage):
                 if col not in [c.name for c in
                                self.reportColumns.getSelectedColumns()]:
                     s_sort_by = None
-        if not s_sort_by and 'group_by' in self.params:
+        if not s_sort_by and self.params.group_bys:
             # defaults
             s_sort_by ='%s:asc' \
                           % self.reportColumns.getSelectedColumns()[0].name
@@ -357,8 +370,9 @@ class ReportBase(HtmlPage):
                 else:
                     value = control.value
                 filters.append("%s: %s" % (control.display, value))
-        if self.params.get('group_by'):
-            filters.append('Summarized by: %s' % self.params.group_by.display)
+        if self.params.group_bys:
+            filters.append('Summarized by: %s' % ', '.join(
+                    [c.display for c in self.params.group_bys]))
                            
         filter_desc = '; &nbsp; '.join(filters)
         if not filter_desc:
@@ -463,7 +477,7 @@ class ReportBase(HtmlPage):
 
     def getColumnHeaders(self):
         headers = []
-        onclick = 'set_s_sort' if 'group_by' in self.params else 'set_sort'
+        onclick = 'set_s_sort' if self.params.group_bys else 'set_sort'
         for column in self.reportColumns.getSelectedColumns():
             sort_indicator, sort_direction = self.getSortIndicator(column)
             cell = a("%s%s" % (column.display, sort_indicator),
@@ -475,7 +489,7 @@ class ReportBase(HtmlPage):
     def getSortIndicator(self, column):
         indicator = ''
         direction = 'asc'
-        if self.params.get('group_by'):
+        if self.params.group_bys:
             sort_column    = self.params.s_sort_column
             sort_direction = self.params.s_sort_direction
         else:
@@ -516,7 +530,8 @@ class ReportBase(HtmlPage):
 
                 # report_link and report_key allows linking into other reports
                 if target == 'html' and column.get('report_link') and \
-                   not self.params.get('group_by') and value and value != 'No':
+                   not self.params.group_bys and \
+                   value and value != 'No':
                     report_link = column['report_link']
                     report_key  = column['report_key']
                     value = a(value, href='%s?%s=%s' % (report_link,
