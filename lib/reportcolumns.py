@@ -25,15 +25,18 @@ class ReportColumns(object):
         return columns
 
     def disabled(self, column):
-        group_by = self.params.get('group_by')
-        if group_by \
-               and column.name != group_by.name \
-               and 'aggregate_func' not in column:
+        # summary and not a summary column and has not aggregate func
+        if self.params.group_bys \
+                and column.name not in [c.name for c in self.params.group_bys]\
+                and 'aggregate_func' not in column:
             return True
-        elif not group_by and column.get('mode') == 'aggregate':
+        
+        # not summary and column mode is aggregate
+        elif not self.params.group_bys and column.get('mode') == 'aggregate':
             return True
-        else:
-            return False
+
+        # all else okay
+        return False
         
     def getColumnChooser(self):
         title = div(b('Columns'), class_='report-controls-title')

@@ -73,11 +73,8 @@ class ReportSqlBuilder(object):
            Return a list of table aliases
         '''
 
-        # spec. handling from group_by
-        if check_field == 'group_by':
-            group_by = self.params.get('group_by')
-            if not group_by:
-                return []
+        if check_field == 'group_by' and not self.params.group_bys:
+            return []
             
         alias_list = copy(existing_list)
         for data in self.params[driver]:
@@ -89,9 +86,15 @@ class ReportSqlBuilder(object):
                 continue
 
             # spec. handling for group_by:
-            if check_field == 'group_by' and group_by.name != data.name:
-                continue
-            
+            if check_field == 'group_by':
+                match = 0
+                for group_by in self.params.group_bys:
+                    if group_by.name == data.name:
+                        match = 1
+                        break
+                if not match:
+                    continue
+
             if 'aliases' in data:
                 aliases = data.aliases.split(',')
             else:
@@ -134,7 +137,7 @@ class ReportSqlBuilder(object):
     def _getSelectClause(self):
         select = []
         for c in self.reportColumns.getSelectedColumns():
-            if self.params.get('group_by') and c.get('aggregate_func'):
+            if self.params.get('group_bys') and c.get('aggregate_func'):
                 s = "%s(%s)" % (c.aggregate_func, c.select)
             else:
                 s = c.select
@@ -142,8 +145,9 @@ class ReportSqlBuilder(object):
         return ', '.join(select)
 
     def _getCountSelectClause(self):
-        if 'group_by' in self.params:
-            return 'count(distinct %s) as count' % self.params.group_by.select
+        if self.params.group_bys:
+            return 'count(distinct %s) as count' % ', '.join(
+                [c.select for c in self.params.group_bys])
         else:
             return 'count(*) as count'
         
@@ -153,8 +157,6 @@ class ReportSqlBuilder(object):
                     self.params.table_joins
            target param in (''|'Count')
         '''
-        aliases = self.group_by_aliases or self.where_aliases \
-                  if target == 'Count' else self.aliases
         if target == 'Count':
             aliases = self.group_by_aliases or self.where_aliases
 
@@ -190,12 +192,13 @@ class ReportSqlBuilder(object):
         return 'where ' + ' and '.join(filters)
 
     def _getGroupByClause(self):
-        if 'group_by' in self.params:
-            return 'group by %s' % self.params.group_by.select
+        if self.params.group_bys:
+            return 'group by %s' % ', '.join(
+                [c.select for c in self.params.group_bys])
         return ''
                           
     def _getOrderByClause(self):
-        if self.params.get('group_by'):
+        if self.params.group_bys:
             sort_column    = self.params.s_sort_column
             sort_direction = self.params.s_sort_direction
         else:
