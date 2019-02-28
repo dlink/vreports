@@ -12,19 +12,12 @@ class ReportSummaries(object):
         title = div(b('Summaries'), class_='report-controls-title')
 
         table = HtmlTable(class_='report-controls-table')
-        #sss
         for n in range(1, self.params.num_group_bys+1):
             if n == 1:
                 row = ['Summarize by:', self._getGroupByMenu(n)]
             else:
                 row = ['', self._getGroupByMenu(n)]
             table.addRow(row)
-            #table.setRowClass(table.rownum, 'filter-summarize-by')
-            #table.setCellColSpan(table.rownum, 2, 2)
-        
-        #eee
-        
-        #table.addRow(['Summarize by:', self._getGroupByMenu()])
 
         reset_button = a('Reset Summary', id='reset-filters', class_='vbutton',
                          onclick='reset_summaries()')
