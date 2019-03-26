@@ -75,7 +75,7 @@ class ReportBase(HtmlPage):
             'js/report.js',
             ]
         self.style_sheets.extend([
-            "http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
+            "https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css",
             "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
             'css/main.css',
             'css/report_controls.css',
