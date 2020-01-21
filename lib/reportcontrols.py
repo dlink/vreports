@@ -114,7 +114,7 @@ class ReportControls(object):
             group_by_name = self.params.group_bys[n-1].name
         else:
             group_by_name = None
-        for c in self.params.columns:
+        for c in sorted(self.params.columns, key=lambda f: f['name']):
             if c.get('group_by'):
                 if  c.name == group_by_name:
                     options += option(c.display, value=c.name, selected='1')
