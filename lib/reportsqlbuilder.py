@@ -10,7 +10,11 @@ class ReportSqlBuilder(object):
         self.params        = params
         self.reportColumns = reportColumns
         self.sql_params    = odict(base_table=params.base_table,
-                                   base_table_alias=params.base_table_alias)
+                                   base_table_alias=params.base_table_alias,
+                                   force_index='')
+        if params.get('force_index'):
+            self.sql_params.force_index = ' force index (%s)' % params.force_index
+
         self.where_aliases  = []
         self.aliases        = []
         self.prepped = False
@@ -18,7 +22,7 @@ class ReportSqlBuilder(object):
     def getCountSQL(self):
         self._sqlPrep()
         sql_t = 'select {count_select_clause} ' \
-                 'from {base_table} {base_table_alias}' \
+                 'from {base_table} {base_table_alias}{force_index} ' \
                  '{count_join_clause} ' \
                  '{where_clause}'
         sql = sql_t.format(**self.sql_params)
@@ -27,7 +31,7 @@ class ReportSqlBuilder(object):
     def getSQL(self, limited=True):
         self._sqlPrep()
         sql_t = 'select {select_clause} ' \
-                'from {base_table} {base_table_alias} ' \
+                'from {base_table} {base_table_alias}{force_index} ' \
                 '{join_clause} ' \
                 '{where_clause} ' \
                 '{group_by_clause} ' \
