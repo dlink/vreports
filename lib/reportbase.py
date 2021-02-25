@@ -426,8 +426,8 @@ class ReportBase(HtmlPage):
         reset_js = 'function(){document.form1.csv.value=0}'
         return script('setInterval(%s,''500)') % reset_js + \
                input(name='csv', type='hidden', value='0') + \
-               a('Download CSV', id='download-csv', class_='vbutton orange',
-                 onclick='document.form1.csv.value=1; document.form1.submit()')
+               nobr(a('Download CSV', id='download-csv', class_='vbutton orange',
+                 onclick='document.form1.csv.value=1; document.form1.submit()'))
 
     #def getSaveButton(self):
     #  return input(name='save', type='button',
