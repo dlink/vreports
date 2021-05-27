@@ -13,7 +13,6 @@ columns:
      select  : concat_ws('-', substr(b.isbn,1,3), substr(b.isbn,4))
      aliases : b
      link    : http://www.amazon.com/gp/search/ref=sr_adv_b/?field-isbn=%s
-     default : true
 
    - name    : name
      default : true
