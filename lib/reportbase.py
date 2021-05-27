@@ -74,12 +74,14 @@ class ReportBase(BasePage):
 
         # init params
         self.params = odict()
-        self.params['num_group_bys'] = NUM_GROUP_BYS
         
         # bring in VCONF if exists (for default db values)
         if 'VCONF' in os.environ:
             self.params = dict2odict(yaml.load(open(os.environ['VCONF'])))
 
+        # init num_group_bys
+        self.params['num_group_bys'] = NUM_GROUP_BYS
+        
         # load yaml parameter files:
         for c in ['main', 'columns', 'controls', 'table_joins']:
             filepath = "%s/%s/%s.yaml" %(pdir, self.report_name, c)
