@@ -68,6 +68,7 @@ columns:
    - name    : nationality
      select  : c.nationality
      group_by: true
+     default : true
 
    - name    : born
      select  : a.born
