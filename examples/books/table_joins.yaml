@@ -15,16 +15,16 @@ table_joins:
                group_concat(
                   concat_ws(' ', a.first_name, a.middle_name, a.last_name )
                   separator ', '
-               ) as authors 
+               ) as authors,
+               group_concat(
+                  c.nationality separator ', '
+               ) as nationality
             from
                book_authors ba
                join authors a on ba.author_id = a.id
+               left join countries c on a.country_id = c.id
             group by 
                ba.book_id) as bas on b.id = bas.book_id
-   c:
-      require: a
-      clause : left join countries c on a.country_id = c.id
-
    bgs:
       clause : >
          left join (
