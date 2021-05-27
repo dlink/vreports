@@ -2,7 +2,7 @@ id,name
 1,Philosophical
 2,Gothic
 3,Speculative
-4,Roman à clef
+4,Roman à clef
 5,Prose Poetry
 6,Science Fiction
 7,Historical Fiction
@@ -14,5 +14,6 @@ id,name
 13,Adventure
 14,Children's literature
 15,Humour
-16,Fantasy,
+16,Fantasy
 17,Sword and planet
+18,Manners

@@ -1,4 +1,4 @@
-id,isbn,name,publicated,type
+id,isbn,name,published,classification
 1,9781557427960,The Picture of Dorian Gray,1891,Novel
 2,9780140283297,On the Road,1957,Novel
 3,9781851243969,"Frankenstein; or, The Modern Prometheus",1818,Novel
@@ -8,10 +8,10 @@ id,isbn,name,publicated,type
 7,9780486266848,Another Turn of the Screw,1898,Novel
 8,9780486280615,Adventures of Huckleberry Finn,1884,Novel
 9,9780143104889,A Princess of Mars,1917,Novel
-10,,War of the Worlds,1897,Novel
-11,,Northanger Abbey,1818,Novel
-12,,Emma,1916,Novel
-13,9781614270621,The Prophet,1923,Poetry
+10,9781974599271,War of the Worlds,1897,Novel
+11,9780141439792,Northanger Abbey,1818,Novel
+12,9780141439587,Emma,1916,Novel
+13,9780394404288,The Prophet,1923,Poetry
 14,,Zen and the Art of Motocycle Maintenance: An Inquiry into Value,1974,Novel
 15,,Shogun,1975,Novel
 16,,Hunger,1890,Novel

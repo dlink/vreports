@@ -7,5 +7,8 @@ id,first_name,middle_name,last_name,country_id,born,died
 6,Henry,,James,3,1843,1916
 7,Mark,,Twain,2,1835,1910
 8,Edgar,Rice,Burroughs,2,1875,1950
-100,Brian,,Herbert,3,1947,
-101,Kevin,J.,Anderson,1962,
+9,Brian,,Herbert,3,1947,0
+10,Kevin,J.,Anderson,2,1962,NULL
+11,H.,G.,Wells,3,1866,NULL
+12,Jane,,Austin,3,1775,NULL
+13,Kahlil,,Gabran,4,1883,1931
