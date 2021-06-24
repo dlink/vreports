@@ -4,7 +4,7 @@ import os
 
 from vweb.htmlpage import HtmlPage
 from vweb.html import *
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from header import Header
 
@@ -58,7 +58,7 @@ class NoData(HtmlPage):
                     link = '/%s/?r=%s' % (self.urlbase, d)
                     data = a(d, href=link)
                     examples.append(data)
-            except Exception, e:
+            except Exception as e:
                 continue
             
         return div(p('\n'.join(map(li, examples))))
