@@ -53,7 +53,7 @@ class ReportBase(BasePage):
             self.report_name = self.form['r'].value
         else:
             self.nodata = True
-            print 'Location: nodata.py' # <-- Exit
+            print('Location: nodata.py') # <-- Exit
             return
 
         self.title = self.report_name.title()
@@ -323,25 +323,25 @@ class ReportBase(BasePage):
 
         show_report_params = ''
         if 'r' in self.form:
-          show_report_params += input(name='r', type=itype,
-                                      value=self.form['r'].value)
+          show_report_params += eval(input(name='r', type=itype,
+                                      value=self.form['r'].value))
         if 'u' in self.form:
-          show_report_params += input(name='u', type=itype,
-                                      value=self.form['u'].value)
+          show_report_params += eval(input(name='u', type=itype,
+                                      value=self.form['u'].value))
 
-        return page_num + input(name='page_num', type=itype,
-                                value=self.params.page_num) + \
-               show_sql_panel + input(name='show_sql',
+        return page_num + eval(input(name='page_num', type=itype,
+                                value=self.params.page_num)) + \
+               show_sql_panel + eval(input(name='show_sql',
                                       type=itype,
-                                      value=self.params.show_sql_panel) + \
-               sort_by + input(name='sort_by', type=itype,
+                                      value=self.params.show_sql_panel)) + \
+               sort_by + eval(input(name='sort_by', type=itype,
                                value="%s:%s" % (self.params.sort_column,
-                                                self.params.sort_direction)) +\
-               s_sort_by + input(name='s_sort_by', type=itype,
+                                                self.params.sort_direction))) +\
+               s_sort_by + eval(input(name='s_sort_by', type=itype,
                                    value="%s:%s" \
                                    % (self.params.s_sort_column,
-                                      self.params.s_sort_direction)) +\
-               clear_cntrls + input(name='clear_cntrls', type=itype) +\
+                                      self.params.s_sort_direction))) +\
+               clear_cntrls + eval(input(name='clear_cntrls', type=itype)) +\
                show_report_params
             
     def getLoadingIndicator(self):
@@ -427,7 +427,7 @@ class ReportBase(BasePage):
 
         reset_js = 'function(){document.form1.csv.value=0}'
         return script('setInterval(%s,''500)') % reset_js + \
-               input(name='csv', type='hidden', value='0') + \
+               eval(input(name='csv', type='hidden', value='0')) + \
                a('Download CSV', id='download-csv', class_='vbutton orange',
                  onclick='document.form1.csv.value=1; document.form1.submit()')
 
@@ -511,7 +511,7 @@ class ReportBase(BasePage):
             row2 = []
             for column in self.reportColumns.getSelectedColumns():
                 value = row[column.name]
-                if isinstance(value, basestring):
+                if isinstance(value, str):
                     value = toEntity(value)
                 if value is None:
                     value = ''
@@ -537,7 +537,7 @@ class ReportBase(BasePage):
                                                         row[report_key]),
                               target='_blank')
                 row2.append(value)
-            table.append(map(str, row2))
+            table.append(list(map(str, row2)))
         return table
     
     def getRowCount(self):
@@ -555,7 +555,7 @@ def dict2odict(src_dict):
        Also expand environement vars
     '''
     o = odict()
-    for k,v in src_dict.items():
+    for k,v in list(src_dict.items()):
         if isinstance(v, dict):
             o[k] = dict2odict(v)
         elif isinstance(v, list):

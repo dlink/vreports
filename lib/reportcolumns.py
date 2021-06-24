@@ -94,9 +94,9 @@ class ReportColumns(object):
                 
                 # hidden fields
                 style = 'color: lightgrey'
-                h = input(type='hidden',
+                h = eval(input(type='hidden',
                           name='%s_column' % column.name,
-                          value=column.get('selected', ''))
+                          value=column.get('selected', '')))
                 mark = 'x' if column.get('selected') else '&nbsp;'
                 display = span('[ %s ] %s' % (mark,column.display),style=style)
                 checkbox = display + h
@@ -115,7 +115,7 @@ class ReportColumns(object):
                 else:
                     display = span(column.display, class_='cc_major')
                                  
-                checkbox = input(**checkbox_params) + display
+                checkbox = eval(input(**checkbox_params)) + display
             
             # build matrix of checkboxes, n x num_rows
             if skip_one:

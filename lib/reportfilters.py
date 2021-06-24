@@ -55,10 +55,10 @@ class ReportFilters(object):
         return report_controls
         
     def _getInput(self, control):
-        cinput = input(name=control.name,
+        cinput = eval(input(name=control.name,
                        class_=control.type,
                        type_='text',
-                       value=control.get('value', ''))
+                       value=control.get('value', '')))
         return cinput
 
     def _getCheckbox(self, control):
@@ -68,13 +68,13 @@ class ReportFilters(object):
                   'value': 'True'}
         if control.get('value'):
             params['checked'] = 1
-        cinput = input(**params)
+        cinput = eval(input(**params))
         return cinput
 
     def _getControlMenu(self, control):
         options = ''
         # sort by menu name
-        keys = sorted(control.menu.keys(), key=lambda k: control.menu[k])
+        keys = sorted(list(control.menu.keys()), key=lambda k: control.menu[k])
         # put 'All' (key = 0) back at the top of the list
         p = keys.index(0)
         keys = [0] + keys[0:p] + keys[p+1:]

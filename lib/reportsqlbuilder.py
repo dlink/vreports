@@ -181,7 +181,7 @@ class ReportSqlBuilder(object):
         for control in self.params.controls:
             if control.value: 
                 value = control.value
-                if isinstance(value, (str, unicode)):
+                if isinstance(value, str):
                     value = value.replace("'", "''")
                 if control.type == 'multiple':
                     value = ','.join(['"%s"' % v
@@ -222,7 +222,7 @@ def _getAliases(sql_code):
         # accept only alpha-numeric and '_':
         if not alias.replace('_','').isalnum():
             raise Exception('Alias not Alphanumeric')
-    except Exception, e:
+    except Exception as e:
         raise Exception("Unable to determine table alias from sql_code: '%s'. You must specify an 'alias' value. %s" % (sql_code, e))
     return [alias]
         
