@@ -3,7 +3,7 @@
 report_title    : World Report
 base_table      : Country
 base_table_alias: c
-debug_cgi       : false
+debug_form      : false
 debug_sql       : false
 display_num_rows: 100
 sort_by         : Name:asc

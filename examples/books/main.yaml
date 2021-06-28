@@ -4,7 +4,7 @@
 report_title    : Books Report
 base_table      : books
 base_table_alias: b
-debug_cgi       : false
+debug_form      : false
 debug_sql       : false
 display_num_rows: 100
 sort_by         : book_id:asc
