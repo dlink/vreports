@@ -74,9 +74,9 @@ class ReportColumns(object):
         num_checkboxes = len(self.params.columns) + num_separators
         remander = num_checkboxes % NUM_COL
         if remander:
-            num_rows = (num_checkboxes/NUM_COL)+1
+            num_rows = (num_checkboxes // NUM_COL)+1
         else:
-            num_rows = num_checkboxes/NUM_COL
+            num_rows = num_checkboxes // NUM_COL
         rows = [ [] for x in range(num_rows+1)]
         row_num = 0
         
@@ -94,9 +94,9 @@ class ReportColumns(object):
                 
                 # hidden fields
                 style = 'color: lightgrey'
-                h = eval(input(type='hidden',
+                h = input(type='hidden',
                           name='%s_column' % column.name,
-                          value=column.get('selected', '')))
+                          value=column.get('selected', ''))
                 mark = 'x' if column.get('selected') else '&nbsp;'
                 display = span('[ %s ] %s' % (mark,column.display),style=style)
                 checkbox = display + h
@@ -115,7 +115,7 @@ class ReportColumns(object):
                 else:
                     display = span(column.display, class_='cc_major')
                                  
-                checkbox = eval(input(**checkbox_params)) + display
+                checkbox = input(**checkbox_params) + display
             
             # build matrix of checkboxes, n x num_rows
             if skip_one:
