@@ -43,9 +43,9 @@ class ReportBase(BasePage):
         BasePage.__init__(self, 'Untitled')
         self.nodata = False
 
-        if traceback_dir:
-            import cgitb
-            cgitb.enable(display=0, logdir=traceback_dir)
+        #if traceback_dir:
+        #    import cgitb
+        #    cgitb.enable(display=0, logdir=traceback_dir)
 
         if report_name:
             self.report_name = report_name
@@ -60,7 +60,7 @@ class ReportBase(BasePage):
         self.allow_download = allow_download
         self.loadParams()
 
-        self.debug_cgi      = self.params.debug_cgi
+        self.debug_form     = self.params.debug_form
         self.db             = db.Db(self.params.database)
         self.reportFilters  = ReportFilters(self.params)
         self.reportSummaries= ReportSummaries(self.params)
@@ -111,14 +111,14 @@ class ReportBase(BasePage):
     # Process Inbound parameters:
 
     def process(self):
-        '''Pre-render CGI parameter processing'''
+        '''Pre-render form parameter processing'''
         if self.nodata: return
 
         BasePage.process(self)
 
         shared_form = {}
         for field in self.form:
-            shared_form[field] = self.form[field].value
+            shared_form[field] = self.form[field]
 
         # Controls: Init
         for control in self.params.controls:
@@ -323,29 +323,29 @@ class ReportBase(BasePage):
 
         show_report_params = ''
         if 'r' in self.form:
-          show_report_params += eval(input(name='r', type=itype,
-                                      value=self.form['r'].value))
+          show_report_params += input(name='r', type=itype,
+                                      value=self.form['r'].value)
         if 'u' in self.form:
-          show_report_params += eval(input(name='u', type=itype,
-                                      value=self.form['u'].value))
+          show_report_params += input(name='u', type=itype,
+                                      value=self.form['u'].value)
 
-        return page_num + eval(input(name='page_num', type=itype,
-                                value=self.params.page_num)) + \
-               show_sql_panel + eval(input(name='show_sql',
+        return page_num + input(name='page_num', type=itype,
+                                value=self.params.page_num) + \
+               show_sql_panel + input(name='show_sql',
                                       type=itype,
-                                      value=self.params.show_sql_panel)) + \
-               sort_by + eval(input(name='sort_by', type=itype,
+                                      value=self.params.show_sql_panel) + \
+               sort_by + input(name='sort_by', type=itype,
                                value="%s:%s" % (self.params.sort_column,
-                                                self.params.sort_direction))) +\
-               s_sort_by + eval(input(name='s_sort_by', type=itype,
+                                                self.params.sort_direction)) +\
+               s_sort_by + input(name='s_sort_by', type=itype,
                                    value="%s:%s" \
                                    % (self.params.s_sort_column,
-                                      self.params.s_sort_direction))) +\
-               clear_cntrls + eval(input(name='clear_cntrls', type=itype)) +\
+                                      self.params.s_sort_direction)) +\
+               clear_cntrls + input(name='clear_cntrls', type=itype) +\
                show_report_params
             
     def getLoadingIndicator(self):
-        return div(img(src="images/loading.gif", id="loading-indicator"),
+        return div(img(src="/images/loading.gif", id="loading-indicator"),
                    id="loading-indicator-wrapper")
 
     def getReportDesc(self):
@@ -427,7 +427,7 @@ class ReportBase(BasePage):
 
         reset_js = 'function(){document.form1.csv.value=0}'
         return script('setInterval(%s,''500)') % reset_js + \
-               eval(input(name='csv', type='hidden', value='0')) + \
+               input(name='csv', type='hidden', value='0') + \
                a('Download CSV', id='download-csv', class_='vbutton orange',
                  onclick='document.form1.csv.value=1; document.form1.submit()')
 
@@ -494,7 +494,7 @@ class ReportBase(BasePage):
             sort_column    = self.params.sort_column
             sort_direction = self.params.sort_direction
         if column.name == sort_column:
-            icon_file = 'images/sort_%s.png' % sort_direction
+            icon_file = '/images/sort_%s.png' % sort_direction
             indicator = img(src=icon_file)
             direction = 'desc' if sort_direction =='asc' else 'asc'
         return indicator, direction
