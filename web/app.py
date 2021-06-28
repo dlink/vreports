@@ -1,19 +1,24 @@
 import os
 import sys
 
-from reportbase import ReportBase
-from nodata import NoData
-
 from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
 def root():
+    from nodata import NoData
     return NoData().go()
 
-@app.route('/report/<report_name>')
+@app.route('/reports/<report_name>', methods=['GET', 'POST'])
 def report(report_name):
+    from reportbase import ReportBase
     return ReportBase(report_name).go()
+
+@app.route('/test_page')
+def test_page():
+    from test_page import TestPage
+    return TestPage().go()
+
 
 #not for production
 #@app.route("/showenv")

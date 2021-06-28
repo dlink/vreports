@@ -57,7 +57,7 @@ class NoData(HtmlPage):
             # check see it is a directory with a main.yaml in it:
             try:
                 if 'main.yaml' in  os.listdir('%s/%s' % (examples_dir, d)):
-                    link = '/report/%s' % d
+                    link = '/reports/%s' % d
                     data = a(d, href=link)
                     examples.append(data)
             except Exception as e:

@@ -8,8 +8,8 @@ class Menu(object):
     def getMenu(self, current_page):
 
         # customize this list
-        reports= [['Books', '/vreports/?r=books'],
-                  ['World', '/vreports?r=world'],
+        reports= [['Books', '/reports/books'],
+                  ['World', '/reports/world'],
                   ]
 
         menu_html = ''
