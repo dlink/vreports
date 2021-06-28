@@ -27,12 +27,12 @@ class BasePage(HtmlPage):
         self.javascript_src = [
             "//code.jquery.com/jquery-1.10.2.js",
             "//code.jquery.com/ui/1.11.1/jquery-ui.js",
-            versionize('js/vreports.js'),
+            versionize('/js/vreports.js'),
             ]
         self.style_sheets.extend(
             ['http://code.jquery.com/ui/1.10.2/themes/smoothness/' \
                  'jquery-ui.css',
-             versionize('css/vreports.css'),
+             versionize('/css/vreports.css'),
              ])
 
     def process(self):
