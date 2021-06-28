@@ -18,9 +18,10 @@ class BasePage(HtmlPage):
         self.menu = Menu()
         self.header = Header(self.title)
 
-        progpath = os.path.dirname(sys.argv[0])
+        # basedir is the directory above the virtual_env
+        basedir = '/'.join(os.environ['VIRTUAL_ENV'].split('/')[0:-1])
         def versionize(file):
-            timestamp = os.path.getmtime('%s/../web/%s' % (progpath, file))
+            timestamp = os.path.getmtime('%s/web/%s' % (basedir, file))
             return '%s?v=%s' % (file, timestamp)
 
         self.javascript_src = [
