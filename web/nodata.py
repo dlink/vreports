@@ -47,29 +47,23 @@ class NoData(HtmlPage):
                    )
 
     def examples(self):
-        examples_dir = os.path.dirname(os.path.realpath(__file__))\
-            .replace('/web', '/examples')
+        basedir = '/'.join(os.environ['VIRTUAL_ENV'].split('/')[0:-1])
+        examples_dir = '%s/examples' % basedir
 
         examples = []
         for d in os.listdir(examples_dir):
+            if not os.path.isdir('%s/%s' % (examples_dir, d)):
+                continue
             # check see it is a directory with a main.yaml in it:
             try:
                 if 'main.yaml' in  os.listdir('%s/%s' % (examples_dir, d)):
-                    link = '/%s/?r=%s' % (self.urlbase, d)
+                    link = '/report/%s' % d
                     data = a(d, href=link)
                     examples.append(data)
             except Exception as e:
                 continue
             
         return div(p('\n'.join(map(li, examples))))
-    
-    @property
-    def urlbase(self):
-        '''Take /dev-vreport/nodata.py found in REQUEST_URI
-           And return 'dev-vreport'
-        '''
-        return urlparse(os.environ.get('REQUEST_URI')).path.split('/')[1]
 
-                   
 if __name__ == '__main__':
     NoData().go()
