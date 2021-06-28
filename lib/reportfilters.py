@@ -55,10 +55,10 @@ class ReportFilters(object):
         return report_controls
         
     def _getInput(self, control):
-        cinput = eval(input(name=control.name,
+        cinput = input(name=control.name,
                        class_=control.type,
                        type_='text',
-                       value=control.get('value', '')))
+                       value=control.get('value', ''))
         return cinput
 
     def _getCheckbox(self, control):
@@ -68,7 +68,7 @@ class ReportFilters(object):
                   'value': 'True'}
         if control.get('value'):
             params['checked'] = 1
-        cinput = eval(input(**params))
+        cinput = input(**params)
         return cinput
 
     def _getControlMenu(self, control):
@@ -100,7 +100,7 @@ def listToTable(alist):
     NUM_COL = 2
     num_elements = len(alist)
     remander     = num_elements % NUM_COL
-    num_rows     = num_elements / NUM_COL
+    num_rows     = num_elements // NUM_COL
     row_num = 0
 
     rows = [ [] for x in range(num_rows+1)]
