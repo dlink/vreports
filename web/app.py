@@ -1,7 +1,8 @@
 import os
 import sys
 
-from flask import Flask
+from flask import Flask, Response
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -12,15 +13,25 @@ def root():
 @app.route('/reports/<report_name>', methods=['GET', 'POST'])
 def report(report_name):
     from reportbase import ReportBase
-    return ReportBase(report_name).go()
+    report = ReportBase(report_name).go()
+    # html
+    if report.startswith('<!DOCTYPE html'):
+        return report
 
-@app.route('/test_page')
+    # csv
+    return Response(
+        report,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                 "attachment; filename=%s.csv" % report_name})
+
+# Not for production
+
+#@app.route('/test')
 def test_page():
     from test_page import TestPage
     return TestPage().go()
 
-
-#not for production
 #@app.route("/showenv")
 def showenv():
     import getenv
