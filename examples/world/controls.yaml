@@ -3,12 +3,12 @@ controls:
      filter  : c.Continent like '%{value}%'
 
    - name   : country
-     filter : c.Name like %s
+     filter : c.Name like '%{value}%'
 
    - name   : Official Languages
-     filter : cls_o.language in '%{value}%'
+     filter : cls_o.languages like '%{value}%'
      type   : multiple
 
    - name   : Spoken Languages
-     filter : cl.language in (%s)
+     filter : cl.language like '%{value}%'
      type   : multiple
