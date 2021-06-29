@@ -1,0 +1,14 @@
+# dev-vreports notes
+
+# launch gunicorn
+
+cd ~/vreports
+source .venv/bin/activate
+cd web
+export PYTHONPATH='/home/dlink/vreports/lib:/home/dlink/vweb/src:/home/dlink/vlib/src'
+gunicorn --reload wsgi:app
+
+# cmdline db access
+
+export VRDB_PASS='woodenships60'
+alias vrdb='mysql -h514abcb77a2bba096a4253a0ce0c5b5a88953316.rackspaceclouddb.com -uvreports -p$VRDB_PASS --ssl-mode=DISABLED --database=vreports'
