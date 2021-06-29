@@ -77,7 +77,7 @@ class ReportBase(BasePage):
         
         # bring in VCONF if exists (for default db values)
         if 'VCONF' in os.environ:
-            self.params = dict2odict(yaml.load(open(os.environ['VCONF'])))
+            self.params = dict2odict(yaml.safe_load(open(os.environ['VCONF'])))
 
         # init num_group_bys
         self.params['num_group_bys'] = NUM_GROUP_BYS
@@ -85,7 +85,7 @@ class ReportBase(BasePage):
         # load yaml parameter files:
         for c in ['main', 'columns', 'controls', 'table_joins']:
             filepath = "%s/%s/%s.yaml" %(pdir, self.report_name, c)
-            self.params.update(dict2odict(yaml.load(open(filepath))))
+            self.params.update(dict2odict(yaml.safe_load(open(filepath))))
 
         # fill in some blank defaults:
         for column in self.params.columns:
@@ -187,14 +187,13 @@ class ReportBase(BasePage):
                 self.reportColumns.getColumn(column.report_key).selected = True
 
         # clear controls if nec. (deprecated - now done in JS)
-        if 'clear_cntrls' in shared_form:
-            for control in self.params.controls:
-                control.value = control.default
-            for n in range(1, self.params.num_group_bys+1):
-                gbn = 'group_by_%s' % n
-                if gbn in self.params:
-                    del self.params[gbn]
-
+        #if 'clear_cntrls' in shared_form:
+        #    for control in self.params.controls:
+        #        control.value = control.default
+        #    for n in range(1, self.params.num_group_bys+1):
+        #        gbn = 'group_by_%s' % n
+        #        if gbn in self.params:
+        #            del self.params[gbn]
 
         # sort_by
         # TO DO: refactor this mess
