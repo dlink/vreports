@@ -379,15 +379,20 @@ class ReportBase(BasePage):
                                   id='report-paging-info')
         report_paging_controls = span(self.getPager(),
                                       id='report-paging-controls')
-        report_addl_buttons = span(' '.join(addl_buttons))
+        report_addl_buttons = ' '.join(addl_buttons)
         
         # put it together
-        return div(report_name + \
-                   report_description + \
-                   report_paging_info + \
-                   report_paging_controls + \
-                   report_addl_buttons,
-                   id='report-header')
+        row1 = div(
+            report_addl_buttons + \
+            report_paging_controls,
+            id='report-buttons')
+
+        row2 = div(
+            report_name + \
+            report_description + \
+            report_paging_info,
+            id='report-header-text')
+        return div(row1 + row2, id='report-header')
 
     def getPager(self):
         # previous button
