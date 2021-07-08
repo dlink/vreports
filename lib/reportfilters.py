@@ -25,7 +25,7 @@ class ReportFilters(object):
             if control.type in ('string', 'date', 'multiple'):
                 cinput = self._getInput(control)
                 if control.type == 'multiple':
-                    ctitle += ' (multiple - space separated)'
+                    ctitle += '(s)'
             elif control.type == 'checkbox':
                 cinput = self._getCheckbox(control)
             elif control.type == 'menu':
