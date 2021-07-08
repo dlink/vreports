@@ -24,7 +24,7 @@ from reportsqlbuilder import ReportSqlBuilder
 
 from datetime import datetime
 
-NUM_GROUP_BYS = 4
+NUM_GROUP_BYS = 10
 
 class VReportException(Exception): pass
 
