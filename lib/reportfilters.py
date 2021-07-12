@@ -74,7 +74,8 @@ class ReportFilters(object):
     def _getControlMenu(self, control):
         options = ''
         # sort by menu name
-        keys = sorted(list(control.menu.keys()), key=lambda k: control.menu[k])
+        keys = sorted(list(control.menu.keys()),
+                      key=lambda k: str(control.menu[k]))
         # put 'All' (key = 0) back at the top of the list
         p = keys.index(0)
         keys = [0] + keys[0:p] + keys[p+1:]
