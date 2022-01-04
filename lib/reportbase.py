@@ -516,7 +516,8 @@ class ReportBase(BasePage):
             for column in self.reportColumns.getSelectedColumns():
                 value = row[column.name]
                 if isinstance(value, str):
-                    value = toEntity(value)
+                    if target == 'html':
+                        value = toEntity(value)
                 if value is None:
                     value = ''
                 if column.get('type') == 'money' and (value or value==0):
