@@ -33,6 +33,12 @@ class ReportBase(BasePage):
        Dynamic Reporting
     '''
 
+    default_images = {
+        'loading': '/images/loading.gif',
+        'sort_asc': '/images/sort_asc.png',
+        'sort_desc': '/images/sort_desc.png',
+    }
+
     def __init__(self, report_name=None, allow_download=True,traceback_dir=''):
         '''Constructor:
               report_name    - Name of page
@@ -67,6 +73,9 @@ class ReportBase(BasePage):
         self.reportColumns  = ReportColumns(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
+
+        if not hasattr(self, 'images'):
+            self.images = default_images
 
     def loadParams(self):
         '''Load parameters files'''
@@ -344,7 +353,7 @@ class ReportBase(BasePage):
                show_report_params
             
     def getLoadingIndicator(self):
-        return div(img(src="/images/loading.gif", id="loading-indicator"),
+        return div(img(src=self.images['loading'], id="loading-indicator"),
                    id="loading-indicator-wrapper")
 
     def getReportDesc(self):
@@ -498,8 +507,8 @@ class ReportBase(BasePage):
             sort_column    = self.params.sort_column
             sort_direction = self.params.sort_direction
         if column.name == sort_column:
-            icon_file = '/images/sort_%s.png' % sort_direction
-            indicator = img(src=icon_file)
+            icon_name = f'sort_{sort_direction}'
+            indicator = img(src=self.images[icon_name])
             direction = 'desc' if sort_direction =='asc' else 'asc'
         return indicator, direction
 
