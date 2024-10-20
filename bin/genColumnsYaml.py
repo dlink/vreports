@@ -49,15 +49,17 @@ class Generator(object):
             # care not about unsigned:
             db_type = db_type.replace(' unsigned', '')
 
-            if db_type in ('int()', 'tinyint()', 'smallint()', 'bigint()'):
+            if db_type in ('int()', 'tinyint()', 'smallint()', 'bigint()',
+                           # mssql
+                           'bit', 'int', 'bigint'):
                 type = 'integer'
-            elif db_type in ('char()', 'varchar()','text') or 'enum' in db_type:
+            elif db_type in ('char()', 'varchar()','text', 'nvarchar') or 'enum' in db_type:
                 type = 'string'
             elif db_type in ('datetime', 'timestamp'):
                 type = 'datetime'
             elif db_type in ('date',):
                 type = 'date'
-            elif db_type in ('decimal(,)'):
+            elif db_type in ('decimal(,)', 'float'):
                 type = 'money'
             else:
                 raise GeneratorError('Unrecognized db_type: %s' % db_type)
@@ -90,8 +92,8 @@ class Generator(object):
 
 def syntax():
     progname = os.path.basename(sys.argv[0])
-    print "%s <table_name> <table_alias>" % progname
-    print
+    print("%s <table_name> <table_alias>" % progname)
+    print()
     sys.exit(1)
 
 
@@ -103,4 +105,4 @@ if __name__ == '__main__':
     table_alias = sys.argv[2]
 
     g=Generator()
-    print g.genYaml(table_name, table_alias)
+    print(g.genYaml(table_name, table_alias))
