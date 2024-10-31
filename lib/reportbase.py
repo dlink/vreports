@@ -470,13 +470,16 @@ class ReportBase(BasePage):
         # top valign header:
         table.setRowVAlign(1, 'top')
         
-        # right align number:
+        # right align number / percent cells
         col = 1
         for column in self.reportColumns.getSelectedColumns():
             if column.get('type') in ('number', 'integer', 'money', 'percent'):
                 table.setColAlign(col, 'right')
+
+            if column.get('type') == 'percent':
+                table.setColClass(col, 'vpercent')
             col += 1
-                
+
         return table.getTable()
 
     def getReportTableFooter(self):
