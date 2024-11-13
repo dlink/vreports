@@ -77,9 +77,12 @@ class ReportBase(BasePage):
         if not hasattr(self, 'images'):
             self.images = default_images
 
+    @property
+    def pdir(self):
+        return os.environ['PARAMETER_FILES_DIR']
+
     def loadParams(self):
         '''Load parameters files'''
-        pdir = os.environ['PARAMETER_FILES_DIR']
 
         # init params
         self.params = odict()
@@ -93,7 +96,7 @@ class ReportBase(BasePage):
         
         # load yaml parameter files:
         for c in ['main', 'columns', 'controls', 'table_joins']:
-            filepath = "%s/%s/%s.yaml" %(pdir, self.report_name, c)
+            filepath = "%s/%s/%s.yaml" %(self.pdir, self.report_name, c)
             self.params.update(dict2odict(yaml.safe_load(open(filepath))))
 
         # fill in some blank defaults:
