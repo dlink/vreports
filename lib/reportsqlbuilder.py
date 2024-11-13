@@ -207,10 +207,14 @@ class ReportSqlBuilder(object):
         return 'order by %s %s' % (sort_column, sort_direction)
     
     def _getLimitClause(self):
+        if self.params.get('mssql'):
+            return 'offset {offset} rows fetch next {limit} rows only'.format(
+                limit=self.params.display_num_rows,
+                offset=(self.params.page_num-1) * self.params.display_num_rows)
         return 'limit {limit} offset {offset}'.format(
             limit=self.params.display_num_rows,
             offset=(self.params.page_num-1) * self.params.display_num_rows)
-    
+
 def _getAliases(sql_code):
     '''Find table aliases from sql code frag
        Else throw Exception
