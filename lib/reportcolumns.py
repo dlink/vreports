@@ -28,7 +28,8 @@ class ReportColumns(object):
         # summary and not a summary column and has not aggregate func
         if self.params.group_bys \
                 and column.name not in [c.name for c in self.params.group_bys]\
-                and 'aggregate_func' not in column:
+                and not ('aggregate_func' in column or
+                         'aggregate_func2' in column):
             return True
         
         # not summary and column mode is aggregate

@@ -139,6 +139,8 @@ class ReportSqlBuilder(object):
         for c in self.reportColumns.getSelectedColumns():
             if self.params.get('group_bys') and c.get('aggregate_func'):
                 s = "%s(%s)" % (c.aggregate_func, c.select)
+            elif self.params.get('group_bys') and c.get('aggregate_func2'):
+                s = c.aggregate_func2
             else:
                 s = c.select
             select.append("%s as %s" % (s, c.name))
