@@ -481,6 +481,9 @@ class ReportBase(BasePage):
 
             if column.get('type') == 'percent':
                 table.setColClass(col, 'vpercent')
+
+            if column.get('class'):
+                table.setColClass(col, column['class'])
             col += 1
 
         return table.getTable()
