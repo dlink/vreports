@@ -508,7 +508,10 @@ class ReportBase(BasePage):
     
     def getSortIndicator(self, column):
         indicator = ''
-        direction = 'asc'
+        if column.get('type') in ('number', 'integer', 'money', 'percent'):
+            direction = 'desc'
+        else:
+            direction = 'asc'
         if self.params.group_bys:
             sort_column    = self.params.s_sort_column
             sort_direction = self.params.s_sort_direction
