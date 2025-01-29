@@ -476,7 +476,8 @@ class ReportBase(BasePage):
         # right align number / percent cells
         col = 1
         for column in self.reportColumns.getSelectedColumns():
-            if column.get('type') in ('number', 'integer', 'money', 'percent'):
+            if column.get('type') in ('number', 'integer', 'money', 'dollars',
+                                      'round_dollars', 'percent'):
                 table.setColAlign(col, 'right')
 
             if column.get('type') == 'percent':
@@ -543,6 +544,10 @@ class ReportBase(BasePage):
                     value = ''
                 if column.get('type') == 'money' and (value or value==0):
                     value = "{:,.2f}".format(value)
+                if column.get('type')=='round_dollars' and (value or value==0):
+                    value = "${:,.0f}".format(value)
+                if column.get('type') == 'dollars' and (value or value==0):
+                    value = "${:,.2f}".format(value)
                 if column.get('type') == 'integer' and (value or value==0):
                     value = "{:,.0f}".format(value)
                 elif column.get('type') == 'percent' and value != '':
