@@ -248,15 +248,15 @@ class ReportBase(BasePage):
                     s_sort_by = None
         if not s_sort_by and self.params.group_bys:
             # defaults
-            s_sort_by ='%s:asc' \
+            s_sort_by ='%s:desc' \
                           % self.reportColumns.getSelectedColumns()[0].name
-        if s_sort_by:
-            s_sort_column, s_sort_direction = s_sort_by.split(':')
+            if s_sort_by:
+                s_sort_column, s_sort_direction = s_sort_by.split(':')
         else:
             s_sort_column = s_sort_direction = ''
         self.params.s_sort_column    = s_sort_column
         self.params.s_sort_direction = s_sort_direction
-            
+
     # Level I
 
     def getHtmlContent(self):
@@ -509,10 +509,10 @@ class ReportBase(BasePage):
     
     def getSortIndicator(self, column):
         indicator = ''
-        if column.get('type') in ('number', 'integer', 'money', 'percent'):
-            direction = 'desc'
-        else:
+        if column.get('type') == 'string':
             direction = 'asc'
+        else:
+            direction = 'desc'
         if self.params.group_bys:
             sort_column    = self.params.s_sort_column
             sort_direction = self.params.s_sort_direction
