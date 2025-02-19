@@ -250,8 +250,8 @@ class ReportBase(BasePage):
             # defaults
             s_sort_by ='%s:desc' \
                           % self.reportColumns.getSelectedColumns()[0].name
-            if s_sort_by:
-                s_sort_column, s_sort_direction = s_sort_by.split(':')
+        if s_sort_by:
+            s_sort_column, s_sort_direction = s_sort_by.split(':')
         else:
             s_sort_column = s_sort_direction = ''
         self.params.s_sort_column    = s_sort_column
