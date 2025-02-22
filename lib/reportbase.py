@@ -39,19 +39,15 @@ class ReportBase(BasePage):
         'sort_desc': '/images/sort_desc.png',
     }
 
-    def __init__(self, report_name=None, allow_download=True,traceback_dir=''):
+    def __init__(self, report_name=None, allow_download=True,
+                 additional_conf_file=None):
         '''Constructor:
               report_name    - Name of page
               allow_download - Add [csv download] button or not
-              traceback_dir  - Where to write traceback
-                               if left blank display to screen
+              additional_conf_file - Can be used to define database
         '''
         BasePage.__init__(self, 'Untitled')
         self.nodata = False
-
-        #if traceback_dir:
-        #    import cgitb
-        #    cgitb.enable(display=0, logdir=traceback_dir)
 
         if report_name:
             self.report_name = report_name
@@ -64,6 +60,7 @@ class ReportBase(BasePage):
 
         self.title = self.report_name.title()
         self.allow_download = allow_download
+        self.additional_conf_file = additional_conf_file
         self.loadParams()
 
         self.debug_form     = self.params.debug_form
@@ -90,6 +87,10 @@ class ReportBase(BasePage):
         # bring in VCONF if exists (for default db values)
         if 'VCONF' in os.environ:
             self.params = dict2odict(yaml.safe_load(open(os.environ['VCONF'])))
+
+        # bring in additional_conf_file if exists
+        if self.additional_conf_file:
+            self.params = dict2odict(yaml.safe_load(open(self.additional_conf_file)))
 
         # init num_group_bys
         self.params['num_group_bys'] = NUM_GROUP_BYS
