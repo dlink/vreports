@@ -552,7 +552,7 @@ class ReportBase(BasePage):
                 if column.get('type') == 'integer' and (value or value==0):
                     value = "{:,.0f}".format(value)
                 elif column.get('type') == 'percent' and value != '':
-                    value = "{:,.2f}%".format(value*100)
+                    value = "{:,.1f}%".format(value*100)
                 elif column.get('type') == 'date' and value:
                     value = format_date(value)
                 if target == 'html' and column.get('html'):
