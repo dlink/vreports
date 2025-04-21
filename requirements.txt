@@ -2,7 +2,7 @@ click==8.0.1
 Flask==3.1.0
 gunicorn==23.0.0
 itsdangerous==2.0.1
-Jinja2==3.0.1
+Jinja2==3.1.5
 MarkupSafe==2.0.1
 PyMySQL==1.1.1
 PyYAML==5.4.1
