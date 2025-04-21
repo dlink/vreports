@@ -320,7 +320,9 @@ a.vbutton:hover {
   margin-bottom: 15px;
 }
 /* summary-chooser */
-
+#summary-chooser{
+    margin-bottom: 15px;
+}
 /*#summaries-title {
   padding: 5px;
   background-color: #f1f8ff;

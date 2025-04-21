@@ -18,6 +18,7 @@ from menu import Menu
 from basepage import BasePage
 from reportfilters import ReportFilters
 from reportsummaries import ReportSummaries
+from reportlimits import ReportLimits
 from reportcolumns import ReportColumns
 from reportsqlpanel import ReportSqlPanel
 from reportsqlbuilder import ReportSqlBuilder
@@ -67,6 +68,7 @@ class ReportBase(BasePage):
         self.db             = db.Db(self.params.database)
         self.reportFilters  = ReportFilters(self.params)
         self.reportSummaries= ReportSummaries(self.params)
+        self.reportLimits   = ReportLimits(self.params)
         self.reportColumns  = ReportColumns(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
@@ -258,6 +260,10 @@ class ReportBase(BasePage):
         self.params.s_sort_column    = s_sort_column
         self.params.s_sort_direction = s_sort_direction
 
+        # limit
+        if 'limit' in shared_form:
+            self.params.display_num_rows = int(shared_form['limit'])
+
     # Level I
 
     def getHtmlContent(self):
@@ -311,7 +317,8 @@ class ReportBase(BasePage):
         panel = div(
             a('X', href="#", class_="close", id='close') + \
             div(self.reportFilters.getControls() + \
-                self.reportSummaries.getControls(),
+                self.reportSummaries.getControls() + \
+                self.reportLimits.getControls(),
                 id='filters-and-summaries-container'
             ) + \
             self.reportColumns.getColumnChooser() + \
@@ -328,10 +335,12 @@ class ReportBase(BasePage):
             show_sql_panel = 'show_sql_panel'
             sort_by = 'sort_by'
             s_sort_by = 's_sort_by'
+            limit = 'limit'
             clear_cntrls = 'clear_cntrls'
         else:
             itype = 'hidden'
-            page_num = show_sql_panel = sort_by = s_sort_by = clear_cntrls = ''
+            page_num = show_sql_panel = sort_by = s_sort_by = limit = \
+                clear_cntrls = ''
 
         show_report_params = ''
         if 'r' in self.form:
@@ -353,6 +362,8 @@ class ReportBase(BasePage):
                                    value="%s:%s" \
                                    % (self.params.s_sort_column,
                                       self.params.s_sort_direction)) +\
+               limit + input(name='limit', type=itype,
+                             value=self.params.display_num_rows) +\
                clear_cntrls + input(name='clear_cntrls', type=itype) +\
                show_report_params
             
