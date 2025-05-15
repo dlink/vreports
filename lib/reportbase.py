@@ -18,6 +18,7 @@ from menu import Menu
 from basepage import BasePage
 from reportfilters import ReportFilters
 from reportsummaries import ReportSummaries
+from reportlimits import ReportLimits
 from reportcolumns import ReportColumns
 from reportsqlpanel import ReportSqlPanel
 from reportsqlbuilder import ReportSqlBuilder
@@ -39,19 +40,15 @@ class ReportBase(BasePage):
         'sort_desc': '/images/sort_desc.png',
     }
 
-    def __init__(self, report_name=None, allow_download=True,traceback_dir=''):
+    def __init__(self, report_name=None, allow_download=True,
+                 additional_conf_file=None):
         '''Constructor:
               report_name    - Name of page
               allow_download - Add [csv download] button or not
-              traceback_dir  - Where to write traceback
-                               if left blank display to screen
+              additional_conf_file - Can be used to define database
         '''
         BasePage.__init__(self, 'Untitled')
         self.nodata = False
-
-        #if traceback_dir:
-        #    import cgitb
-        #    cgitb.enable(display=0, logdir=traceback_dir)
 
         if report_name:
             self.report_name = report_name
@@ -64,12 +61,14 @@ class ReportBase(BasePage):
 
         self.title = self.report_name.title()
         self.allow_download = allow_download
+        self.additional_conf_file = additional_conf_file
         self.loadParams()
 
         self.debug_form     = self.params.debug_form
         self.db             = db.Db(self.params.database)
         self.reportFilters  = ReportFilters(self.params)
         self.reportSummaries= ReportSummaries(self.params)
+        self.reportLimits   = ReportLimits(self.params)
         self.reportColumns  = ReportColumns(self.params)
         self.sqlBuilder     = ReportSqlBuilder(self.params, self.reportColumns)
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
@@ -90,6 +89,10 @@ class ReportBase(BasePage):
         # bring in VCONF if exists (for default db values)
         if 'VCONF' in os.environ:
             self.params = dict2odict(yaml.safe_load(open(os.environ['VCONF'])))
+
+        # bring in additional_conf_file if exists
+        if self.additional_conf_file:
+            self.params = dict2odict(yaml.safe_load(open(self.additional_conf_file)))
 
         # init num_group_bys
         self.params['num_group_bys'] = NUM_GROUP_BYS
@@ -257,6 +260,10 @@ class ReportBase(BasePage):
         self.params.s_sort_column    = s_sort_column
         self.params.s_sort_direction = s_sort_direction
 
+        # limit
+        if 'limit' in shared_form:
+            self.params.display_num_rows = int(shared_form['limit'])
+
     # Level I
 
     def getHtmlContent(self):
@@ -310,7 +317,8 @@ class ReportBase(BasePage):
         panel = div(
             a('X', href="#", class_="close", id='close') + \
             div(self.reportFilters.getControls() + \
-                self.reportSummaries.getControls(),
+                self.reportSummaries.getControls() + \
+                self.reportLimits.getControls(),
                 id='filters-and-summaries-container'
             ) + \
             self.reportColumns.getColumnChooser() + \
@@ -327,10 +335,12 @@ class ReportBase(BasePage):
             show_sql_panel = 'show_sql_panel'
             sort_by = 'sort_by'
             s_sort_by = 's_sort_by'
+            limit = 'limit'
             clear_cntrls = 'clear_cntrls'
         else:
             itype = 'hidden'
-            page_num = show_sql_panel = sort_by = s_sort_by = clear_cntrls = ''
+            page_num = show_sql_panel = sort_by = s_sort_by = limit = \
+                clear_cntrls = ''
 
         show_report_params = ''
         if 'r' in self.form:
@@ -352,6 +362,8 @@ class ReportBase(BasePage):
                                    value="%s:%s" \
                                    % (self.params.s_sort_column,
                                       self.params.s_sort_direction)) +\
+               limit + input(name='limit', type=itype,
+                             value=self.params.display_num_rows) +\
                clear_cntrls + input(name='clear_cntrls', type=itype) +\
                show_report_params
             
@@ -551,7 +563,7 @@ class ReportBase(BasePage):
                 if column.get('type') == 'integer' and (value or value==0):
                     value = "{:,.0f}".format(value)
                 elif column.get('type') == 'percent' and value != '':
-                    value = "{:,.2f}%".format(value*100)
+                    value = "{:,.1f}%".format(value*100)
                 elif column.get('type') == 'date' and value:
                     value = format_date(value)
                 if target == 'html' and column.get('html'):
