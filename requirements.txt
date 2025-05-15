@@ -90,7 +90,7 @@ twilio==8.10.3
 typing_extensions==4.12.2
 tzdata==2023.3
 uritemplate==4.1.1
-urllib3==2.1.0
+urllib3==2.2.2
 vlib==2.0.2
 vweb==2.0.0
 Werkzeug==3.1.3
