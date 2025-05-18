@@ -165,6 +165,12 @@ table.vtable {
   border-collapse: collapse;
 }
 
+table.vtable .totals_row {
+    background-color: lightyellow;
+}
+table.vtable .totals_row td {
+    border-bottom: 1px solid grey;
+}
 table.vtable tr th {
   background-color: #badae4;
   padding: 6px; 
@@ -331,6 +337,9 @@ a.vbutton:hover {
 
 /* #column-chooser */
 
+#summary-input-section {
+    display: flex;
+}
 #column-chooser { 
   display: inline-block;
   width: 49%;
