@@ -3,6 +3,8 @@
 import os, sys
 import yaml
 
+from flask import request
+
 from vlib import db
 from vlib.sqlutils import pretty_sql
 from vlib.utils import list2csv, format_date
@@ -196,7 +198,12 @@ class ReportBase(BasePage):
                                     % group_by_name)
 
         # Set show_totals
-        self.params.show_summary_totals =shared_form.get('show_summary_totals')
+        if request.method == 'GET':
+            # initially read from main.yaml
+            self.params.show_summary_totals = self.params.get('show_totals')
+        else:
+            self.params.show_summary_totals = \
+                shared_form.get('show_summary_totals')
 
         # Column report_links init:
         # report_key column must be selected
