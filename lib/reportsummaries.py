@@ -30,8 +30,7 @@ class ReportSummaries(object):
             params['checked'] = 1
         checkbox = input(**params)
         table.addRow(['Show Summary Totals', checkbox])
-        show_summary_totals = div(table.getTable(), id='show_summary_totals')+\
-            f"show_totals: {self.params.get('show_totals')}"
+        show_summary_totals = div(table.getTable(), id='show_summary_totals')
 
         # Rest button
         reset_button = a('Reset Summary', id='reset-filters', class_='vbutton',
