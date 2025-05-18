@@ -40,6 +40,17 @@ class ReportSqlBuilder(object):
         #print 'sql: %s' % pretty_sql(sql, True)
         return sql
 
+    def getTotalsSQL(self):
+        self._sqlPrep()
+        sql_t = (
+            'select {totals_select_clause} '
+            'from {base_table} {base_table_alias} '
+            '{join_clause} '
+            '{where_clause}'
+        )
+        sql = sql_t.format(**self.sql_params)
+        return sql
+
     def _sqlPrep(self):
         if self.prepped:
             return
@@ -55,6 +66,7 @@ class ReportSqlBuilder(object):
                                          self.where_aliases)
         self.sql_params.select_clause     = self._getSelectClause()
         self.sql_params.count_select_clause = self._getCountSelectClause()
+        self.sql_params.totals_select_clause = self._getTotalsSelectClause()
         self.sql_params.join_clause       = self._getJoinClause()
         self.sql_params.count_join_clause = self._getJoinClause('Count')
         self.sql_params.where_clause      = self._getWhereClause()
@@ -146,13 +158,26 @@ class ReportSqlBuilder(object):
             select.append("%s as %s" % (s, c.name))
         return ', '.join(select)
 
+    def _getTotalsSelectClause(self):
+        select = []
+        for c in self.reportColumns.getSelectedColumns():
+            if self.params.get('group_bys') \
+               and isSumOrCount(c.get('aggregate_func')):
+                s = "%s(%s)" % (c.aggregate_func, c.select)
+            elif self.params.get('group_bys') and c.get('aggregate_func2'):
+                s = c.aggregate_func2
+            else:
+                s = "''"
+            select.append("%s as %s" % (s, c.name))
+        return ', '.join(select)
+
     def _getCountSelectClause(self):
         if self.params.group_bys:
             return 'count(distinct %s) as count' % ', '.join(
                 [c.select for c in self.params.group_bys])
         else:
             return 'count(*) as count'
-        
+
     def _getJoinClause(self, target=''):
         '''Return SQL Join Statement
            based on (self.aliases or self.where_aliases) and
@@ -231,4 +256,10 @@ def _getAliases(sql_code):
     except Exception as e:
         raise Exception("Unable to determine table alias from sql_code: '%s'. You must specify an 'alias' value. %s" % (sql_code, e))
     return [alias]
-        
+
+def isSumOrCount(aggregate_func):
+    '''Return True if aggregate_func contains sum or count - and not avg'''
+    if aggregate_func:
+        if 'sum' in aggregate_func or 'count' in aggregate_func:
+            return 1
+    return 0

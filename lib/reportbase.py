@@ -195,6 +195,9 @@ class ReportBase(BasePage):
                     raise Exception('Unrecognized group_by value: %s'
                                     % group_by_name)
 
+        # Set show_totals
+        self.params.show_summary_totals =shared_form.get('show_summary_totals')
+
         # Column report_links init:
         # report_key column must be selected
         for column in self.reportColumns.getSelectedColumns():
@@ -294,6 +297,8 @@ class ReportBase(BasePage):
         o = ''
         o += ','.join([c.display for
                        c in self.reportColumns.getSelectedColumns()]) + '\n'
+        if self.params.group_bys and self.params.show_summary_totals:
+            o += list2csv([self.getTotals(target='csv')])
         o += list2csv(self.getData(target='csv'))
         return o
 
@@ -477,6 +482,10 @@ class ReportBase(BasePage):
     def getReportTable(self):
         table = HtmlTable(class_='vtable')
         table.addHeader(self.getColumnHeaders())
+        if self.params.group_bys and self.params.show_summary_totals:
+            table.addRow(self.getTotals())
+            table.setRowClass(table.rownum, 'totals_row')
+
         for row in self.getData():
             #table.addRow(row)
             # experimenting with nobr 9/3/2013 -dvl
@@ -539,8 +548,11 @@ class ReportBase(BasePage):
 
     # Data Level:
     
-    def getData(self, target='html'):
-        sql = self.sqlBuilder.getSQL(limited=target!='csv')
+    def getData(self, target='html', totals=0):
+        if totals:
+            sql = self.sqlBuilder.getTotalsSQL()
+        else:
+            sql = self.sqlBuilder.getSQL(limited=target!='csv')
         if self.params.debug_sql:
             self.debug_msg += p("SQL: %s" % pretty_sql(sql, True))
 
@@ -583,6 +595,8 @@ class ReportBase(BasePage):
                               target='_blank')
                 row2.append(value)
             table.append(list(map(str, row2)))
+        if totals:
+            return row2
         return table
     
     def getRowCount(self):
@@ -592,6 +606,9 @@ class ReportBase(BasePage):
                 self.debug_msg += p("Count SQL: %s" % pretty_sql(sql, True))
             self._row_count = self.db.query(sql)[0]['count']
         return self._row_count
+
+    def getTotals(self, target='html'):
+        return self.getData(target, totals=1)
 
 # Helpers
 
