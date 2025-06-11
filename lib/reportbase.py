@@ -198,12 +198,10 @@ class ReportBase(BasePage):
                                     % group_by_name)
 
         # Set show_totals
-        if request.method == 'GET':
-            # initially read from main.yaml
-            self.params.show_summary_totals = self.params.get('show_totals')
+        if 'show_totals' in shared_form:
+            self.params.show_summary_totals = int(shared_form['show_totals'])
         else:
-            self.params.show_summary_totals = \
-                shared_form.get('show_summary_totals')
+            self.params.show_summary_totals = 1
 
         # Column report_links init:
         # report_key column must be selected
