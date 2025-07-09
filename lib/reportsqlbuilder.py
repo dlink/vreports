@@ -161,7 +161,9 @@ class ReportSqlBuilder(object):
     def _getTotalsSelectClause(self):
         select = []
         for c in self.reportColumns.getSelectedColumns():
-            if self.params.get('group_bys') \
+            if c.get('no_summary_totals'):
+                s = "''"
+            elif self.params.get('group_bys') \
                and isSumOrCount(c.get('aggregate_func')):
                 s = "%s(%s)" % (c.aggregate_func, c.select)
             elif self.params.get('group_bys') and c.get('aggregate_func2'):
