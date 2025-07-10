@@ -206,6 +206,22 @@ table.vtable a:hover {
   color: orange;
 }
 
+/* floating header */
+div.vtable_float_header {
+    max-height: 600px;
+    overflow: auto;
+}
+table.vtable {
+  text-align: left;
+  position: relative;
+}
+
+table.vtable th {
+  background: white;
+  position: sticky;
+  top: 0;
+}
+
 /* footer */
 #report_table_footer {
    margin: 30px 0 20px;

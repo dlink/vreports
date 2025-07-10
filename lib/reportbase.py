@@ -513,7 +513,7 @@ class ReportBase(BasePage):
                 table.setColClass(col, column['class'])
             col += 1
 
-        return table.getTable()
+        return div(table.getTable(), class_='vtable_float_header')
 
     def getReportTableFooter(self):
         
