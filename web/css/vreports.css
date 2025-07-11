@@ -262,6 +262,7 @@ a.vbutton:hover {
   width: 100%;
   background: rgba(0, 0, 0, .5);
   overflow: scroll;
+  z-index: 10;
 }
 #customize-report-panel-wrapper a.vbutton {
   font-size: 12px;
