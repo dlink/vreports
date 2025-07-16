@@ -325,6 +325,7 @@ class ReportBase(BasePage):
                           id='customize-report-buttons')
 
         panel = div(
+            span(self.params.report_title, id='customize-report-header') + \
             a('X', href="#", class_="close", id='close') + \
             div(self.reportFilters.getControls() + \
                 self.reportSummaries.getControls() + \

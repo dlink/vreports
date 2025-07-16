@@ -290,6 +290,14 @@ a.vbutton:hover {
 .close:hover {
    color: #d4bbbb;
 }
+#customize-report-header {
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    line-height: 25px;
+    font-size: medium;
+    color: #555;
+}
 
 /* customize-report-buttons */
 
