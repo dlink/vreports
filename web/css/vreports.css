@@ -142,6 +142,11 @@ body {
   font-weight: bold
 }
 
+#report-header #report-name .subtitle {
+  font-size: 14px;
+  font-weight: Normal;
+}
+
 #report-header #report-description {
   font-size: 14px;
   padding-right: 30px;

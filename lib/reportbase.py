@@ -94,7 +94,8 @@ class ReportBase(BasePage):
 
         # bring in additional_conf_file if exists
         if self.additional_conf_file:
-            self.params = dict2odict(yaml.safe_load(open(self.additional_conf_file)))
+            self.params = dict2odict(yaml.safe_load(
+                open(self.additional_conf_file)))
 
         # init num_group_bys
         self.params['num_group_bys'] = NUM_GROUP_BYS
@@ -148,6 +149,11 @@ class ReportBase(BasePage):
             # Convert Integers
             if control.type in ('integer', 'menu'):
                 control.value = int(control.value)
+
+        if 'report_title' in shared_form:
+            self.params.report_title = \
+                f"{shared_form['report_title']} " \
+                f"<span class='subtitle'>[{self.params.report_title}]</span>"
 
         # Pager Control: Init
         if 'page_num' in shared_form:
