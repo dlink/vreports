@@ -42,6 +42,11 @@ class ReportBase(BasePage):
         'sort_desc': '/images/sort_desc.png',
     }
 
+    # def log(self, msg):
+    #     fp = open('/home/dlink/v.log', 'a')
+    #     fp.write(msg + '\n')
+    #     fp.close()
+
     def __init__(self, report_name=None, allow_download=True,
                  additional_conf_file=None):
         '''Constructor:
@@ -135,20 +140,29 @@ class ReportBase(BasePage):
         BasePage.process(self)
 
         shared_form = {}
+        multi_menus = [c.name for c in self.params.controls
+                       if c.type == 'multi_menu']
         for field in self.form:
-            shared_form[field] = self.form[field]
+            if field in multi_menus:
+                shared_form[field] = self.form.getlist(field)
+            else:
+                shared_form[field] = self.form[field]
 
         # Controls: Init
         for control in self.params.controls:
             # Reads user setting or set default values
             if control.name in shared_form:
-                control.value = shared_form[control.name].strip()
+                control.value = shared_form[control.name]
             else:
                 control.value = control.default
 
-            # Convert Integers
+            # Convert Integers / strip strings
             if control.type in ('integer', 'menu'):
                 control.value = int(control.value)
+            elif control.type == 'multi_menu':
+                control.value = list(map(int, control.value))
+            else:
+                control.value = control.value.strip()
 
         if 'report_title' in shared_form:
             self.params.report_title = \
@@ -394,10 +408,18 @@ class ReportBase(BasePage):
         for control in self.params.controls:
             if control.get('value'):
                 if control.type == 'menu':
-                    value = control.menu[control.value]
+                    desc = control.menu[control.value]
+                elif control.type == 'multi_menu':
+                    descs = []
+                    for value in control.value:
+                        descs.append(control.menu[value])
+                    if len(descs) == 1:
+                        desc = desc[0]
+                    else:
+                        desc = f"({', '.join(descs)})"
                 else:
-                    value = control.value
-                filters.append("%s: %s" % (control.display, value))
+                    desc = control.value
+                filters.append("%s: %s" % (control.display, desc))
         if self.params.group_bys:
             filters.append('Summarized by: %s' % ', '.join(
                     [c.display for c in self.params.group_bys]))

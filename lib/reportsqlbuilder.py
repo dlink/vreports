@@ -5,7 +5,12 @@ from vlib.odict import odict
 from vweb.html import *
 
 class ReportSqlBuilder(object):
-    
+
+    # def log(self, msg):
+    #     fp = open('/home/dlink/v.log', 'a')
+    #     fp.write(msg + '\n')
+    #     fp.close()
+
     def __init__(self, params, reportColumns):
         self.params        = params
         self.reportColumns = reportColumns
@@ -208,11 +213,13 @@ class ReportSqlBuilder(object):
     def _getWhereClause(self):
         filters = []
         for control in self.params.controls:
-            if control.value: 
+            if control.value:
                 value = control.value
                 if isinstance(value, str):
                     value = value.replace("'", "''")
-                if control.type == 'multiple':
+                if control.type == 'multi_menu':
+                    value = '(' + ','.join(map(str, value)) + ')'
+                elif control.type == 'multiple':
                     value = ','.join(['"%s"' % v
                                       for v in control.value.split(' ')])
                 filters.append(control.filter.format(value=value))
