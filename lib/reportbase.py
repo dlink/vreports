@@ -412,7 +412,7 @@ class ReportBase(BasePage):
                 elif control.type == 'multi_menu':
                     descs = []
                     for value in control.value:
-                        descs.append(control.menu[value])
+                        descs.append(control.menu[value] or "None")
                     if len(descs) == 1:
                         desc = descs[0]
                     else:

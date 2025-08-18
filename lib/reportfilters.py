@@ -96,7 +96,8 @@ class ReportFilters(object):
             else:
                 options += option(control.menu[key], value=key)
         if control.type == 'multi_menu':
-            return select(options, name=control.name, multiple=1)
+            return select(options, name=control.name, multiple=1,
+                          class_='multiple_select')
         return select(options, name=control.name)
 
 def listToTable(alist):
