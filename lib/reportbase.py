@@ -414,7 +414,7 @@ class ReportBase(BasePage):
                     for value in control.value:
                         descs.append(control.menu[value])
                     if len(descs) == 1:
-                        desc = desc[0]
+                        desc = descs[0]
                     else:
                         desc = f"({', '.join(descs)})"
                 else:
