@@ -416,7 +416,7 @@ class ReportBase(BasePage):
                     if len(descs) == 1:
                         desc = descs[0]
                     else:
-                        desc = f"({', '.join(descs)})"
+                        desc = f"({', '.join(map(str, descs))})"
                 else:
                     desc = control.value
                 filters.append("%s: %s" % (control.display, desc))
