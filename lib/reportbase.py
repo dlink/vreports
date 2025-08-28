@@ -388,6 +388,24 @@ class ReportBase(BasePage):
         return div(img(src=self.images['loading'], id="loading-indicator"),
                    id="loading-indicator-wrapper")
 
+    @property
+    def report_short_description(self):
+        desc = []
+        for control in self.params.controls:
+            if control.get('value'):
+                if control.type == 'menu':
+                    value = control.menu[control.value]
+                else:
+                    value = control.value
+                desc.append(value)
+        if self.params.group_bys:
+            desc.append('-%s' % '_'.join(
+                    [c.display for c in self.params.group_bys]))
+        filter_desc = '-'.join(map(str, desc)).replace(' ', '')
+        if not filter_desc:
+            filter_desc = 'All'
+        return f'{self.report_name}_{filter_desc}'
+
     def getReportDesc(self):
         # get filter description
         filters = []
