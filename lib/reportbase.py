@@ -145,6 +145,8 @@ class ReportBase(BasePage):
         for field in self.form:
             if field in multi_menus:
                 shared_form[field] = self.form.getlist(field)
+                shared_form[field] = [v for v in shared_form[field]
+                                      if v != '0']
             else:
                 shared_form[field] = self.form[field]
 
