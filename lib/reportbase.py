@@ -402,6 +402,32 @@ class ReportBase(BasePage):
         return div(img(src=self.images['loading'], id="loading-indicator"),
                    id="loading-indicator-wrapper")
 
+    @property
+    def report_short_description(self):
+        short_filters = []
+        for control in self.params.controls:
+            if control.get('value'):
+                if control.type == 'menu':
+                    desc = control.menu[control.value]
+                elif control.type == 'multi_menu':
+                    descs = []
+                    for value in control.value:
+                        descs.append(control.menu[value] or "None")
+                    if len(descs) == 1:
+                        desc = descs[0]
+                    else:
+                        desc = f"({', '.join(map(str, descs))})"
+                else:
+                    desc = control.value
+                short_filters.append(desc)
+        if self.params.group_bys:
+            short_filters.append('--%s' % '-'.join(
+                    [c.display for c in self.params.group_bys]))
+        filter_short_desc = '-'.join(map(str, short_filters)).replace(' ', '')
+        if not filter_short_desc:
+            filter_short_desc = 'All'
+        return f'{self.report_name}: {filter_short_desc}'
+
     def getReportDesc(self):
         # get filter description
         filters = []
