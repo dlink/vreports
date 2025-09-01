@@ -215,64 +215,28 @@ class ReportBase(BasePage):
             if column.get('report_link'):
                 self.reportColumns.getColumn(column.report_key).selected = True
 
-        # clear controls if nec. (deprecated - now done in JS)
-        #if 'clear_cntrls' in shared_form:
-        #    for control in self.params.controls:
-        #        control.value = control.default
-        #    for n in range(1, self.params.num_group_bys+1):
-        #        gbn = 'group_by_%s' % n
-        #        if gbn in self.params:
-        #            del self.params[gbn]
-
-        # sort_by
-        # TO DO: refactor this mess
-        sort_by = None
-        if 'sort_by' in shared_form:
-            sort_by = shared_form['sort_by']
-            if sort_by == ':': # ignore blanks
+        # # sort_by
+        for sort_by_type in ('sort_by', 's_sort_by'):
+            for p in range(1, 5):
+                ind = '' if p == 1 else p
+                sort_by_var = f'{sort_by_type}{ind}'
+                sort_column = ''
+                sort_direction = ''
                 sort_by = None
-            else:
-                col, dir = sort_by.split(':')
-                # ignore value no longer in form
-                if col not in [c.name for c in
-                               self.reportColumns.getSelectedColumns()]:
-                    sort_by = None
-        if not sort_by and not self.params.group_bys:
-            # default:
-            sort_by = self.params.get('sort_by', '1:desc')
-        if sort_by:
-            sort_column, sort_direction = sort_by.split(':')
-            if sort_column not in [c.name for c in \
-                                   self.reportColumns.getSelectedColumns()]:
-                sort_column = 1
-        else:
-            sort_column = sort_direction = ''
-        self.params.sort_column    = sort_column
-        self.params.sort_direction = sort_direction
-
-        # s_sort_by
-        s_sort_by = None
-        if 's_sort_by' in shared_form:
-            s_sort_by = shared_form['s_sort_by']
-            
-            if s_sort_by == ':': # ignore blanks
-                s_sort_by = None
-            else:
-                col, dir = s_sort_by.split(':')
-                # ignore value no longer in form
-                if col not in [c.name for c in
-                               self.reportColumns.getSelectedColumns()]:
-                    s_sort_by = None
-        if not s_sort_by and self.params.group_bys:
-            # defaults
-            s_sort_by ='%s:desc' \
-                          % self.reportColumns.getSelectedColumns()[0].name
-        if s_sort_by:
-            s_sort_column, s_sort_direction = s_sort_by.split(':')
-        else:
-            s_sort_column = s_sort_direction = ''
-        self.params.s_sort_column    = s_sort_column
-        self.params.s_sort_direction = s_sort_direction
+                if sort_by_var in shared_form:
+                    sort_by = shared_form[sort_by_var]
+                    if sort_by == ':': # ignore blanks
+                        sort_by = None
+                # default
+                if not sort_by and p == 1:
+                    sort_by = self.params.get(sort_by_type, '1:desc')
+                if sort_by:
+                    sort_column, sort_direction = sort_by.split(':')
+                    if sort_column not in [
+                            c.name for c in \
+                            self.reportColumns.getSelectedColumns()]:
+                        sort_column = 1
+                self.params[sort_by_var] = f'{sort_column}:{sort_direction}'
 
         # limit
         if 'limit' in shared_form:
@@ -350,14 +314,11 @@ class ReportBase(BasePage):
             itype      = 'text'
             page_num = 'page_num'
             show_sql_panel = 'show_sql_panel'
-            sort_by = 'sort_by'
-            s_sort_by = 's_sort_by'
             limit = 'limit'
             clear_cntrls = 'clear_cntrls'
         else:
             itype = 'hidden'
-            page_num = show_sql_panel = sort_by = s_sort_by = limit = \
-                clear_cntrls = ''
+            page_num = show_sql_panel = limit = clear_cntrls = ''
 
         show_report_params = ''
         if 'r' in self.form:
@@ -367,23 +328,27 @@ class ReportBase(BasePage):
           show_report_params += input(name='u', type=itype,
                                       value=self.form['u'].value)
 
+        sort_bys = ''
+        for sort_by_type in ('sort_by', 's_sort_by'):
+            for p in range(1, 5):
+                ind = '' if p == 1 else p
+                sort_by_var = f'{sort_by_type}{ind}'
+                field = sort_by_var if SHOW_HIDDEN else ''
+                sort_bys += field + input(name=sort_by_var,
+                                         type=itype,
+                                         value = self.params[sort_by_var])
+
         return page_num + input(name='page_num', type=itype,
                                 value=self.params.page_num) + \
                show_sql_panel + input(name='show_sql',
                                       type=itype,
                                       value=self.params.show_sql_panel) + \
-               sort_by + input(name='sort_by', type=itype,
-                               value="%s:%s" % (self.params.sort_column,
-                                                self.params.sort_direction)) +\
-               s_sort_by + input(name='s_sort_by', type=itype,
-                                   value="%s:%s" \
-                                   % (self.params.s_sort_column,
-                                      self.params.s_sort_direction)) +\
+               sort_bys + \
                limit + input(name='limit', type=itype,
                              value=self.params.display_num_rows) +\
                clear_cntrls + input(name='clear_cntrls', type=itype) +\
                show_report_params
-            
+
     def getLoadingIndicator(self):
         return div(img(src=self.images['loading'], id="loading-indicator"),
                    id="loading-indicator-wrapper")
@@ -560,16 +525,14 @@ class ReportBase(BasePage):
     
     def getSortIndicator(self, column):
         indicator = ''
-        if column.get('type') == 'string':
+        if column.get('type', 'string') == 'string':
             direction = 'asc'
         else:
             direction = 'desc'
         if self.params.group_bys:
-            sort_column    = self.params.s_sort_column
-            sort_direction = self.params.s_sort_direction
+            sort_column, sort_direction = self.params['s_sort_by'].split(':')
         else:
-            sort_column    = self.params.sort_column
-            sort_direction = self.params.sort_direction
+            sort_column, sort_direction = self.params['sort_by'].split(':')
         if column.name == sort_column:
             icon_name = f'sort_{sort_direction}'
             indicator = img(src=self.images[icon_name])

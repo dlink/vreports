@@ -37,7 +37,7 @@ class ReportSqlBuilder(object):
                 '{limit_clause}'
         sql = sql_t.format(**self.sql_params)
         #from vlib.sqlutils import pretty_sql
-        #print 'sql: %s' % pretty_sql(sql, True)
+        #logit(pretty_sql(sql))
         return sql
 
     def getTotalsSQL(self):
@@ -227,13 +227,18 @@ class ReportSqlBuilder(object):
         return ''
                           
     def _getOrderByClause(self):
+        sort_bys = []
+        sort_by_type = 'sort_by'
         if self.params.group_bys:
-            sort_column    = self.params.s_sort_column
-            sort_direction = self.params.s_sort_direction
-        else:
-            sort_column    = self.params.sort_column
-            sort_direction = self.params.sort_direction
-        return 'order by %s %s' % (sort_column, sort_direction)
+            sort_by_type = 's_sort_by'
+        for p in range(1, 5):
+            ind = '' if p==1 else p
+            if self.params[f'{sort_by_type}{ind}']:
+                sort_by = self.params[f'{sort_by_type}{ind}']
+                if sort_by and sort_by != ':':
+                    sort_column, sort_direction = sort_by.split(':')
+                    sort_bys.append(f'{sort_column} {sort_direction}')
+        return f"order by {', '.join(sort_bys)}"
     
     def _getLimitClause(self):
         if self.params.get('mssql'):
