@@ -5,6 +5,11 @@ class ReportFiltersError(Exception): pass
 
 class ReportFilters(object):
     
+    # def log(self, msg):
+    #     fp = open('/home/dlink/v.log', 'a')
+    #     fp.write(msg + '\n')
+    #     fp.close()
+
     def __init__(self, params):
         self.params = params
         
@@ -28,7 +33,7 @@ class ReportFilters(object):
                     ctitle += '(s)'
             elif control.type == 'checkbox':
                 cinput = self._getCheckbox(control)
-            elif control.type == 'menu':
+            elif control.type in ('menu', 'multi_menu'):
                 cinput = self._getControlMenu(control)
             elif control.type == 'no_op':
                 ctitle = ''
@@ -80,11 +85,19 @@ class ReportFilters(object):
         p = keys.index(0)
         keys = [0] + keys[0:p] + keys[p+1:]
         for key in keys:
-            #if int(key) == int(control.get('value')):
-            if key == control.get('value'):
+            selected = 0
+            if control.type == 'multi_menu' and \
+               key in (control.get('value') or []):
+                selected = 1
+            elif key == control.get('value'):
+                selected = 1
+            if selected:
                 options += option(control.menu[key], value=key, selected='1')
             else:
                 options += option(control.menu[key], value=key)
+        if control.type == 'multi_menu':
+            return select(options, name=control.name, multiple=1,
+                          class_='multiple_select')
         return select(options, name=control.name)
 
 def listToTable(alist):
