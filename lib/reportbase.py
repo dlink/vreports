@@ -418,7 +418,7 @@ class ReportBase(BasePage):
                     if len(descs) == 1:
                         desc = descs[0]
                     else:
-                        desc = f"({', '.join(map(str, descs))})"
+                        desc = f"({'_'.join(map(str, descs))})"
                 else:
                     desc = control.value
                 short_filters.append(desc)
@@ -428,7 +428,7 @@ class ReportBase(BasePage):
         filter_short_desc = '-'.join(map(str, short_filters)).replace(' ', '')
         if not filter_short_desc:
             filter_short_desc = 'All'
-        return f'{self.report_name}: {filter_short_desc}'
+        return f'{self.report_name}:{filter_short_desc}'
 
     def getReportDesc(self):
         # get filter description
