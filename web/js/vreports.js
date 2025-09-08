@@ -39,13 +39,32 @@ function go_to_next_page() {
 
 /* sort controls */
 function set_sort(column_name, direction) {
-    document.form1.sort_by.value = column_name + ':' + direction
-    document.form1.submit();
+    let form = document.form1;
+    let current = form.sort_by.value || '';
+    let [cur_col, cur_dir] = current.split(':');
+
+    if (column_name != cur_col) {
+	form.sort_by4.value = form.sort_by3.value
+	form.sort_by3.value = form.sort_by2.value;
+	form.sort_by2.value = form.sort_by.value;
+    }
+    form.sort_by.value = column_name + ':' + direction
+    form.submit();
     return true;
 }
+
 function set_s_sort(column_name, direction) {
-    document.form1.s_sort_by.value = column_name + ':' + direction
-    document.form1.submit();
+    let form = document.form1;
+    let current = form.s_sort_by.value || '';
+    let [cur_col, cur_dir] = current.split(':');
+
+    if (column_name != cur_col) {
+	form.s_sort_by4.value = form.s_sort_by3.value
+	form.s_sort_by3.value = form.s_sort_by2.value;
+	form.s_sort_by2.value = form.s_sort_by.value;
+    }
+    form.s_sort_by.value = column_name + ':' + direction
+    form.submit();
     return true;
 }
 
