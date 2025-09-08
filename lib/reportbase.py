@@ -592,7 +592,7 @@ class ReportBase(BasePage):
     
     def getSortIndicator(self, column):
         indicator = ''
-        if column.get('type') == 'string':
+        if column.get('type', 'string') == 'string':
             direction = 'asc'
         else:
             direction = 'desc'
