@@ -188,15 +188,20 @@ class ReportBase(BasePage):
         # Column Chooser:  Init - Read user settings or set defaults
         found_values = False
         for column in self.params.columns:
-            #if column.get('type') != 'separator':
-            if '%s_column' % column.name in shared_form \
-                   and shared_form['%s_column' % column.name]:
+            # if you pass <col_name>_column in the URL args initially
+            # then it overrides all default columns and you only get
+            # the ones passed in.
+            # Unless <col_name>_column=0, then it just turns that one off
+            col = f'{column.name}.column'
+            if col in shared_form and shared_form[col] != '0':
                 column.selected = True
                 found_values = True
         if not found_values:
             for column in self.params.columns:
+                col = f'{column.name}_column'
                 if column.get('default'):
-                    column.selected = True
+                    if col not in shared_form or shared_form[col] != '0':
+                        column.selected = True
 
         # Set Group_by
         self.params.group_bys = []
