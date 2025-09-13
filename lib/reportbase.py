@@ -42,11 +42,6 @@ class ReportBase(BasePage):
         'sort_desc': '/images/sort_desc.png',
     }
 
-    # def log(self, msg):
-    #     fp = open('/home/dlink/v.log', 'a')
-    #     fp.write(msg + '\n')
-    #     fp.close()
-
     def __init__(self, report_name=None, allow_download=True,
                  additional_conf_file=None):
         '''Constructor:
@@ -219,11 +214,11 @@ class ReportBase(BasePage):
                     raise Exception('Unrecognized group_by value: %s'
                                     % group_by_name)
 
-        # Set show_totals
-        if 'show_totals' in shared_form:
-            self.params.show_summary_totals = int(shared_form['show_totals'])
-        else:
+        # Set show_summary_totals
+        if 'show_summary_totals' in shared_form:
             self.params.show_summary_totals = 1
+        else:
+            self.params.show_summary_totals = 0
 
         # Column report_links init:
         # report_key column must be selected
