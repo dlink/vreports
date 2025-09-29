@@ -161,10 +161,16 @@ class ReportBase(BasePage):
             else:
                 control.value = control.value.strip()
 
+        # report_title and base_table_name
+        #  report_title is initially assigned in main.yaml
+        #  base_table_name is then set to report_title
+        #  URL params override report_title with &report_title=X
+        #  Ex.: report_title = 'Account Dollar Sales'
+        #       base_table_name = 'Products'
+        #       full_title = '{report_title} + [{base_table_name}]'
+        self.params.base_table_name = self.params.report_title
         if 'report_title' in shared_form:
-            self.params.report_title = \
-                f"{shared_form['report_title']} " \
-                f"<span class='subtitle'>[{self.params.report_title}]</span>"
+            self.params.report_title = shared_form['report_title']
 
         # Pager Control: Init
         if 'page_num' in shared_form:
@@ -297,6 +303,9 @@ class ReportBase(BasePage):
     # Level II
     
     def getCustomizeReportPanel(self):
+        report_full_title = \
+            f'{self.params.report_title} [{self.params.base_table_name}]'
+
         submit_button = a('Submit', id='customize-report-submit-button',
                           class_='vbutton')
         cancel_button = a('Cancel', id='customize-report-cancel-button',
@@ -304,9 +313,8 @@ class ReportBase(BasePage):
 
         button_area = div(submit_button + cancel_button,
                           id='customize-report-buttons')
-
         panel = div(
-            span(self.params.report_title, id='customize-report-header') + \
+            span(report_full_title, id='customize-report-header') + \
             a('X', href="#", class_="close", id='close') + \
             div(self.reportFilters.getControls() + \
                 self.reportSummaries.getControls() + \
@@ -324,12 +332,13 @@ class ReportBase(BasePage):
         if SHOW_HIDDEN:
             itype      = 'text'
             page_num = 'page_num'
+            report_title = 'report_title'
             show_sql_panel = 'show_sql_panel'
             limit = 'limit'
             clear_cntrls = 'clear_cntrls'
         else:
             itype = 'hidden'
-            page_num = show_sql_panel = limit = clear_cntrls = ''
+            page_num = report_title=show_sql_panel = limit = clear_cntrls = ''
 
         show_report_params = ''
         if 'r' in self.form:
@@ -351,6 +360,8 @@ class ReportBase(BasePage):
 
         return page_num + input(name='page_num', type=itype,
                                 value=self.params.page_num) + \
+               report_title + input(name='report_title', type=itype,
+                                    value=self.params.report_title) + \
                show_sql_panel + input(name='show_sql',
                                       type=itype,
                                       value=self.params.show_sql_panel) + \
@@ -424,7 +435,10 @@ class ReportBase(BasePage):
             self.getCsvButton()]
 
         # assign ind. spans
-        report_name = span(self.params.report_title, id='report-name')
+        report_full_title = span(self.params.report_title + \
+                                 span(f' [{self.params.base_table_name}]',
+                                      class_='subtitle'),
+                                 id='report-name')
         report_description = span(filter_desc, id='report-description')
         report_paging_info = span(self.getRowCountDesc(),
                                   id='report-paging-info')
@@ -439,7 +453,7 @@ class ReportBase(BasePage):
             id='report-buttons')
 
         row2 = div(
-            report_name + \
+            report_full_title + \
             report_description + \
             report_paging_info,
             id='report-header-text')
