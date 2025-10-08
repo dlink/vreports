@@ -140,6 +140,35 @@ $(function() {
   }
 });
 
+/** Apply Excel-like conditional format on percent values, 
+ **  >= 0 Green
+ **  < 0 Red
+ **  Works on .vtable td.vpercent
+ */
+$(function() {
+  const tables = document.getElementsByClassName("vtable");
+
+  for (let table of tables) {
+    const percentageCells = table.getElementsByClassName("shade_percent");
+
+    for (let cell of percentageCells) {
+      // Skip header cells and empty fields
+      if (cell.tagName === "TH" || cell.textContent.trim() === "") {
+        continue;
+      }
+
+      const percentage = parseFloat(cell.textContent);
+
+      // Apply even more subtle colors
+      if (percentage < 0) {
+          cell.style.backgroundColor = "#ffe6e6"; // Very light red
+      } else {
+          cell.style.backgroundColor = "#e6ffe6"; // Very light green
+      }
+    }
+  }
+});
+
 /** toggleClass
  ** Toggles supplied className on element.
  */
@@ -166,3 +195,22 @@ function toggleClass(element, elemClass){
   }
   return true;
 }
+
+document.querySelectorAll('#customize-report-panel input, #customize-report-panel select, #customize-report-panel textarea')
+  .forEach(function(el) {
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault(); // optional
+        const form = el.closest('form');
+        if (form) form.submit();
+      }
+    });
+  });
+
+// Multi-select
+$(document).ready(function() {
+    $('.multiple_select').select2({
+	width: '100%',
+	closeOnSelect: false
+    });
+});
