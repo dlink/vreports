@@ -158,7 +158,7 @@ class ReportBase(BasePage):
                 control.value = int(control.value)
             elif control.type == 'multi_menu':
                 control.value = list(map(int, control.value))
-            else:
+            elif control.type not in ('date', 'datetime', 'time'):
                 control.value = control.value.strip()
 
         # report_title and base_table_name
