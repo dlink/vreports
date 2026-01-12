@@ -220,7 +220,7 @@ class ReportSqlBuilder(object):
                 if control.type == 'multi_menu':
                     value = '(' + ','.join(map(str, value)) + ')'
                 elif control.type == 'multiple':
-                    value = ','.join(['"%s"' % v
+                    value = ','.join(["'%s'" % v
                                       for v in control.value.split(' ')])
                 filters.append(control.filter.format(value=value))
         if not filters:
