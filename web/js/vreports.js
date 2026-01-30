@@ -36,6 +36,9 @@ function go_to_next_page() {
     document.form1.submit(); 
     return true;
 }
+function reset_page_num() {
+    document.form1.page_num.value = 1;
+}
 
 /* sort controls */
 function set_sort(column_name, direction) {
@@ -113,6 +116,7 @@ $(function() {
 	  if (p) {
               toggleClass(p, 'show');
 	  }
+	  reset_page_num();
 	  document.form1.submit();
       });
   }
