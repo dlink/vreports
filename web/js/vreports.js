@@ -52,6 +52,11 @@ function set_sort(column_name, direction) {
 	form.sort_by2.value = form.sort_by.value;
     }
     form.sort_by.value = column_name + ':' + direction
+    var p = document.getElementById('loading-indicator-wrapper');
+    if (p) {
+        toggleClass(p, 'show');
+    }
+    reset_page_num();
     form.submit();
     return true;
 }
@@ -67,6 +72,11 @@ function set_s_sort(column_name, direction) {
 	form.s_sort_by2.value = form.s_sort_by.value;
     }
     form.s_sort_by.value = column_name + ':' + direction
+    var p = document.getElementById('loading-indicator-wrapper');
+    if (p) {
+        toggleClass(p, 'show');
+    }
+    reset_page_num();
     form.submit();
     return true;
 }
