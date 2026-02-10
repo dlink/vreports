@@ -36,6 +36,9 @@ function go_to_next_page() {
     document.form1.submit(); 
     return true;
 }
+function reset_page_num() {
+    document.form1.page_num.value = 1;
+}
 
 /* sort controls */
 function set_sort(column_name, direction) {
@@ -71,13 +74,15 @@ function set_s_sort(column_name, direction) {
 $(function() {
    $(".date").datepicker({dateFormat: "yy-mm-dd" });
 
-   // Fix form action if current page contains GET parameters
-   if(window.location.href.indexOf('?') != -1) {
-     var cleanUrl = window.location.href.substring(0, window.location.href.indexOf('?'));
-     $("form[name=form1]")
-       .attr('action', cleanUrl)
-       .attr('method', 'POST');
-   }
+    // Fix form action if current page contains GET parameters
+    let form = document.form1;
+    const method = (form.getAttribute('method') || '').toLowerCase();
+    if (method == 'post' && window.location.href.indexOf('?') != -1) {
+	var cleanUrl = window.location.href.substring(0, window.location.href.indexOf('?'));
+	$("form[name=form1]")
+	    .attr('action', cleanUrl)
+	    .attr('method', 'POST');
+    }
 
    /* Show Customize Report Panel Window */
    var b = document.getElementById('customize-report-button');
@@ -113,6 +118,7 @@ $(function() {
 	  if (p) {
               toggleClass(p, 'show');
 	  }
+	  reset_page_num();
 	  document.form1.submit();
       });
   }
