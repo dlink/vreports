@@ -164,9 +164,23 @@ class ReportSqlBuilder(object):
         return ', '.join(select)
 
     def _getTotalsSelectClause(self):
+        # get no_sum_triggers and no_sum_multi_value_triggers
+        no_sum_triggers = []
+        for control in self.params.controls:
+            if control.value:
+                if control.get('no_sum_trigger'):
+                    no_sum_triggers.append(control.no_sum_trigger)
+                elif (control.get('no_sum_multi_value_trigger') and \
+                      control.type == 'multi_menu' and \
+                      len(control.value) > 1):
+                    no_sum_triggers.append(
+                        control.no_sum_multi_value_trigger)
+
         select = []
         for c in self.reportColumns.getSelectedColumns():
             if c.get('no_summary_totals'):
+                s = "''"
+            elif c.get('no_summary_if') in no_sum_triggers:
                 s = "''"
             elif self.params.get('group_bys') \
                and isSumOrCount(c.get('aggregate_func')):
