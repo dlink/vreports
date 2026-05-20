@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 
 import os, sys
+import re
 import yaml
 
 from flask import request
@@ -615,7 +616,8 @@ class ReportBase(BasePage):
                 if target == 'html' and column.get('html'):
                     value = column.html % value
                 if target == 'html' and column.get('link'):
-                    value = a(value, href=column.link % value, target='_blank')
+                    link = self.expandParams(column.link)
+                    value = a(value, href=link % value, target='_blank')
 
                 # report_link and report_key allows linking into other reports
                 if target == 'html' and column.get('report_link') and \
@@ -632,7 +634,22 @@ class ReportBase(BasePage):
         if totals:
             return row2
         return table
-    
+
+    def expandParams(self, s):
+        '''Expand {foo.bar} placeholders from self.params.
+
+           Example:
+           "https://admin.shopify.com/store/{shopify.admin_store}/products/%s"
+        '''
+
+        def replace(match):
+            value = self.params
+            for part in match.group(1).split('.'):
+                value = value[part]
+            return str(value)
+
+        return re.sub(r'\{([^}]+)\}', replace, s)
+
     def getRowCount(self):
         if '_row_count' not in self.__dict__:
             sql = self.sqlBuilder.getCountSQL()
