@@ -392,7 +392,7 @@ class ReportBase(BasePage):
                     else:
                         desc = f"({'_'.join(map(str, descs))})"
                 else:
-                    desc = control.value
+                    desc = control.value[1:25]
                 short_filters.append(desc)
         if self.params.group_bys:
             short_filters.append('--%s' % '-'.join(
