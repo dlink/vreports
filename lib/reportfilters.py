@@ -1,3 +1,5 @@
+from html import escape
+
 from vweb.htmltable import HtmlTable
 from vweb.html import *
 
@@ -35,6 +37,8 @@ class ReportFilters(object):
                 cinput = self._getCheckbox(control)
             elif control.type in ('menu', 'multi_menu'):
                 cinput = self._getControlMenu(control)
+            elif control.type in ('tree', 'multi_tree'):
+                cinput = self._getTreeControl(control)
             elif control.type == 'no_op':
                 ctitle = ''
                 cinput = ''
@@ -99,6 +103,61 @@ class ReportFilters(object):
             return select(options, name=control.name, multiple=1,
                           class_='multiple_select')
         return select(options, name=control.name)
+
+    def _getTreeControl(self, control):
+        values = control.get('value') or []
+        if control.type == 'tree':
+            values = [values] if values else []
+        selected = set(values)
+
+        hidden_values = ''.join(
+            input(type_='hidden', name=control.name, value=value,
+                  class_='tree-value')
+            for value in values
+        )
+        options = self._getTreeOptions(control.menu, selected)
+        box = div('', class_='tree-box', tabindex='0', role='combobox',
+                  aria_expanded='false', aria_haspopup='tree')
+        dropdown = div(options, class_='tree-dropdown', role='tree')
+        return div(hidden_values + box + dropdown,
+                   class_='tree-select %s' % control.type,
+                   data_name=control.name)
+
+    def _getTreeOptions(self, menu, selected):
+        options = ''
+        for key, value in menu.items():
+            if isinstance(value, dict):
+                branch = button(escape(str(key)), type_='button',
+                                class_='tree-parent',
+                                aria_expanded='false')
+                children = div(self._getTreeOptions(value, selected),
+                               class_='tree-children', role='group')
+                options += div(branch + children, class_='tree-node')
+                continue
+
+            is_selected = key in selected
+            css_class = 'tree-option selected' if is_selected \
+                        else 'tree-option'
+            options += button(
+                escape(str(value)), type_='button', class_=css_class,
+                data_value=escape(str(key), quote=True),
+                data_label=escape(str(value), quote=True),
+                role='treeitem',
+                aria_selected='true' if is_selected else 'false'
+            )
+        return options
+
+
+def getMenuLabel(menu, target):
+    '''Return the label for a leaf value in a nested menu.'''
+    for key, value in menu.items():
+        if isinstance(value, dict):
+            label = getMenuLabel(value, target)
+            if label is not None:
+                return label
+        elif key == target:
+            return value
+    return None
 
 def listToTable(alist):
     '''Given a list of tuples

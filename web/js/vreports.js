@@ -10,6 +10,11 @@ function reset_filters() {
     $('#filter-chooser input[type=text]').val('');
     $('#filter-chooser input[type=checkbox]').attr('checked', false);
     $('#filter-chooser select').val(0);
+    document.querySelectorAll('#filter-chooser .tree-select')
+        .forEach(function(tree) {
+            setTreeValues(tree, []);
+            renderTreeSelect(tree);
+        });
     return true;
 }
 function reset_summaries() {
@@ -228,5 +233,141 @@ $(document).ready(function() {
     $('.multiple_select').select2({
 	width: '100%',
 	closeOnSelect: false
+    });
+});
+
+function getTreeValues(tree) {
+    return Array.from(tree.querySelectorAll('.tree-value'))
+        .map(function(input) { return input.value; });
+}
+
+function setTreeValues(tree, values) {
+    tree.querySelectorAll('.tree-value').forEach(function(input) {
+        input.remove();
+    });
+
+    const box = tree.querySelector('.tree-box');
+    values.forEach(function(value) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = tree.dataset.name;
+        input.value = value;
+        input.className = 'tree-value';
+        tree.insertBefore(input, box);
+    });
+}
+
+function findTreeOption(tree, value) {
+    return Array.from(tree.querySelectorAll('.tree-option'))
+        .find(function(option) { return option.dataset.value === value; });
+}
+
+function renderTreeSelect(tree) {
+    const box = tree.querySelector('.tree-box');
+    const values = getTreeValues(tree);
+    const selected = new Set(values);
+
+    tree.querySelectorAll('.tree-option').forEach(function(option) {
+        const isSelected = selected.has(option.dataset.value);
+        option.classList.toggle('selected', isSelected);
+        option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+    });
+
+    box.innerHTML = '';
+    if (!values.length) {
+        const placeholder = document.createElement('span');
+        placeholder.className = 'tree-placeholder';
+        placeholder.textContent = 'Select...';
+        box.appendChild(placeholder);
+        return;
+    }
+
+    values.forEach(function(value) {
+        const option = findTreeOption(tree, value);
+        if (!option) return;
+
+        const pill = document.createElement('span');
+        pill.className = 'tree-pill';
+        pill.appendChild(document.createTextNode(option.dataset.label + ' '));
+
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'tree-pill-remove';
+        remove.textContent = '\u00d7';
+        remove.setAttribute('aria-label', 'Remove ' + option.dataset.label);
+        remove.addEventListener('click', function(event) {
+            event.stopPropagation();
+            setTreeValues(tree, getTreeValues(tree).filter(function(item) {
+                return item !== value;
+            }));
+            renderTreeSelect(tree);
+        });
+
+        pill.appendChild(remove);
+        box.appendChild(pill);
+    });
+}
+
+function closeTreeSelect(tree) {
+    tree.classList.remove('open');
+    tree.querySelector('.tree-box').setAttribute('aria-expanded', 'false');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.tree-select').forEach(function(tree) {
+        const box = tree.querySelector('.tree-box');
+
+        renderTreeSelect(tree);
+
+        box.addEventListener('click', function() {
+            const opening = !tree.classList.contains('open');
+            document.querySelectorAll('.tree-select.open').forEach(closeTreeSelect);
+            tree.classList.toggle('open', opening);
+            box.setAttribute('aria-expanded', opening ? 'true' : 'false');
+        });
+
+        box.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                box.click();
+            } else if (event.key === 'Escape') {
+                closeTreeSelect(tree);
+            }
+        });
+
+        tree.querySelectorAll('.tree-parent').forEach(function(parent) {
+            parent.addEventListener('click', function(event) {
+                event.stopPropagation();
+                const opening = !parent.classList.contains('open');
+                parent.classList.toggle('open', opening);
+                parent.setAttribute('aria-expanded', opening ? 'true' : 'false');
+            });
+        });
+
+        tree.querySelectorAll('.tree-option').forEach(function(option) {
+            option.addEventListener('click', function(event) {
+                event.stopPropagation();
+                const value = option.dataset.value;
+                let values = getTreeValues(tree);
+
+                if (tree.classList.contains('multi_tree')) {
+                    values = values.includes(value)
+                        ? values.filter(function(item) { return item !== value; })
+                        : values.concat(value);
+                } else {
+                    values = values.includes(value) ? [] : [value];
+                }
+
+                setTreeValues(tree, values);
+                renderTreeSelect(tree);
+                if (tree.classList.contains('tree')) closeTreeSelect(tree);
+            });
+        });
+    });
+
+    document.addEventListener('click', function(event) {
+        document.querySelectorAll('.tree-select.open').forEach(function(tree) {
+            if (!tree.contains(event.target)) closeTreeSelect(tree);
+        });
     });
 });

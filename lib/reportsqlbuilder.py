@@ -172,7 +172,7 @@ class ReportSqlBuilder(object):
                 if control.get('no_sum_trigger'):
                     no_sum_triggers.append(control.no_sum_trigger)
                 elif (control.get('no_sum_multi_value_trigger') and \
-                      control.type == 'multi_menu' and \
+                      control.type in ('multi_menu', 'multi_tree') and \
                       len(control.value) > 1):
                     no_sum_triggers.append(
                         control.no_sum_multi_value_trigger)
@@ -232,7 +232,7 @@ class ReportSqlBuilder(object):
                 value = control.value
                 if isinstance(value, str):
                     value = value.replace("'", "''")
-                if control.type == 'multi_menu':
+                if control.type in ('multi_menu', 'multi_tree'):
                     value = '(' + ','.join(map(str, value)) + ')'
                 elif control.type == 'multiple':
                     value = ','.join(["'%s'" % v

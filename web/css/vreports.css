@@ -355,6 +355,107 @@ a.vbutton:hover {
 #filter-chooser {
   margin-bottom: 15px;
 }
+
+/* tree controls */
+
+.tree-select {
+  position: relative;
+  min-width: 190px;
+  max-width: 320px;
+}
+.tree-box {
+  min-height: 28px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 3px 6px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+.tree-box:focus {
+  outline: 2px solid #5897fb;
+  outline-offset: 1px;
+}
+.tree-placeholder {
+  color: #777;
+}
+.tree-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 5px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #f8f8f8;
+}
+.tree-pill-remove {
+  padding: 0 0 0 4px;
+  border: 0;
+  background: transparent;
+  color: #777;
+  cursor: pointer;
+}
+.tree-dropdown {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 330px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border: 1px solid #aaa;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+}
+.tree-select.open .tree-dropdown {
+  display: block;
+}
+.tree-parent,
+.tree-option {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 9px;
+  border: 0;
+  background: transparent;
+  color: #555;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.tree-parent {
+  font-weight: bold;
+}
+.tree-parent::before {
+  content: "\25b6";
+  display: inline-block;
+  width: 16px;
+}
+.tree-parent.open::before {
+  content: "\25bc";
+}
+.tree-children {
+  display: none;
+  padding-left: 14px;
+}
+.tree-parent.open + .tree-children {
+  display: block;
+}
+.tree-option:hover,
+.tree-option:focus {
+  background: #5897fb;
+  color: #fff;
+  outline: none;
+}
+.tree-option.selected {
+  background: #ddd;
+  color: #333;
+}
 /* summary-chooser */
 #summary-chooser{
     margin-bottom: 15px;

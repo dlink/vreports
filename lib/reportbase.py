@@ -19,7 +19,7 @@ from header import Header
 from menu import Menu
 
 from basepage import BasePage
-from reportfilters import ReportFilters
+from reportfilters import ReportFilters, getMenuLabel
 from reportsummaries import ReportSummaries
 from reportlimits import ReportLimits
 from reportcolumns import ReportColumns
@@ -119,7 +119,7 @@ class ReportBase(BasePage):
             if 'type' not in control:
                 control.type = 'string'
             if 'default' not in control:
-                if control.type in ('integer', 'menu'):
+                if control.type in ('integer', 'menu', 'tree'):
                     control.default = 0
                 else:
                     control.default = ''
@@ -137,7 +137,7 @@ class ReportBase(BasePage):
 
         shared_form = {}
         multi_menus = [c.name for c in self.params.controls
-                       if c.type == 'multi_menu']
+                       if c.type in ('multi_menu', 'multi_tree')]
         for field in self.form:
             if field in multi_menus:
                 shared_form[field] = self.form.getlist(field)
@@ -155,9 +155,9 @@ class ReportBase(BasePage):
                 control.value = control.default
 
             # Convert Integers / strip strings
-            if control.type in ('integer', 'menu'):
+            if control.type in ('integer', 'menu', 'tree'):
                 control.value = int(control.value)
-            elif control.type == 'multi_menu':
+            elif control.type in ('multi_menu', 'multi_tree'):
                 control.value = list(map(int, control.value))
             elif control.type == 'string':
                 control.value = control.value.strip()
@@ -383,10 +383,16 @@ class ReportBase(BasePage):
             if control.get('value'):
                 if control.type == 'menu':
                     desc = control.menu[control.value]
-                elif control.type == 'multi_menu':
+                elif control.type == 'tree':
+                    desc = getMenuLabel(control.menu, control.value)
+                elif control.type in ('multi_menu', 'multi_tree'):
                     descs = []
                     for value in control.value:
-                        descs.append(control.menu[value] or "None")
+                        if control.type == 'multi_tree':
+                            label = getMenuLabel(control.menu, value)
+                        else:
+                            label = control.menu[value]
+                        descs.append(label or "None")
                     if len(descs) == 1:
                         desc = descs[0]
                     else:
@@ -409,10 +415,16 @@ class ReportBase(BasePage):
             if control.get('value'):
                 if control.type == 'menu':
                     desc = control.menu[control.value]
-                elif control.type == 'multi_menu':
+                elif control.type == 'tree':
+                    desc = getMenuLabel(control.menu, control.value)
+                elif control.type in ('multi_menu', 'multi_tree'):
                     descs = []
                     for value in control.value:
-                        descs.append(control.menu[value] or "None")
+                        if control.type == 'multi_tree':
+                            label = getMenuLabel(control.menu, value)
+                        else:
+                            label = control.menu[value]
+                        descs.append(label or "None")
                     if len(descs) == 1:
                         desc = descs[0]
                     else:
