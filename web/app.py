@@ -1,12 +1,14 @@
 import os
 import sys
 
-from flask import Flask, Response
+from flask import Flask, redirect, request, Response, url_for
 
 app = Flask(__name__)
 
 @app.route('/')
 def root():
+    if request.args.get('r'):
+        return redirect(url_for('report', report_name=request.args['r']))
     from nodata import NoData
     return NoData().go()
 
@@ -41,4 +43,3 @@ def showenv():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
-

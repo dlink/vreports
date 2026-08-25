@@ -1,6 +1,8 @@
 import sys
 import os
 
+from flask import request
+
 from vweb.html import *
 
 class Menu(object):
@@ -8,8 +10,8 @@ class Menu(object):
     def getMenu(self, current_page):
 
         # customize this list
-        reports= [['Books', '/reports/books'],
-                  ['World', '/reports/world'],
+        reports= [['Books', '%s/reports/books' % request.script_root],
+                  ['World', '%s/reports/world' % request.script_root],
                   ]
 
         menu_html = ''
@@ -27,7 +29,7 @@ class Menu(object):
     def getLeftNav(self):
 
         # customize this list
-        reports = [['Dashboard', '/vreports/dashboard.py'],
+        reports = [['Dashboard', '%s/dashboard.py' % request.script_root],
                    #['Other Report', '/vreports/other.py']
                    ]
 

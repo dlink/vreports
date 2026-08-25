@@ -2,6 +2,8 @@
 
 import os, sys
 
+from flask import request
+
 from vweb.htmlpage import HtmlPage
 from vweb.html import *
 
@@ -22,7 +24,7 @@ class BasePage(HtmlPage):
         basedir = '/'.join(os.environ['VIRTUAL_ENV'].split('/')[0:-1])
         def versionize(file):
             timestamp = os.path.getmtime('%s/web/%s' % (basedir, file))
-            return '%s?v=%s' % (file, timestamp)
+            return '%s%s?v=%s' % (request.script_root, file, timestamp)
 
         self.javascript_src = [
             "//code.jquery.com/jquery-1.10.2.js",

@@ -77,7 +77,10 @@ class ReportBase(BasePage):
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
 
         if not hasattr(self, 'images'):
-            self.images = self.default_images
+            self.images = {
+                name: '%s%s' % (request.script_root, path)
+                for name, path in self.default_images.items()
+            }
 
     @property
     def pdir(self):
