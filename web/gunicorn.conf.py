@@ -2,7 +2,7 @@
 
 # Server socket
 
-bind = "unix:vreports.sock"
+bind = "unix:/apps/vreports/web/vreports.sock"
 backlog = 2048
 
 # Worker processes
@@ -21,9 +21,9 @@ spew = False
 
 daemon = False
 raw_env = [
-    'PARAMETER_FILES_DIR=/home/dlink/vreports/examples'
+    'PARAMETER_FILES_DIR=/apps/vreports/examples'
 ]
-pidfile = None
+pidfile = '/apps/vreports/web/vreports.pid'
 umask = 0
 user = 'dlink'
 group = 'dev'
@@ -31,14 +31,14 @@ tmp_upload_dir = None
 
 # Logging
 
-errorlog = '/var/log/gunicorn/dev-vreports/error.log'
-loglevel = 'debug'
-accesslog = '/var/log/gunicorn/dev-vreports/access.log'
+errorlog = '/var/log/gunicorn/vreports/error.log'
+loglevel = 'info'
+accesslog = '/var/log/gunicorn/vreports/access.log'
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 
 # Process naming
 
-proc_name = 'gunicorn-dev-vreports'
+proc_name = 'gunicorn-vreports'
 
 # Server hooks
 
