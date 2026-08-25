@@ -1,6 +1,6 @@
 Flask==3.1.1
 gunicorn==23.0.0
-PyMySQL==1.1.1
+PyMySQL[rsa]==1.1.1
 PyYAML>=6.0,<7
 vlib>=2.0.0
 vweb>=2.0.0

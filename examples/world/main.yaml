@@ -12,6 +12,5 @@ database:
    engine: mysql
    host  : localhost
    user  : vreports
-   passwd: woodenships60
+   passwd: $VREPORTS_DB_PASS
    db    : vreports
-
