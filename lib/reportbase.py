@@ -171,7 +171,7 @@ class ReportBase(BasePage):
         self.params.base_table_name = self.params.report_title
         if 'report_title' in shared_form:
             self.params.report_title = shared_form['report_title']
-
+        
         # Pager Control: Init
         if 'page_num' in shared_form:
             self.params.page_num = int(shared_form['page_num'])
@@ -303,8 +303,11 @@ class ReportBase(BasePage):
     # Level II
     
     def getCustomizeReportPanel(self):
-        report_full_title = \
-            f'{self.params.report_title} [{self.params.base_table_name}]'
+        if self.params.report_title == self.params.base_table_name:
+            report_full_title = self.params.report_title
+        else:
+            report_full_title = \
+                f'{self.params.report_title} [{self.params.base_table_name}]'
 
         submit_button = a('Submit', id='customize-report-submit-button',
                           class_='vbutton')
@@ -435,10 +438,15 @@ class ReportBase(BasePage):
             self.getCsvButton()]
 
         # assign ind. spans
-        report_full_title = span(self.params.report_title + \
-                                 span(f' [{self.params.base_table_name}]',
-                                      class_='subtitle'),
-                                 id='report-name')
+        if self.params.report_title == self.params.base_table_name:
+            report_full_title = span(self.params.report_title,
+                                     id='report-name')
+        else:
+            report_full_title = span(self.params.report_title + \
+                                     span(f' [{self.params.base_table_name}]',
+                                          class_='subtitle'),
+                                     id='report-name')
+
         report_description = span(filter_desc, id='report-description')
         report_paging_info = span(self.getRowCountDesc(),
                                   id='report-paging-info')
@@ -673,3 +681,4 @@ def dict2odict(src_dict):
         else:
             o[k] = v
     return o
+
