@@ -23,7 +23,7 @@ class ReportSqlBuilder(object):
     def getCountSQL(self):
         self._sqlPrep()
         sql_t = 'select {count_select_clause} ' \
-                 'from {base_table} {base_table_alias}' \
+                 'from {base_table} {base_table_alias} {force_index} ' \
                  '{count_join_clause} ' \
                  '{where_clause}'
         sql = sql_t.format(**self.sql_params)
@@ -32,7 +32,7 @@ class ReportSqlBuilder(object):
     def getSQL(self, limited=True):
         self._sqlPrep()
         sql_t = 'select {select_clause} ' \
-                'from {base_table} {base_table_alias} ' \
+                'from {base_table} {base_table_alias} {force_index} ' \
                 '{join_clause} ' \
                 '{where_clause} ' \
                 '{group_by_clause} ' \
@@ -49,7 +49,7 @@ class ReportSqlBuilder(object):
         self._sqlPrep()
         sql_t = (
             'select {totals_select_clause} '
-            'from {base_table} {base_table_alias} '
+            'from {base_table} {base_table_alias} {force_index} '
             '{join_clause} '
             '{where_clause}'
         )
@@ -78,6 +78,7 @@ class ReportSqlBuilder(object):
         self.sql_params.group_by_clause   = self._getGroupByClause()
         self.sql_params.order_by_clause   = self._getOrderByClause()
         self.sql_params.limit_clause      = self._getLimitClause()
+        self.sql_params.force_index       = self._getForceIndex()
         self.prepped = True
         
     def _addAliases(self, driver, sql_field, check_field, existing_list):
@@ -171,7 +172,7 @@ class ReportSqlBuilder(object):
                 if control.get('no_sum_trigger'):
                     no_sum_triggers.append(control.no_sum_trigger)
                 elif (control.get('no_sum_multi_value_trigger') and \
-                      control.type == 'multi_menu' and \
+                      control.type in ('multi_menu', 'multi_tree') and \
                       len(control.value) > 1):
                     no_sum_triggers.append(
                         control.no_sum_multi_value_trigger)
@@ -231,7 +232,7 @@ class ReportSqlBuilder(object):
                 value = control.value
                 if isinstance(value, str):
                     value = value.replace("'", "''")
-                if control.type == 'multi_menu':
+                if control.type in ('multi_menu', 'multi_tree'):
                     value = '(' + ','.join(map(str, value)) + ')'
                 elif control.type == 'multiple':
                     value = ','.join(["'%s'" % v
@@ -269,6 +270,11 @@ class ReportSqlBuilder(object):
         return 'limit {limit} offset {offset}'.format(
             limit=self.params.display_num_rows,
             offset=(self.params.page_num-1) * self.params.display_num_rows)
+
+    def _getForceIndex(self):
+        if not self.params.get('force_index'):
+            return ''
+        return f'force index ({self.params.force_index})'
 
 def _getAliases(sql_code):
     '''Find table aliases from sql code frag

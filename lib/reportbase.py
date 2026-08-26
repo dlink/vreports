@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 
 import os, sys
+import re
 import yaml
 
 from flask import request
@@ -18,7 +19,7 @@ from header import Header
 from menu import Menu
 
 from basepage import BasePage
-from reportfilters import ReportFilters
+from reportfilters import ReportFilters, getMenuLabel
 from reportsummaries import ReportSummaries
 from reportlimits import ReportLimits
 from reportcolumns import ReportColumns
@@ -76,7 +77,10 @@ class ReportBase(BasePage):
         self.reportSqlPanel = ReportSqlPanel(self.params, self.sqlBuilder)
 
         if not hasattr(self, 'images'):
-            self.images = self.default_images
+            self.images = {
+                name: '%s%s' % (request.script_root, path)
+                for name, path in self.default_images.items()
+            }
 
     @property
     def pdir(self):
@@ -118,7 +122,7 @@ class ReportBase(BasePage):
             if 'type' not in control:
                 control.type = 'string'
             if 'default' not in control:
-                if control.type in ('integer', 'menu'):
+                if control.type in ('integer', 'menu', 'tree'):
                     control.default = 0
                 else:
                     control.default = ''
@@ -136,7 +140,7 @@ class ReportBase(BasePage):
 
         shared_form = {}
         multi_menus = [c.name for c in self.params.controls
-                       if c.type == 'multi_menu']
+                       if c.type in ('multi_menu', 'multi_tree')]
         for field in self.form:
             if field in multi_menus:
                 shared_form[field] = self.form.getlist(field)
@@ -154,9 +158,9 @@ class ReportBase(BasePage):
                 control.value = control.default
 
             # Convert Integers / strip strings
-            if control.type in ('integer', 'menu'):
+            if control.type in ('integer', 'menu', 'tree'):
                 control.value = int(control.value)
-            elif control.type == 'multi_menu':
+            elif control.type in ('multi_menu', 'multi_tree'):
                 control.value = list(map(int, control.value))
             elif control.type == 'string':
                 control.value = control.value.strip()
@@ -385,16 +389,22 @@ class ReportBase(BasePage):
             if control.get('value'):
                 if control.type == 'menu':
                     desc = control.menu[control.value]
-                elif control.type == 'multi_menu':
+                elif control.type == 'tree':
+                    desc = getMenuLabel(control.menu, control.value)
+                elif control.type in ('multi_menu', 'multi_tree'):
                     descs = []
                     for value in control.value:
-                        descs.append(control.menu[value] or "None")
+                        if control.type == 'multi_tree':
+                            label = getMenuLabel(control.menu, value)
+                        else:
+                            label = control.menu[value]
+                        descs.append(label or "None")
                     if len(descs) == 1:
                         desc = descs[0]
                     else:
                         desc = f"({'_'.join(map(str, descs))})"
                 else:
-                    desc = control.value
+                    desc = str(control.value)[0:25]
                 short_filters.append(desc)
         if self.params.group_bys:
             short_filters.append('--%s' % '-'.join(
@@ -411,10 +421,16 @@ class ReportBase(BasePage):
             if control.get('value'):
                 if control.type == 'menu':
                     desc = control.menu[control.value]
-                elif control.type == 'multi_menu':
+                elif control.type == 'tree':
+                    desc = getMenuLabel(control.menu, control.value)
+                elif control.type in ('multi_menu', 'multi_tree'):
                     descs = []
                     for value in control.value:
-                        descs.append(control.menu[value] or "None")
+                        if control.type == 'multi_tree':
+                            label = getMenuLabel(control.menu, value)
+                        else:
+                            label = control.menu[value]
+                        descs.append(label or "None")
                     if len(descs) == 1:
                         desc = descs[0]
                     else:
@@ -623,7 +639,8 @@ class ReportBase(BasePage):
                 if target == 'html' and column.get('html'):
                     value = column.html % value
                 if target == 'html' and column.get('link'):
-                    value = a(value, href=column.link % value, target='_blank')
+                    link = self.expandParams(column.link)
+                    value = a(value, href=link % value, target='_blank')
 
                 # report_link and report_key allows linking into other reports
                 if target == 'html' and column.get('report_link') and \
@@ -640,7 +657,22 @@ class ReportBase(BasePage):
         if totals:
             return row2
         return table
-    
+
+    def expandParams(self, s):
+        '''Expand {foo.bar} placeholders from self.params.
+
+           Example:
+           "https://admin.shopify.com/store/{shopify.admin_store}/products/%s"
+        '''
+
+        def replace(match):
+            value = self.params
+            for part in match.group(1).split('.'):
+                value = value[part]
+            return str(value)
+
+        return re.sub(r'\{([^}]+)\}', replace, s)
+
     def getRowCount(self):
         if '_row_count' not in self.__dict__:
             sql = self.sqlBuilder.getCountSQL()

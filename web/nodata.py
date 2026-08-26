@@ -2,6 +2,8 @@
 
 import os
 
+from flask import request
+
 from vweb.htmlpage import HtmlPage
 from vweb.html import *
 from urllib.parse import urlparse
@@ -15,7 +17,7 @@ class NoData(HtmlPage):
         self.header = Header(self.title)
 
         self.style_sheets.extend([
-            'css/vreports.css',
+            '%s/css/vreports.css' % request.script_root,
             ])
 
     def getHtmlContent(self):
@@ -57,7 +59,7 @@ class NoData(HtmlPage):
             # check see it is a directory with a main.yaml in it:
             try:
                 if 'main.yaml' in  os.listdir('%s/%s' % (examples_dir, d)):
-                    link = '/reports/%s' % d
+                    link = '%s/reports/%s' % (request.script_root, d)
                     data = a(d, href=link)
                     examples.append(data)
             except Exception as e:
