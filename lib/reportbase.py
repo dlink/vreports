@@ -24,7 +24,7 @@ from reportsummaries import ReportSummaries
 from reportlimits import ReportLimits
 from reportcolumns import ReportColumns
 from reportsqlpanel import ReportSqlPanel
-from reportsqlbuilder import ReportSqlBuilder
+from reportsqlbuilder import ReportSqlBuilder, getLinkSelectName
 
 from datetime import datetime
 
@@ -638,7 +638,12 @@ class ReportBase(BasePage):
                     value = format_date(value)
                 if target == 'html' and column.get('html'):
                     value = column.html % value
-                if target == 'html' and column.get('link'):
+                if target == 'html' and not totals \
+                        and column.get('link_select'):
+                    link = row[getLinkSelectName(column.name)]
+                    if link:
+                        value = a(value, href=link, target='_blank')
+                elif target == 'html' and column.get('link'):
                     link = self.expandParams(column.link)
                     value = a(value, href=link % value, target='_blank')
 
@@ -713,4 +718,3 @@ def dict2odict(src_dict):
         else:
             o[k] = v
     return o
-

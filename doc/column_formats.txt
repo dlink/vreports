@@ -79,6 +79,16 @@ ATTRIBUTES DEFINED:
                     link   : http://bookreports.flatworldknowledge.com\
                              /bookdetails.py?book=%s
 
+   link_select: A SQL expression that returns the complete hyperlink target
+                for the current row. The value is selected internally and is
+                not displayed as a separate report column. Use aliases for
+                every table referenced by the expression.
+
+                Eq. - name       : product_id
+                      select     : p.id
+                      aliases    : p,s
+                      link_select: concat(s.admin_url, '/products/', p.id)
+
    report_link, and
    report_key       : Allows linking into other reports:
 
@@ -122,4 +132,3 @@ ATTRIBUTES DEFINED:
 
    It is best to list columns that have 'aggregate_func' at the end
      so the columns with 'group_by' will appear on the left of
-

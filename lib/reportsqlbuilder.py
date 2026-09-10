@@ -4,6 +4,11 @@ from vlib.odict import odict
 
 from vweb.html import *
 
+LINK_SELECT_SUFFIX = '__link'
+
+def getLinkSelectName(column_name):
+    return column_name + LINK_SELECT_SUFFIX
+
 class ReportSqlBuilder(object):
 
     # def log(self, msg):
@@ -162,6 +167,9 @@ class ReportSqlBuilder(object):
             else:
                 s = c.select
             select.append("%s as %s" % (s, c.name))
+            if c.get('link_select'):
+                select.append('%s as %s' %
+                              (c.link_select, getLinkSelectName(c.name)))
         return ', '.join(select)
 
     def _getTotalsSelectClause(self):
